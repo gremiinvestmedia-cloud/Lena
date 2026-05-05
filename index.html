@@ -369,36 +369,21 @@ body{font-family:'Times New Roman',Times,serif;font-size:11pt;line-height:1.6;}h
 <body>
 <button class="back-btn" id="back-btn" onclick="showLanding()" style="position:fixed;top:14px;left:14px;z-index:99999;padding:8px 16px;background:#0f1b2d;color:#c9a84c;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:none;align-items:center;gap:6px;box-shadow:0 2px 12px rgba(0,0,0,.3);">← Powrót</button>
 <div id="app-landing">
-  <div class="land-header">
-    <div class="logo-land">H4</div>
-    <div><h1>Generator Umów</h1><p>Wybierz typ dokumentu</p></div>
-  </div>
+  <div class="land-header"><div class="logo-land">H4</div><div><h1>Generator Umów</h1><p>Wybierz typ dokumentu</p></div></div>
   <div class="land-main">
     <div class="land-title">Witaj w systemie umów</div>
     <div class="land-sub">Wybierz odpowiedni generator.</div>
     <div class="land-slabel">H4P Sp. z o.o.</div>
     <div class="land-cards">
-      <div class="land-card" onclick="showApp('h4p')">
-        <div class="lc-icon">🏢</div><div class="lc-co">H4P</div>
-        <div class="lc-title">Umowy najmu</div><span class="lc-btn">Otwórz →</span>
-      </div>
-      <div class="land-card inactive">
-        <div class="lc-icon">👤</div><div class="lc-co">H4P</div>
-        <div class="lc-title">Umowy fiz. os.</div>
-        <span class="lc-btn-off">Osobna sekcja — wkrótce</span>
-      </div>
+      <div class="land-card" onclick="showApp('h4p')"><div class="lc-icon">🏢</div><div class="lc-co">H4P</div><div class="lc-title">Umowy najmu</div><span class="lc-btn">Otwórz →</span></div>
+      <div class="land-card inactive"><div class="lc-icon">👤</div><div class="lc-co">H4P</div><div class="lc-title">Umowy fiz. os.</div><span class="lc-btn-off">Osobna sekcja — wkrótce</span></div>
     </div>
     <div class="land-slabel">Gremi Invest</div>
     <div class="land-cards">
-      <div class="land-card gremi-c" onclick="showApp('gremi')">
-        <div class="lc-icon">🏛️</div><div class="lc-co">Gremi Invest</div>
-        <div class="lc-title">Umowy najmu</div><span class="lc-btn">Otwórz →</span>
-      </div>
+      <div class="land-card gremi-c" onclick="showApp('gremi')"><div class="lc-icon">🏛️</div><div class="lc-co">Gremi Invest</div><div class="lc-title">Umowy najmu</div><span class="lc-btn">Otwórz →</span></div>
     </div>
   </div>
-  <div style="text-align:center;font-size:12px;color:var(--muted);padding:18px 24px 26px;border-top:1px solid var(--border);">
-    H4P Sp. z o.o. &nbsp;·&nbsp; Nadarzyn, ul. Turystyczna &nbsp;·&nbsp; home4people.info@gmail.com
-  </div>
+  <div style="text-align:center;font-size:12px;color:var(--muted);padding:18px 24px 26px;border-top:1px solid var(--border);">H4P Sp. z o.o. &nbsp;·&nbsp; Nadarzyn, ul. Turystyczna &nbsp;·&nbsp; home4people.info@gmail.com</div>
 </div>
 <div id="h4p-app" style="display:none;"><header>
   <div class="logo-circle">H4</div>
@@ -455,8 +440,8 @@ body{font-family:'Times New Roman',Times,serif;font-size:11pt;line-height:1.6;}h
           <div class="card-title"><span class="num">1</span>Typ umowy</div>
           <div class="field" style="margin-bottom:16px;"><label>Podpisuje ze strony Wynajmującego</label>
             <div class="tg" id="ftg-sign">
-              <button class="tb on" onclick="ftg('ftg-sign',0);fst.signer='Prezesem Arnold Hertfelder'">Prezes Arnold Hertfelder</button>
-              <button class="tb" onclick="ftg('ftg-sign',1);fst.signer='prokurentem Olena Dziubenko'">Prokurent Olena Dziubenko</button>
+              <button class="tb on" onclick="ftg('ftg-sign',0);fst.signer='Prezesa Zarządu – Arnolda Hertfeldera'">Prezes Arnold Hertfelder</button>
+              <button class="tb" onclick="ftg('ftg-sign',1);fst.signer='Prokurenta – Olenę Dziubenko'">Prokurent Olena Dziubenko</button>
             </div>
           </div>
           <div class="field" style="margin-bottom:16px;"><label>Przedmiot najmu</label>
@@ -481,7 +466,7 @@ body{font-family:'Times New Roman',Times,serif;font-size:11pt;line-height:1.6;}h
           </div>
           <div class="form-row">
             <div class="field"><label>Seria i nr dowodu / paszportu</label><input type="text" id="f-nDowod" placeholder="AAA 000000"></div>
-            <div class="field"><label>Adres zameldowania</label><input type="text" id="f-nAdres" placeholder="ul. Przykładowa 1, 00-000 Miasto"></div>
+  
           </div>
           <div class="form-row">
             <div class="field"><label>Telefon</label><input type="text" id="f-nTel" placeholder="+48 000 000 000"></div>
@@ -669,8 +654,8 @@ body{font-family:'Times New Roman',Times,serif;font-size:11pt;line-height:1.6;}h
           <div class="card-title"><span class="num">1</span>Typ umowy ramowej</div>
           <div class="field" style="margin-bottom:16px;"><label>Podpisuje ze strony Wynajmującego</label>
             <div class="tg" id="rtg-sign">
-              <button class="tb on" onclick="rtg('rtg-sign',0);rst.signer='Prezesa Zarządu – Arnold Hertfelder'">Prezes Arnold Hertfelder</button>
-              <button class="tb" onclick="rtg('rtg-sign',1);rst.signer='Prokurenta - Olenę Dziubenko'">Prokurent Olena Dziubenko</button>
+              <button class="tb on" onclick="rtg('rtg-sign',0);rst.signer='Prezesa Zarządu – Arnolda Hertfeldera'">Prezes Arnold Hertfelder</button>
+              <button class="tb" onclick="rtg('rtg-sign',1);rst.signer='Prokurenta – Olenę Dziubenko'">Prokurent Olena Dziubenko</button>
             </div>
           </div>
           <div class="field" style="margin-bottom:16px;"><label>Typ umowy</label>
@@ -750,8 +735,8 @@ body{font-family:'Times New Roman',Times,serif;font-size:11pt;line-height:1.6;}h
           <div class="card-title"><span class="num">1</span>Dane do zamówienia</div>
           <div class="field" style="margin-bottom:16px;"><label>Podpisuje ze strony Wynajmującego</label>
             <div class="tg" id="ztg-sign">
-              <button class="tb on" onclick="ztg('ztg-sign',0);zst.signer='Prezesa Zarządu – Arnold Hertfelder'">Prezes Arnold Hertfelder</button>
-              <button class="tb" onclick="ztg('ztg-sign',1);zst.signer='Prokurenta - Olenę Dziubenko'">Prokurent Olena Dziubenko</button>
+              <button class="tb on" onclick="ztg('ztg-sign',0);zst.signer='Prezesa Zarządu – Arnolda Hertfeldera'">Prezes Arnold Hertfelder</button>
+              <button class="tb" onclick="ztg('ztg-sign',1);zst.signer='Prokurenta – Olenę Dziubenko'">Prokurent Olena Dziubenko</button>
             </div>
           </div>
           <div class="field" style="margin-bottom:16px;"><label>Typ czynszu</label>
@@ -946,1106 +931,7 @@ body{font-family:'Times New Roman',Times,serif;font-size:11pt;line-height:1.6;}h
     </div>
     <div id="out"></div>
   </div>
-</div>
-
-
-// ─── STATE ────────────────────────────────────────────────────────────────────
-const fst={signer:'Prezesem Arnold Hertfelder',pred:'lokal',kaucja:'jed',sklad:'3'};
-const rst={signer:'Prezesa Zarządu – Arnold Hertfelder',typ:'posrednik'};
-const zst={signer:'Prezesa Zarządu – Arnold Hertfelder',typ:'posrednik'};
-let fDorosli=[],fDzieci=[],fBedTypes={};
-
-// Wszystkie domy - stałe
-const WSZYSTKIE_DOMY='9, 9a, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45';
-const WSZYSTKIE_DOMY_TEKST='budynkach mieszkalnych nr 15, 17, 19, 21, 23, 25, 27 i 29 przy ul. Turystycznej w miejscowości Nadarzyn';
-
-// ─── FORMULARZ ZAMÓWIENIA (reusable HTML) ────────────────────────────────────
-function zamFormHTML(prefix){
-  return `
-  <div class="info-box"><span>📋</span><span>Czynsz: <strong>6 000 zł</strong> — lokal 3-pokojowy (6–7 osób) &nbsp;|&nbsp; <strong>4 000 zł</strong> — lokal 2-pokojowy (4 osoby). Wpisz kwotę ręcznie lub skorzystaj z sugestii.</span></div>
-  <div class="form-row">
-    <div class="field"><label>Numer zamówienia <span style="font-size:10px;color:var(--muted);font-weight:400;">(auto)</span></label>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <input type="text" id="${prefix}zamNr" placeholder="np. 01.03.2026" style="flex:1;">
-        <button onclick="genZamNr('${prefix}')" style="padding:10px 14px;background:var(--navy);color:var(--gold);border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">🔢 Auto</button>
-      </div>
-    </div>
-    <div class="field"><label>Data wydania przedmiotu najmu</label><input type="date" id="${prefix}zamWydanie"></div>
-  </div>
-  <div class="form-row">
-    <div class="field"><label>Numer domu (ul. Turystyczna)</label>
-      <select id="${prefix}zamDom">
-        <option value="">— wybierz —</option>
-        <option>9</option><option>9a</option><option>11</option><option>13</option>
-        <option>15</option><option>17</option><option>19</option><option>21</option>
-        <option>23</option><option>25</option><option>27</option><option>29</option>
-        <option>31</option><option>33</option><option>35</option><option>37</option>
-        <option>39</option><option>41</option><option>43</option><option>45</option>
-      </select>
-    </div>
-    <div class="field"><label>Numer lokalu</label>
-      <select id="${prefix}zamLokal">
-        <option value="">— wybierz —</option>
-        <option>1</option><option>2</option><option>3</option><option>4</option>
-        <option>5</option><option>6</option><option>7</option><option>8</option>
-        <option>9</option><option>10</option><option>11</option><option>12</option>
-      </select>
-    </div>
-  </div>
-  <div class="sep"></div>
-  <div class="sl">Czynsz miesięczny</div>
-  <div class="czynsz-grid">
-    <div class="czynsz-option sel" id="${prefix}co1" onclick="selectCzynsz('${prefix}',6000,this)">
-      <div class="co-title">6 000 zł netto</div>
-      <div class="co-sub">Lokal 3-pokojowy · 6–7 osób</div>
-    </div>
-    <div class="czynsz-option" id="${prefix}co2" onclick="selectCzynsz('${prefix}',4000,this)">
-      <div class="co-title">4 000 zł netto</div>
-      <div class="co-sub">Lokal 2-pokojowy · 4 osoby</div>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="field"><label>Czynsz miesięczny (PLN netto) — można edytować</label><input type="number" id="${prefix}zamCzynsz" placeholder="np. 6000" value="6000"></div>
-    <div class="field"><label>Ilość osób do zakwaterowania</label><input type="number" id="${prefix}zamOsoby" placeholder="np. 6" min="1"></div>
-  </div>
-  <div class="sep"></div>
-  <div class="sl">Pierwszy niepełny miesiąc (opcjonalnie)</div>
-  <div class="form-row t">
-    <div class="field"><label>Od dnia</label><input type="date" id="${prefix}zamM1od"></div>
-    <div class="field"><label>Do dnia</label><input type="date" id="${prefix}zamM1do"></div>
-    <div class="field"><label>Kwota za niepełny miesiąc (PLN)</label><input type="number" id="${prefix}zamM1kw" placeholder="np. 2000"></div>
-  </div>
-  <div class="sep"></div>
-  <div class="form-row">
-    <div class="field"><label>Okres najmu od</label><input type="date" id="${prefix}zamOd"></div>
-    <div class="field"><label>Okres najmu do (puste = nieokreślony)</label><input type="date" id="${prefix}zamDo"></div>
-  </div>
-  <div class="field" style="margin-bottom:10px;">
-    <label>Kaucja</label>
-    <div class="tg" id="${prefix}tg-kaucja-typ">
-      <button class="tb on" onclick="setZamKaucjaTyp('${prefix}','nowa')">Nowa kaucja</button>
-      <button class="tb" onclick="setZamKaucjaTyp('${prefix}','oplacona')">Kaucja już opłacona (3 zamówienia)</button>
-    </div>
-  </div>
-  <div id="${prefix}kaucja-nowa-wrap">
-    <div class="form-row">
-      <div class="field"><label>Wysokość kaucji (PLN)</label><input type="number" id="${prefix}zamKaucja" placeholder="np. 6000"></div>
-      <div class="field"><label>Kaucja — termin zapłaty</label><input type="date" id="${prefix}zamKaucjaDt"></div>
-    </div>
-  </div>
-  <div id="${prefix}kaucja-oplacona-wrap" style="display:none;">
-    <div class="info-box" style="font-size:12px;margin-bottom:4px;"><span>ℹ️</span><span>Kaucja już opłacona — zostanie wpisany odpowiedni tekst do zamówienia.</span></div>
-  </div>
-  <div class="field" style="margin-top:8px;"><label>Inne warunki</label><input type="text" id="${prefix}zamInne" placeholder="np. Brak"></div>
-  <div class="sep"></div>
-  <div class="sl" style="color:var(--navy);font-size:12px;">📋 Protokół zdawczo-odbiorczy</div>
-  <div class="form-row">
-    <div class="field"><label>Data protokołu</label><input type="date" id="${prefix}protData"></div>
-    <div class="field"><label>Liczba kluczy</label><input type="text" id="${prefix}protKlucze" placeholder="np. 2 komplety"></div>
-  </div>
-  <div class="sep"></div>
-  <div class="sl">Stan wyposażenia</div>
-  <div class="pom-box">
-    <div class="pom-title">🍳 Kuchnia</div>
-    <div class="form-row" style="margin-bottom:10px;">
-      <div class="field"><label>Stan wizualny</label><select id="${prefix}kw"><option>bardzo dobry</option><option>dobry</option><option>dostateczny</option><option>zły</option></select></div>
-      <div class="field"><label>Stan urządzeń</label><select id="${prefix}kt"><option>bardzo dobry</option><option>dobry</option><option>dostateczny</option><option>zły</option></select></div>
-    </div>
-    <div class="sl">Meble</div>
-    <div class="qty-row"><span class="qty-label">Szafki zabudowa stała</span><span style="font-size:12px;color:var(--muted)">nowe (stałe)</span></div>
-    <div class="qty-row"><span class="qty-label">Stół</span><button class="qty-btn" onclick="chQ(\`${prefix}ks\`,-1)">−</button><span class="qty-val" id="${prefix}ks">1</span><button class="qty-btn" onclick="chQ(\`${prefix}ks\`,1)">+</button></div>
-    <div class="qty-row"><span class="qty-label">Krzesło</span><button class="qty-btn" onclick="chQ(\`${prefix}kkr\`,-1)">−</button><span class="qty-val" id="${prefix}kkr">3</span><button class="qty-btn" onclick="chQ(\`${prefix}kkr\`,1)">+</button></div>
-    <div class="sl" style="margin-top:8px;">Urządzenia</div>
-    <div class="qty-row"><span class="qty-label">Kuchenka z piekarnikiem</span><span style="font-size:12px;color:var(--muted)">1 szt. – nowa</span></div>
-    <div class="qty-row"><span class="qty-label">Czajnik</span><button class="qty-btn" onclick="chQ(\`${prefix}kcz\`,-1)">−</button><span class="qty-val" id="${prefix}kcz">1</span><button class="qty-btn" onclick="chQ(\`${prefix}kcz\`,1)">+</button></div>
-    <div class="qty-row"><span class="qty-label">Lodówka</span><button class="qty-btn" onclick="chQ(\`${prefix}klo\`,-1)">−</button><span class="qty-val" id="${prefix}klo">1</span><button class="qty-btn" onclick="chQ(\`${prefix}klo\`,1)">+</button></div>
-    <div class="qty-row"><span class="qty-label">Kuchenka mikrofalowa</span><button class="qty-btn" onclick="chQ(\`${prefix}kmi\`,-1)">−</button><span class="qty-val" id="${prefix}kmi">1</span><button class="qty-btn" onclick="chQ(\`${prefix}kmi\`,1)">+</button></div>
-    <div class="field" style="margin-top:8px;"><label>Uwagi</label><input type="text" id="${prefix}kuwagi" placeholder="opcjonalne"></div>
-  </div>
-  <div id="${prefix}pokoje-prot-wrap"></div>
-  <div class="pom-box">
-    <div class="pom-title">🚿 Łazienka</div>
-    <div class="form-row" style="margin-bottom:10px;">
-      <div class="field"><label>Stan wizualny</label><select id="${prefix}lw"><option>bardzo dobry</option><option>dobry</option><option>dostateczny</option><option>zły</option></select></div>
-      <div class="field"><label>Stan urządzeń</label><select id="${prefix}lt"><option>bardzo dobry</option><option>dobry</option><option>dostateczny</option><option>zły</option></select></div>
-    </div>
-    <div class="qty-row"><span class="qty-label">Pralka</span><span style="font-size:12px;color:var(--muted)">1 szt. – nowa</span></div>
-    <div class="field" style="margin-top:8px;"><label>Uwagi</label><input type="text" id="${prefix}luwagi" placeholder="opcjonalne"></div>
-  </div>
-  <div class="sep"></div>
-  <div class="field"><label>Uwagi ogólne do protokołu</label><textarea id="${prefix}protUwagi" rows="3" placeholder="Opcjonalne..."></textarea></div>`;
-}
-
-function selectCzynsz(prefix, kwota, btn){
-  document.querySelectorAll(`[id^="${prefix}co"]`).forEach(el=>el.classList.remove('sel'));
-  btn.classList.add('sel');
-  document.getElementById(prefix+'zamCzynsz').value=kwota;
-  initZamPokoje(prefix);
-}
-
-// ─── MAIN TYPE ────────────────────────────────────────────────────────────────
-function setMain(type){
-  document.querySelectorAll('.main-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('mt-'+type).classList.add('active');
-  document.querySelectorAll('.form-section').forEach(s=>s.classList.remove('active'));
-  document.getElementById('fs-'+type).classList.add('active');
-  if(type==='archiwum')archRender();
-  if(type==='ramowa'&&!document.getElementById('r-zam-form').innerHTML){
-    document.getElementById('r-zam-form').innerHTML=zamFormHTML('r-');
-initZamPokoje('r-');
-  }
-  if(type==='zamowienie'&&!document.getElementById('z-zam-form').innerHTML){
-    document.getElementById('z-zam-form').innerHTML=zamFormHTML('z-');
-    initZamPokoje('z-');
-  }
-}
-
-// ─── NAVIGATION ──────────────────────────────────────────────────────────────
-function fGo(n){
-  document.querySelectorAll('#fs-fiz .section').forEach(s=>s.classList.remove('active'));
-  document.getElementById('fiz-'+n).classList.add('active');
-  for(let i=1;i<=6;i++){const e=document.getElementById('sf'+i);e.classList.remove('active','done');if(i<n)e.classList.add('done');if(i===n)e.classList.add('active');}
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function rGo(n){
-  document.querySelectorAll('#fs-ramowa .section').forEach(s=>s.classList.remove('active'));
-  document.getElementById('ram-'+n).classList.add('active');
-  for(let i=1;i<=3;i++){const e=document.getElementById('sr'+i);e.classList.remove('active','done');if(i<n)e.classList.add('done');if(i===n)e.classList.add('active');}
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function zGo(n){
-  document.querySelectorAll('#fs-zamowienie .section').forEach(s=>s.classList.remove('active'));
-  document.getElementById('zam-'+n).classList.add('active');
-  for(let i=1;i<=2;i++){const e=document.getElementById('sz'+i);e.classList.remove('active','done');if(i<n)e.classList.add('done');if(i===n)e.classList.add('active');}
-  if(n===2&&!document.getElementById('z-zam-form').innerHTML){
-    document.getElementById('z-zam-form').innerHTML=zamFormHTML('z-');
-    initZamPokoje('z-');
-  }
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-// ─── TOGGLES ─────────────────────────────────────────────────────────────────
-function ftg(gid,idx){document.querySelectorAll('#'+gid+' .tb').forEach((b,i)=>b.classList.toggle('on',i===idx));}
-function rtg(gid,idx){document.querySelectorAll('#'+gid+' .tb').forEach((b,i)=>b.classList.toggle('on',i===idx));}
-function ztg(gid,idx){document.querySelectorAll('#'+gid+' .tb').forEach((b,i)=>b.classList.toggle('on',i===idx));}
-function fSetPred(v){fst.pred=v;ftg('ftg-pred',v==='lokal'?0:1);document.getElementById('f-pokoj-wrap').style.display=v==='pokoj'?'':'none';}
-function fSetSklad(v){
-  fst.sklad=v;ftg('ftg-sklad',v==='3'?0:1);fRenderPokoje();
-  // auto-suggest monthly rent based on sklad
-  const c2=document.getElementById('f-c2kw');
-  if(c2&&!c2.value){c2.value=v==='2'?3600:4000;}
-  fUpdatePrice();fAutoCalc();
-}
-function fSetKaucja(v){fst.kaucja=v;ftg('ftg-kaucja',v==='jed'?0:1);document.getElementById('f-k-jed').style.display=v==='jed'?'':'none';document.getElementById('f-k-dwie').style.display=v==='dwie'?'':'none';}
-function rSetTyp(v){rst.typ=v;rtg('rtg-typ',v==='posrednik'?0:1);}
-function zSetTyp(v){zst.typ=v;ztg('ztg-typ',v==='posrednik'?0:1);}
-
-// ─── QTY ─────────────────────────────────────────────────────────────────────
-function chQ(id,d){const el=document.getElementById(id);if(!el)return;let val=parseInt(el.textContent)||0;el.textContent=Math.max(0,val+d);}
-function gq(id){const el=document.getElementById(id);return el?parseInt(el.textContent)||0:0;}
-
-// ─── POKOJE PROTOKÓŁ (fiz) ───────────────────────────────────────────────────
-function fRenderPokoje(){
-  const n=parseInt(fst.sklad);
-  const c=document.getElementById('f-pokoje-prot');
-  c.innerHTML='';
-  for(let i=1;i<=n;i++){
-    const pid='fp'+i;fBedTypes[pid]='tapczan2';
-    c.innerHTML+=`<div class="pom-box">
-      <div class="pom-title">🛏 Pokój ${i}</div>
-      <div class="form-row" style="margin-bottom:10px;">
-        <div class="field"><label>Stan wizualny</label><select id="${pid}w"><option>bardzo dobry</option><option>dobry</option><option>dostateczny</option><option>zły</option></select></div>
-        <div class="field"><label>Stan urządzeń</label><select id="${pid}t"><option>bardzo dobry</option><option>dobry</option><option>dostateczny</option><option>zły</option></select></div>
-      </div>
-      <div class="sl">Łóżko / Tapczan</div>
-      <div class="bed-toggle" id="${pid}-bt">
-        <button class="bed-opt sel" onclick="fSetBed('${pid}','tapczan2',this)">Tapczan (2 szt.)</button>
-        <button class="bed-opt" onclick="fSetBed('${pid}','tapczan1',this)">Tapczan (1 szt.)</button>
-        <button class="bed-opt" onclick="fSetBed('${pid}','tapczan3',this)">Tapczan (3 szt.)</button>
-        <button class="bed-opt" onclick="fSetBed('${pid}','lozko',this)">Łóżko dwuosobowe</button>
-      </div>
-      <div class="sl" style="margin-top:7px;">Meble</div>
-      <div class="qty-row"><span class="qty-label">Komoda</span><button class="qty-btn" onclick="chQ('${pid}ko',-1)">−</button><span class="qty-val" id="${pid}ko">1</span><button class="qty-btn" onclick="chQ('${pid}ko',1)">+</button></div>
-      <div class="qty-row"><span class="qty-label">Szafa</span><button class="qty-btn" onclick="chQ('${pid}sz',-1)">−</button><span class="qty-val" id="${pid}sz">1</span><button class="qty-btn" onclick="chQ('${pid}sz',1)">+</button></div>
-      <div class="qty-row"><span class="qty-label">Krzesło</span><button class="qty-btn" onclick="chQ('${pid}kr',-1)">−</button><span class="qty-val" id="${pid}kr">2</span><button class="qty-btn" onclick="chQ('${pid}kr',1)">+</button></div>
-      <div class="qty-row"><span class="qty-label">Stół</span><button class="qty-btn" onclick="chQ('${pid}st',-1)">−</button><span class="qty-val" id="${pid}st">1</span><button class="qty-btn" onclick="chQ('${pid}st',1)">+</button></div>
-      <div class="qty-row"><span class="qty-label">Szafka nocna</span><button class="qty-btn" onclick="chQ('${pid}sn',-1)">−</button><span class="qty-val" id="${pid}sn">2</span><button class="qty-btn" onclick="chQ('${pid}sn',1)">+</button></div>
-      <div class="field" style="margin-top:8px;"><label>Uwagi</label><input type="text" id="${pid}uw" placeholder="opcjonalne"></div>
-    </div>`;
-  }
-}
-function fSetBed(pid,type,btn){fBedTypes[pid]=type;document.querySelectorAll('#'+pid+'-bt .bed-opt').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');}
-function fBedText(pid){const t=fBedTypes[pid]||'tapczan2';return t==='tapczan1'?'Tapczan (1 szt.) – stan bardzo dobry':t==='tapczan3'?'Tapczan (3 szt.) – stan bardzo dobry':t==='lozko'?'Łóżko dwuosobowe (1 szt.) – stan bardzo dobry':'Tapczan (2 szt.) – stan bardzo dobry';}
-
-// ─── FIZ PEOPLE ──────────────────────────────────────────────────────────────
-function fAddP(type){
-  const id=Date.now()+Math.floor(Math.random()*9999);
-  if(type==='d')fDorosli.push(id);else fDzieci.push(id);
-  fRenderPeople();
-}
-function fRemP(type,id){
-  if(type==='d')fDorosli=fDorosli.filter(x=>x!==id);else fDzieci=fDzieci.filter(x=>x!==id);
-  fRenderPeople();
-}
-function fRenderPeople(){
-  ['d','k'].forEach(tp=>{
-    const list=tp==='d'?fDorosli:fDzieci;
-    const c=document.getElementById('f-'+(tp==='d'?'dorosli':'dzieci')+'-c');
-    c.innerHTML='';
-    list.forEach(id=>{
-      const div=document.createElement('div');div.className='person-row';
-      div.innerHTML=`<div class="field"><label>${tp==='d'?'Imię i nazwisko':'Imię i nazwisko dziecka'}</label><input type="text" id="fpn${id}" placeholder="Imię Nazwisko"></div>
-        <div class="field"><label>${tp==='d'?'PESEL / nr id.':'Data urodzenia / PESEL'}</label><input type="text" id="fpi${id}" placeholder="${tp==='d'?'00000000000':'DD.MM.RRRR'}"></div>
-        <button class="btn-rm" onclick="fRemP('${tp}',${id})">✕</button>`;
-      c.appendChild(div);
-    });
-  });
-  fUpdatePrice();
-}
-
-// ─── SŁOWNIE ─────────────────────────────────────────────────────────────────
-function n2w(n){
-  if(!n||isNaN(n))return'';n=parseInt(n);
-  const o=['','jeden','dwa','trzy','cztery','pięć','sześć','siedem','osiem','dziewięć','dziesięć','jedenaście','dwanaście','trzynaście','czternaście','piętnaście','szesnaście','siedemnaście','osiemnaście','dziewiętnaście'];
-  const t=['','','dwadzieścia','trzydzieści','czterdzieści','pięćdziesiąt','sześćdziesiąt','siedemdziesiąt','osiemdziesiąt','dziewięćdziesiąt'];
-  const h=['','sto','dwieście','trzysta','czterysta','pięćset','sześćset','siedemset','osiemset','dziewięćset'];
-  function ch(x){if(x===0)return'';if(x<20)return o[x];if(x<100)return t[Math.floor(x/10)]+(x%10?' '+o[x%10]:'');return h[Math.floor(x/100)]+(x%100?' '+ch(x%100):'');}
-  if(n===0)return'zero złotych 00/100';
-  let r='';const th=Math.floor(n/1000),rest=n%1000;
-  if(th>0){if(th===1)r+='jeden tysiąc';else if(th<5)r+=ch(th)+' tysiące';else r+=ch(th)+' tysięcy';}
-  if(rest>0)r+=(r?' ':'')+ch(rest);
-  const l2=n%100,l1=n%10;let sf='złotych';
-  if(n===1)sf='złoty';else if(l2>=12&&l2<=14)sf='złotych';else if(l1>=2&&l1<=4)sf='złote';
-  return r+' '+sf+' 00/100';
-}
-function upSl(inp,out){const el=document.getElementById(out);if(el)el.value=n2w(document.getElementById(inp).value);}
-
-// ─── HELPERS ─────────────────────────────────────────────────────────────────
-function v(id){const el=document.getElementById(id);return el?el.value.trim():'';}
-function sv(id){const el=document.getElementById(id);return el?el.value:'';}
-function fd(d){if(!d)return'…';const[y,m,dy]=d.split('-');return`${dy}.${m}.${y} r.`;}
-function mn(d){if(!d)return'…';const ms=['stycznia','lutego','marca','kwietnia','maja','czerwca','lipca','sierpnia','września','października','listopada','grudnia'];const[y,m]=d.split('-');return ms[parseInt(m)-1]+' '+y+' r.';}
-
-// ─── ZAMÓWIENIE HTML (shared) ────────────────────────────────────────────────
-// ─── BUILD POKOJE FOR ZAMOWIENIE PROTOCOL ────────────────────────────────────
-function zamBedTypes(prefix,pid){return window['zamBed_'+prefix+pid]||'tapczan2';}
-function zamBedText(prefix,pid){
-  const t=zamBedTypes(prefix,pid);
-  return t==='tapczan1'?'Tapczan (1 szt.) – stan bardzo dobry':t==='tapczan3'?'Tapczan (3 szt.) – stan bardzo dobry':t==='lozko'?'Łóżko dwuosobowe (1 szt.) – stan bardzo dobry':'Tapczan (2 szt.) – stan bardzo dobry';
-}
-function initZamPokoje(prefix){
-  // Determine number of rooms from czynsz selection: 6000=>3 rooms, 4000=>2 rooms, else guess from osoby
-  const cz=parseInt(document.getElementById(prefix+'zamCzynsz')?.value)||0;
-  const n=cz>=5500?3:2;
-  const wrap=document.getElementById(prefix+'pokoje-prot-wrap');
-  if(!wrap)return;
-  wrap.innerHTML='';
-  for(let i=1;i<=n;i++){
-    const pid='p'+i;
-    window['zamBed_'+prefix+pid]='tapczan2';
-    wrap.innerHTML+=`<div class="pom-box">
-      <div class="pom-title">🛏 Pokój ${i}</div>
-      <div class="form-row" style="margin-bottom:10px;">
-        <div class="field"><label>Stan wizualny</label><select id="${prefix}${pid}w"><option>bardzo dobry</option><option>dobry</option><option>dostateczny</option><option>zły</option></select></div>
-        <div class="field"><label>Stan urządzeń</label><select id="${prefix}${pid}t"><option>bardzo dobry</option><option>dobry</option><option>dostateczny</option><option>zły</option></select></div>
-      </div>
-      <div class="sl">Łóżko / Tapczan</div>
-      <div class="bed-toggle" id="${prefix}${pid}-bt">
-        <button class="bed-opt sel" onclick="setZamBed('${prefix}','${pid}','tapczan2',this)">Tapczan (2 szt.)</button>
-        <button class="bed-opt" onclick="setZamBed('${prefix}','${pid}','tapczan1',this)">Tapczan (1 szt.)</button>
-        <button class="bed-opt" onclick="setZamBed('${prefix}','${pid}','tapczan3',this)">Tapczan (3 szt.)</button>
-        <button class="bed-opt" onclick="setZamBed('${prefix}','${pid}','lozko',this)">Łóżko dwuosobowe</button>
-      </div>
-      <div class="sl" style="margin-top:7px;">Meble</div>
-      <div class="qty-row"><span class="qty-label">Komoda</span><button class="qty-btn" onclick="chQ('${prefix}${pid}ko',-1)">−</button><span class="qty-val" id="${prefix}${pid}ko">1</span><button class="qty-btn" onclick="chQ('${prefix}${pid}ko',1)">+</button></div>
-      <div class="qty-row"><span class="qty-label">Szafa</span><button class="qty-btn" onclick="chQ('${prefix}${pid}sz',-1)">−</button><span class="qty-val" id="${prefix}${pid}sz">1</span><button class="qty-btn" onclick="chQ('${prefix}${pid}sz',1)">+</button></div>
-      <div class="qty-row"><span class="qty-label">Krzesło</span><button class="qty-btn" onclick="chQ('${prefix}${pid}kr',-1)">−</button><span class="qty-val" id="${prefix}${pid}kr">2</span><button class="qty-btn" onclick="chQ('${prefix}${pid}kr',1)">+</button></div>
-      <div class="qty-row"><span class="qty-label">Stół</span><button class="qty-btn" onclick="chQ('${prefix}${pid}st',-1)">−</button><span class="qty-val" id="${prefix}${pid}st">1</span><button class="qty-btn" onclick="chQ('${prefix}${pid}st',1)">+</button></div>
-      <div class="qty-row"><span class="qty-label">Szafka nocna</span><button class="qty-btn" onclick="chQ('${prefix}${pid}sn',-1)">−</button><span class="qty-val" id="${prefix}${pid}sn">2</span><button class="qty-btn" onclick="chQ('${prefix}${pid}sn',1)">+</button></div>
-      <div class="field" style="margin-top:8px;"><label>Uwagi</label><input type="text" id="${prefix}${pid}uw" placeholder="opcjonalne"></div>
-    </div>`;
-  }
-}
-function setZamBed(prefix,pid,type,btn){
-  window['zamBed_'+prefix+pid]=type;
-  document.querySelectorAll('#'+prefix+pid+'-bt .bed-opt').forEach(b=>b.classList.remove('sel'));
-  btn.classList.add('sel');
-}
-
-function buildZamHTML(prefix, dataRamowa, sigName, firmaPelna, firmaCity, firmaAdres, firmaNIP, firmaREGON, firmaKRS, firmaRepr, firmaEmail, signerFull){
-  const zamNr=v(prefix+'zamNr');
-  const zamDom=v(prefix+'zamDom');
-  const zamLokal=v(prefix+'zamLokal');
-  const zamOsoby=v(prefix+'zamOsoby');
-  const zamCzynsz=v(prefix+'zamCzynsz');
-  const zamOd=fd(v(prefix+'zamOd'));
-  const zamDo=v(prefix+'zamDo')?fd(v(prefix+'zamDo')):'nieokreślony';
-  const zamWydanie=fd(v(prefix+'zamWydanie'));
-  const zamKaucja=v(prefix+'zamKaucja');
-  const zamKaucjaDt=v(prefix+'zamKaucjaDt')?fd(v(prefix+'zamKaucjaDt')):'…';
-  const zamInne=v(prefix+'zamInne')||'Brak';
-  const m1od=v(prefix+'zamM1od'),m1do=v(prefix+'zamM1do'),m1kw=v(prefix+'zamM1kw');
-  const hasM1=m1od&&m1do&&m1kw;
-
-  // Protocol data
-  const protData=fd(v(prefix+'protData'));
-  const protKlucze=v(prefix+'protKlucze')||'…';
-  const nPok=parseInt(zamCzynsz)>=5500?3:2;
-  // pokoje HTML for protocol
-  let zamPokHTML='';
-  for(let i=1;i<=nPok;i++){
-    const pid='p'+i;
-    const bed=zamBedText(prefix,pid);
-    const ko=gq(prefix+pid+'ko'),sz=gq(prefix+pid+'sz'),kr=gq(prefix+pid+'kr'),stol=gq(prefix+pid+'st'),sn=gq(prefix+pid+'sn');
-    const meble=[bed,ko?`komoda (${ko} szt.) – stan bardzo dobry`:'',sz?`szafa (${sz} szt.) – stan bardzo dobry`:'',kr?`krzesło (${kr} szt.) – stan bardzo dobry`:'',stol?`stół (${stol} szt.) – stan bardzo dobry`:'',sn?`szafka nocna (${sn} szt.) – stan bardzo dobry`:''].filter(Boolean).join(', ');
-    zamPokHTML+=`<p><strong>Pokój ${i}</strong></p><ul><li>Stan wizualny: ${sv(prefix+pid+'w')}</li><li>Stan urządzeń technicznych: ${sv(prefix+pid+'t')}</li><li>Wyposażenie — meble: ${meble}</li>${v(prefix+pid+'uw')?`<li>Uwagi: ${v(prefix+pid+'uw')}</li>`:''}</ul>`;
-  }
-  const kuchMeble=['Szafki zabudowa stała – nowe',gq(prefix+'ks')?`stół (${gq(prefix+'ks')} szt.) – stan bardzo dobry`:'',gq(prefix+'kkr')?`krzesło (${gq(prefix+'kkr')} szt.) – stan bardzo dobry`:''].filter(Boolean).join(', ');
-  const kuchUrz=['Kuchenka z piekarnikiem (1 szt.) – nowa',gq(prefix+'kcz')?`czajnik (${gq(prefix+'kcz')} szt.) – stan bardzo dobry`:'',gq(prefix+'klo')?`lodówka (${gq(prefix+'klo')} szt.) – stan bardzo dobry`:'',gq(prefix+'kmi')?`kuchenka mikrofalowa (${gq(prefix+'kmi')} szt.) – stan bardzo dobry`:''].filter(Boolean).join(', ');
-
-  const wypowiedzenieTxt=`Każda ze Stron jest uprawniona do wypowiedzenia Zamówienia z zachowaniem miesięcznego okresu wypowiedzenia. Bieg wypowiedzenia rozpoczyna się w dniu doręczenia drugiej Stronie oświadczenia o wypowiedzeniu.<br><br>Złożenie wypowiedzenia może nastąpić zarówno w formie pisemnej, jak i za pośrednictwem poczty elektronicznej na wyłącznie następujące adresy e-mail: <strong>home4people.info@gmail.com</strong> (Wynajmujący) i <strong>${firmaEmail}</strong> (Najemca). Wypowiedzenie dokonane w formie elektronicznej uważa się za skutecznie doręczone od dnia następującego po dniu przesłania wiadomości e-mail, chyba że odbiorca oświadczenia potwierdzi jego otrzymanie wcześniej.`;
-
-  return `<div class="contract-preview">
-<h2>Zamówienie nr ${zamNr}</h2>
-<p class="sub">do umowy ramowej najmu zawartej dnia ${fd(dataRamowa)} w Łodzi</p>
-<p>pomiędzy:</p>
-<p><strong>H4P spółką z ograniczoną odpowiedzialnością z siedzibą w Łodzi</strong> (90-514) przy ul. Wólczańskiej 66/C311<br>wpisaną do rejestru przedsiębiorców prowadzonego przez Sąd Rejonowy dla Łodzi Śródmieścia w Łodzi,<br>XX Wydział Gospodarczy KRS pod numerem KRS 0001137971,<br>posługująca się numerem NIP 7252349415, numerem REGON: 540166136,<br>o kapitale zakładowym w wysokości 5.000,00 zł,<br>reprezentowaną przez ${signerFull},<br>zwaną dalej „<strong>Wynajmującym</strong>",</p>
-<p>a</p>
-<p><strong>${firmaPelna} z siedzibą w ${firmaCity} przy ${firmaAdres}</strong><br>NIP: ${firmaNIP}, REGON: ${firmaREGON}, KRS: ${firmaKRS}<br>reprezentowaną przez ${firmaRepr},<br>zwaną dalej „<strong>Najemcą</strong>".</p>
-<table class="zam-table">
-  <tr><td>Przedmiot najmu:</td><td>lokal mieszkalny nr ${zamLokal} znajdujący się przy ul. Turystycznej ${zamDom} w miejscowości Nadarzyn</td></tr>
-  <tr><td>Ilość osób do zakwaterowania:</td><td>${zamOsoby}</td></tr>
-  <tr><td>Miesięczny czynsz najmu:</td><td>${zamCzynsz} zł netto + VAT${hasM1?`<br><em>Pierwszy niepełny miesiąc (${fd(m1od)} – ${fd(m1do)}): ${m1kw} zł netto + VAT</em>`:''}</td></tr>
-  <tr><td>Okres najmu:</td><td>od dnia ${zamOd} do dnia ${v(prefix+'zamDo')?fd(v(prefix+'zamDo')):'czas nieoznaczony'}</td></tr>
-  <tr><td>Wysokość i termin płatności kaucji:</td><td>${window['zamKaucjaTyp_'+prefix]==='oplacona'
-    ? 'Najemca uiścił kaucję obejmującą 3 zamówienia. Za niniejsze mieszkanie kaucja nie jest pobierana. Łączna kaucja pozostaje ważna i obejmuje wszystkie mieszkania, na które zostały podpisane zamówienia.'
-    : zamKaucja+' zł do dnia '+zamKaucjaDt}</td></tr>
-  <tr><td>Wydanie przedmiotu najmu Najemcy:</td><td>dnia ${zamWydanie}</td></tr>
-  <tr><td>Warunki i termin wypowiedzenia:</td><td>${wypowiedzenieTxt}</td></tr>
-  <tr><td>Inne:</td><td>${zamInne}</td></tr>
-</table>
-<table class="sig-table"><tr>
-  <td><div class="sig-line">___________________________<br>za Wynajmującego<br><small>${sigName}</small></div></td>
-  <td><div class="sig-line">Potwierdzam: ___________________________<br>za Najemcę<br><small>${firmaRepr}</small></div></td>
-</tr></table>
-</div>
-<div style="height:40px;"></div>
-<div class="contract-preview">
-<h2>Protokół zdawczo-odbiorczy</h2>
-<p class="sub">Protokół zdawczo-odbiorczy — lokal nr ${zamLokal}, ul. Turystyczna ${zamDom}, Nadarzyn</p>
-<p>Między <strong>H4P Sp. z o.o.</strong> repr. przez ${sigName} a <strong>${firmaPelna}</strong>.</p>
-<p>Sporządzony dnia ${protData} w Nadarzynie dla lokalu nr ${zamLokal} przy ul. Turystycznej ${zamDom}.</p>
-<p class="sh">DOSTĘPNE MEDIA</p><p>Internet</p>
-<p class="sh">LICZBA KLUCZY</p><p>${protKlucze}</p>
-<p class="sh">STAN WYPOSAŻENIA MIESZKANIA</p>
-<p><strong>Kuchnia</strong></p>
-<ul>
-  <li>Stan wizualny: ${sv(prefix+'kw')}</li>
-  <li>Stan urządzeń technicznych: ${sv(prefix+'kt')}</li>
-  <li>Wyposażenie — meble: ${kuchMeble}</li>
-  <li>Wyposażenie — urządzenia: ${kuchUrz}</li>
-  ${v(prefix+'kuwagi')?`<li>Uwagi: ${v(prefix+'kuwagi')}</li>`:''}
-</ul>
-${zamPokHTML}
-<p><strong>Łazienka</strong></p>
-<ul>
-  <li>Stan wizualny: ${sv(prefix+'lw')}</li>
-  <li>Stan urządzeń technicznych: ${sv(prefix+'lt')}</li>
-  <li>Pralka (1 szt.) – nowa</li>
-  ${v(prefix+'luwagi')?`<li>Uwagi: ${v(prefix+'luwagi')}</li>`:''}
-</ul>
-${v(prefix+'protUwagi')?`<p class="sh">UWAGI OGÓLNE</p><p>${v(prefix+'protUwagi')}</p>`:''}
-<p style="margin-top:16px;">Strony niniejszy protokół sporządziły po szczegółowych oględzinach lokalu, wspólnie i w uzgodnieniu.</p>
-<table class="sig-table"><tr>
-  <td><div class="sig-line">___________________________<br>Wynajmujący<br><small>${sigName}</small></div></td>
-  <td><div class="sig-line">___________________________<br>Najemca<br><small>${firmaRepr}</small></div></td>
-</tr></table>
-</div>`;
-}
-
-// ─── FIZ GENERATE ────────────────────────────────────────────────────────────
-function fGenerate(){
-  const isPokoj=fst.pred==='pokoj';
-  const dom=v('f-nrDomu'),mNr=v('f-nrMiesz'),dataZaw=v('f-dataZaw');
-  const nPok=parseInt(fst.sklad);
-  const skladTxt=fst.sklad==='3'?'trzy pokoje, kuchnia, łazienka połączona z WC oraz przedpokój':'dwa pokoje, kuchnia, łazienka połączona z WC oraz przedpokój';
-  const najEmail=v('f-nEmail')||v('f-emailFakt');
-  const najAdr=`Nadarzyn, ul. Turystyczna ${dom}/${mNr}, adres e-mail: ${najEmail}, tel. ${v('f-nTel')}`;
-  const sigName=fst.signer==='Prezesem Arnold Hertfelder'?'Arnold Hertfelder':'Olena Dziubenko';
-  let kaucjaTxt='';
-  if(fst.kaucja==='jed'){kaucjaTxt=`Najemca zapłaci Wynajmującemu kaucję w wysokości ${v('f-k1kw')} PLN (słownie: ${v('f-k1sl')}) do dnia ${fd(v('f-k1dt'))} na rachunek bankowy o nr 49 1140 1108 0000 7107 5200 1001.`;}
-  else{kaucjaTxt=`Najemca zapłaci Wynajmującemu kaucję w dwóch ratach:<br>– I rata: ${v('f-k2akw')} PLN (${v('f-k2asl')}) do dnia ${fd(v('f-k2adt'))};<br>– II rata: ${v('f-k2bkw')} PLN (${v('f-k2bsl')}) do dnia ${fd(v('f-k2bdt'))}<br>na rachunek bankowy o nr 49 1140 1108 0000 7107 5200 1001.`;}
-  let wspolArr=[];
-  fDorosli.forEach(id=>{wspolArr.push(`${document.getElementById('fpn'+id)?.value||'…'}, PESEL: ${document.getElementById('fpi'+id)?.value||'…'}`);});
-  fDzieci.forEach(id=>{wspolArr.push(`${document.getElementById('fpn'+id)?.value||'…'} (dziecko, ur./PESEL: ${document.getElementById('fpi'+id)?.value||'…'})`);});
-  const totalOsoby=1+fDorosli.length;
-  let predTxt=isPokoj?`Na zasadach określonych niniejszą Umową Wynajmujący oddaje Najemcy do wyłącznego używania pokój o wielkości ${v('f-pokM2')||'…'} m² (${v('f-pokNazwa')||'pokój'}) znajdujący się w Lokalu (zwany dalej: „<strong>Przedmiotem Najmu</strong>").`:`Na zasadach określonych niniejszą Umową Wynajmujący oddaje Najemcy do używania lokal (zwany dalej: „<strong>Przedmiotem Najmu</strong>").`;
-  const sklTxt=`lokal mieszkalny nr ${mNr} składający się z następujących pomieszczeń: ${skladTxt}, znajdujący się w budynku mieszkalnym nr ${dom} przy ul. Turystycznej w miejscowości Nadarzyn`;
-  const c1kwFmt=v('f-c1kw')?`${parseInt(v('f-c1kw')).toLocaleString('pl')} PLN (słownie: ${v('f-c1sl')})`:'… PLN';
-  const c2kwFmt=v('f-c2kw')?`${parseInt(v('f-c2kw')).toLocaleString('pl')} PLN (słownie: ${v('f-c2sl')})`:'… PLN';
-  const eF=v('f-emailFakt')||najEmail||'…';
-  let pokHTML='';
-  for(let i=1;i<=nPok;i++){
-    const pid='fp'+i;const bed=fBedText(pid);
-    const ko=gq(pid+'ko'),sz=gq(pid+'sz'),kr=gq(pid+'kr'),stol=gq(pid+'st'),sn=gq(pid+'sn');
-    const meble=[bed,ko?`komoda (${ko} szt.) – stan bardzo dobry`:'',sz?`szafa (${sz} szt.) – stan bardzo dobry`:'',kr?`krzesło (${kr} szt.) – stan bardzo dobry`:'',stol?`stół (${stol} szt.) – stan bardzo dobry`:'',sn?`szafka nocna (${sn} szt.) – stan bardzo dobry`:''].filter(Boolean).join(', ');
-    pokHTML+=`<p><strong>Pokój ${i}</strong></p><ul><li>Stan wizualny: ${sv(pid+'w')}</li><li>Stan urządzeń technicznych: ${sv(pid+'t')}</li><li>Wyposażenie — meble: ${meble}</li>${v(pid+'uw')?`<li>Uwagi: ${v(pid+'uw')}</li>`:''}</ul>`;
-  }
-  const kuchMeble=['Szafki zabudowa stała – nowe',gq('f-ks')?`stół (${gq('f-ks')} szt.) – stan bardzo dobry`:'',gq('f-kkr')?`krzesło (${gq('f-kkr')} szt.) – stan bardzo dobry`:''].filter(Boolean).join(', ');
-  const kuchUrz=['Kuchenka z piekarnikiem (1 szt.) – nowa',gq('f-kcz')?`czajnik (${gq('f-kcz')} szt.) – stan bardzo dobry`:'',gq('f-klo')?`lodówka (${gq('f-klo')} szt.) – stan bardzo dobry`:'',gq('f-kmi')?`kuchenka mikrofalowa (${gq('f-kmi')} szt.) – stan bardzo dobry`:''].filter(Boolean).join(', ');
-
-  const html=`<div class="contract-preview">
-<h2>Umowa najmu</h2>
-<p class="sub">zawarta dnia ${fd(dataZaw)} roku w Łodzi, zwana dalej; „<strong>Umową</strong>"</p>
-<p>pomiędzy:</p>
-<p><strong>H4P spółką z ograniczoną odpowiedzialnością z siedzibą w Łodzi</strong> (90-514) przy ul. Wólczańskiej 66/C311 wpisaną do rejestru przedsiębiorców prowadzonego przez Sąd Rejonowy dla Łodzi Śródmieścia w Łodzi, XX Wydział Gospodarczy KRS pod numerem KRS 0001137971, posługująca się numerem NIP 7252349415, numerem REGON: 540166136, o kapitale zakładowym w wysokości 5.000,00 zł,<br><br>reprezentowaną przez ${fst.signer},<br><br>zwaną dalej „<strong>Wynajmującym</strong>",</p>
-<p>a</p>
-<p><strong>${v('f-nImie')}</strong>,<br><br>zwanym dalej „<strong>Najemcą</strong>".</p>
-<p class="sh">§ 1. [Oświadczenia]</p>
-<ol>
-<li>Wynajmujący oświadcza, że:
-  <ol>
-    <li>posiada prawo do oddania w najem ${sklTxt} posadowionym na nieruchomości gruntowej stanowiącą działkę o numerach ewidencyjnych 427/16, gminie Nadarzyn, powiecie pruszkowskim, województwie mazowieckim, obrębie ewidencyjnym 0001, dalej zwanym „<strong>Lokalem</strong>",</li>
-    <li>zawarcie Umowy nie naruszy jakichkolwiek praw przysługujących osobom trzecim.</li>
-  </ol>
-</li>
-<li>Najemca oświadcza, że:
-  <ol>
-    <li>zapoznał się ze stanem technicznym Lokalu i nie wnosi w tym zakresie żadnych zastrzeżeń,</li>
-    <li>do zawarcia i wykonania Umowy nie jest wymagana żadna zgoda, zatwierdzenie ani upoważnienie ze strony jakiejkolwiek osoby trzeciej lub sądu,</li>
-    <li>będzie wykorzystywał Lokal wyłącznie w celach mieszkaniowych.</li>
-  </ol>
-</li>
-</ol>
-<p class="sh">§ 2. [Przedmiot Umowy]</p>
-<ol>
-<li>${predTxt}</li>
-${isPokoj?`<li>W ramach Umowy Najemca jest także uprawniony do wspólnego korzystania wraz z innymi najemcami z następujących pomieszczeń znajdujących się w Lokalu: ${v('f-wspolne')||'…'} .</li>`:'<li>Najemca oświadcza, że Lokal będzie wykorzystywany wyłącznie w celach mieszkaniowych.</li>'}
-<li>Każdorazowo wydanie Przedmiotu Najmu zostanie potwierdzone podpisanym przez Strony protokołem zdawczo-odbiorczym, który będzie określał stan Przedmiotu Najmu.</li>
-</ol>
-<p class="sh">§ 3. [Czynsz]</p>
-<ol>
-<li>Najemca zapłaci Wynajmującemu czynsz w okresie ${fd(v('f-c1od'))} r. – ${fd(v('f-c1do'))} r. w wysokości: ${c1kwFmt}${(()=>{
-  const od=v('f-c1od'),doD=v('f-c1do'),mies=parseFloat(v('f-c2kw'))||0;
-  if(od&&doD&&mies){
-    const d1=new Date(od),d2=new Date(doD);
-    const days=Math.round((d2-d1)/(1000*60*60*24))+1;
-    const dim=new Date(d1.getFullYear(),d1.getMonth()+1,0).getDate();
-    return ` (${days} dni × ${mies.toLocaleString('pl')} zł ÷ ${dim} dni = ${Math.round(mies/dim*days).toLocaleString('pl')} zł)`;
-  }return '';
-})()}.</li>
-<li>Najemca będzie płacił Wynajmującemu miesięczny czynsz od ${mn(v('f-c2od'))} w wysokości ${c2kwFmt}.</li>
-<li>Czynsz za niepełny miesiąc jest obliczany proporcjonalnie do liczby dni zakwaterowania i stawki miesięcznej czynszu.</li>
-<li>Czynsz płatny jest z góry, w terminie do 14. dnia każdego miesiąca przelewem na rachunek bankowy Wynajmującego wskazany na fakturze VAT. W przypadku pierwszego miesiąca obowiązywania Umowy, czynsz jest płatny z góry w terminie 7 dni od dnia zawarcia Umowy.</li>
-<li>Za dzień dokonania płatności uznaje się dzień uznania rachunku bankowego Wynajmującego.</li>
-</ol>
-<p class="sh">§ 4. [Obowiązki Wynajmującego]</p>
-<ol>
-<li>Wynajmujący oświadcza, że oddany Najemcy Lokal będzie w stanie umożliwiającym zamieszkanie i spełniającym wymagania sanitarne.</li>
-<li>Wynajmujący zobowiązuje się do:
-  <ol>
-    <li>umożliwienia Najemcy niezakłóconego korzystania z przedmiotu najmu,</li>
-    <li>niezwłocznego informowania Najemcy o każdej okoliczności mającej wpływ na przysługujące mu prawo do najmu przedmiotu najmu,</li>
-    <li>wykonywania napraw obciążających Wynajmującego.</li>
-  </ol>
-</li>
-</ol>
-<p class="sh">§ 5. [Obowiązki Najemcy]</p>
-<ol>
-<li>Najemca zobowiązuje się do:
-  <ol>
-    <li>używania przedmiotu najmu w sposób zgodny z jego przeznaczeniem,</li>
-    <li>korzystania z przedmiotu najmu w sposób nie utrudniający i nie przeszkadzający innym użytkownikom Nieruchomości,</li>
-    <li>terminowego uiszczania czynszu i innych opłat wynikających z Umowy,</li>
-    <li>utrzymywania Lokalu w należytym stanie i dbania o czystość zarówno w Lokalu jak i częściach wspólnych nieruchomości, której Lokal jest częścią,</li>
-    <li>wykonywania napraw obciążających Najemcę,</li>
-    <li>przestrzegania przepisów dotyczących ochrony przeciwpożarowej oraz bhp,</li>
-    <li>powstrzymania się od podejmowania działań mogących wywołać bezpośrednie niebezpieczeństwo powstania szkody w Lokalu,</li>
-    <li>przekazania informacji dotyczących szkody w Nieruchomości, spowodowanych działalnością osób trzecich,</li>
-    <li>przestrzegania przez niego i osób z nim zamieszkujących zakazu palenia w Lokalu i w nieruchomości, której Lokal jest częścią,</li>
-    <li>nie dokonywać jakichkolwiek ingerencji ani zmian w Lokalu, w szczególności nie wykonywać otworów w ścianach, suficie ani podłodze. W przypadku konieczności dokonania takiej ingerencji Najemca może zwrócić się do Wynajmującego z odpowiednim wnioskiem. Wynajmujący, według własnego uznania, może dokonać stosownej czynności we własnym zakresie.</li>
-  </ol>
-</li>
-<li>Najemca dołoży wszelkich starań w celu umożliwienia Wynajmującemu dokonywania kontroli przestrzegania przez Najemcę warunków Umowy.</li>
-</ol>
-<p class="sh">§ 6. [Kaucja]</p>
-<ol>
-<li>${kaucjaTxt}</li>
-<li>Kaucja jest pobierana jako zabezpieczenie ewentualnych roszczeń Wynajmującego wynikających z Umowy.</li>
-<li>Kaucja nie jest przychodem Wynajmującego i nie podlega waloryzacji ani oprocentowaniu.</li>
-<li>W przypadku wykorzystania przez Wynajmującego części lub całości kaucji na cele wskazane w pkt 6.2 powyżej Najemca uzupełni kaucję do pierwotnej wysokości w terminie 7 dni od daty otrzymania wezwania.</li>
-<li>W przypadku, gdy Wynajmujący nie ma w stosunku do Najemcy żadnych roszczeń powstałych w związku z Umową, kaucja podlega zwrotowi w terminie 14 dni od daty zwrotu Przedmiotu Najmu.</li>
-</ol>
-<p class="sh">§ 7. [Podnajem]</p>
-<ol>
-<li>Najemcy nie przysługuje prawo do oddania Przedmiotu Najmu w podnajem lub do oddania do jakiegokolwiek innego używania, bez uzyskania uprzedniej zgody Wynajmującego.</li>
-<li>Wynajmujący wyraża zgodę na wspólne zamieszkiwanie Najemcy z: ${wspolArr.length?wspolArr.join('; '):'nie dotyczy'}.</li>
-</ol>
-<p class="sh">§ 8. [Czas trwania i rozwiązanie Umowy]</p>
-<ol>
-<li>Umowa zostaje zawarta na czas nieokreślony.</li>
-<li>Strony mogą m.in. wypowiedzieć Umowę z zachowaniem miesięcznego okresu wypowiedzenia. Bieg wypowiedzenia rozpoczyna się pierwszego dnia miesiąca następującego po tym, w którym dokonano wypowiedzenia.</li>
-<li>Wynajmujący uprawniony jest do rozwiązania Umowy m.in. z zachowaniem siedmiodniowego okresu wypowiedzenia, jeżeli:
-  <ol>
-    <li>Najemca będzie opóźniał się z zapłatą całości bądź części czynszu w sposób przekraczający 30 dni lub</li>
-    <li>Lokal wykorzystywany będzie przez Najemcę niezgodnie z postanowieniami Umowy, w tym, jeśli:
-      <ol>
-        <li>Najemca dopuści się niszczenia Lokalu bądź pomieszczeń lub urządzeń przeznaczonych do wspólnego korzystania, lub</li>
-        <li>Najemca w sposób rażący lub uporczywy wykracza przeciwko porządkowi domowemu, czyniąc uciążliwym korzystanie z Lokalu bądź innych lokali, lub</li>
-        <li>Najemca dopuści się naruszenia zakazu podnajmu lub oddania do jakiegokolwiek innego używania, lub</li>
-        <li>Najemca nie wpłacił kaucji w terminie wskazanym w Umowie.</li>
-      </ol>
-    </li>
-  </ol>
-</li>
-<li>Wypowiedzenie Umowy może nastąpić w formie dokumentowej.</li>
-<li>W przypadku rozwiązania Umowy Najemca zwróci Przedmiot Najmu z dniem jej zakończenia w stanie niepogorszonym. Z czynności zwrotu Przedmiotu Najmu zostanie sporządzony protokół zdawczo-odbiorczy.</li>
-<li>Wszelkie nakłady poczynione na Lokal przez Najemcę są wyłącznie jego własnym kosztem bez prawa zwrotu wartości nakładów po zakończeniu okresu najmu, chyba że Strony postanowią na piśmie inaczej przed dokonaniem nakładów.</li>
-<li>Dalsze korzystanie przez Najemcę z Przedmiotu Najmu po upływie okresu najmu nie będzie uważane za przedłużenie stosunku najmu (wyłączenie stosowania art. 674 Kodeksu cywilnego).</li>
-</ol>
-<p class="sh">§ 9. [Odpowiedzialność i kary umowne]</p>
-<ol>
-<li>Wynajmujący nie ponosi odpowiedzialności za mienie wniesione do Lokalu przez Najemcę.</li>
-<li>Wynajmujący nie ponosi odpowiedzialności za szkody powstałe w majątku Najemcy w wyniku działania osób trzecich lub będących wynikiem niezawinionej przez Wynajmującego awarii urządzeń wodno-kanalizacyjnych, elektrycznych, czy centralnego ogrzewania.</li>
-<li>Najemca zobowiązuje się nie trzymać w Lokalu żadnych zwierząt, bez względu na ich gatunek czy wielkość, chyba że Wynajmujący wyrazi na to uprzednią, pisemną zgodę; w przypadku naruszenia zakazu Najemca ponosi odpowiedzialność za wszelkie wynikłe szkody oraz poddaje się egzekucji opróżnienia i wydania Lokalu.</li>
-<li>Najemca zapłaci na rzecz Wynajmującego następujące kary umowne:
-  <ol>
-    <li>w przypadku każdorazowego naruszenia zakazu palenia w Nieruchomości wskazanego w pkt 5.1.9. Umowy – w wysokości 500,00 zł za każde naruszenie,</li>
-    <li>w przypadku każdorazowego naruszenia zakazu wskazanego w pkt 7.1. Umowy – w wysokości 500 zł za każde naruszenie,</li>
-    <li>w przypadku przebywania w Lokalu więcej niż ${totalOsoby} ${totalOsoby===1?'osoby':totalOsoby<5?'osób':'osób'} Najemca zobowiązany będzie do uiszczenia kary umownej w wysokości 2.000,00 zł.</li>
-  </ol>
-</li>
-<li>Wynajmującemu przysługuje uprawnienie do dochodzenia odszkodowania przewyższającego zastrzeżone kary umowne.</li>
-</ol>
-<p class="sh">§ 10. [Postanowienia końcowe]</p>
-<ol>
-<li>W sprawach nieuregulowanych Umową mają zastosowanie przepisy prawa polskiego.</li>
-<li>Strony wskazują następujące dane do korespondencji:
-  <ol>
-    <li>Wynajmujący – (90-514) Łódź, ul. Wólczańska 66 lok. C311, adres e-mail: home4people.info@gmail.com.</li>
-    <li>Najemca – ${najAdr}, adres e-mail: ${v('f-nEmail')||'…'}.</li>
-  </ol>
-</li>
-<li>Strony będą niezwłocznie, nie później niż w terminie 3 dni, informować się pisemnie lub za pośrednictwem wiadomości e-mail o zmianie danych, o których mowa w pkt 10.2. powyżej. W przypadku braku wskazania nowych danych, przesłanie korespondencji na dotychczasowe dane kontaktowe uważa się za skutecznie doręczone.</li>
-<li>Najemca oświadcza, że treść niniejszej umowy jest dla niego jasna, zrozumiała i nie budzi zastrzeżeń.</li>
-<li>Umowę sporządzono w dwóch jednobrzmiących egzemplarzach, po jednym dla każdej ze Stron.</li>
-<li>Zmiany postanowień Umowy wymagają formy pisemnej pod rygorem nieważności.</li>
-</ol>
-<table class="sig-table"><tr>
-  <td><div class="sig-line">_____________________________<br>za Wynajmującego<br><small>${sigName}</small></div></td>
-  <td><div class="sig-line">_____________________________<br>za Najemcę<br><small>${v('f-nImie')}</small></div></td>
-</tr></table>
-</div>
-<div style="height:40px;"></div>
-<div class="contract-preview">
-<h2>Protokół zdawczo-odbiorczy</h2><p class="sub">Załącznik nr 1 do umowy najmu z dnia ${fd(dataZaw)}</p>
-<p>Między <strong>H4P Sp. z o.o.</strong> repr. przez ${sigName} a <strong>${v('f-nImie')}</strong>.</p>
-<p>Sporządzony dnia ${fd(v('f-protData'))} w Nadarzynie dla lokalu nr ${mNr} przy ul. Turystycznej ${dom}.</p>
-<p class="sh">DOSTĘPNE MEDIA</p><p>Internet</p>
-<p class="sh">LICZNIKI WODY</p><p>Nr: ${v('f-w1nr')||'…'} | Stan: ${v('f-w1st')||'…'}</p><p>Nr: ${v('f-w2nr')||'…'} | Stan: ${v('f-w2st')||'…'}</p>
-<p class="sh">CIEPŁOMIERZ</p><p>Nr: ${v('f-c1nr')||'…'} | Stan: ${v('f-c1st')||'…'}</p>
-<p class="sh">LICZBA KLUCZY</p><p>${v('f-protKlucze')||'…'}</p>
-<p class="sh">STAN WYPOSAŻENIA</p>
-<p><strong>Kuchnia</strong></p><ul><li>Stan wizualny: ${sv('f-kw')}</li><li>Stan urządzeń: ${sv('f-kt')}</li><li>Meble: ${kuchMeble}</li><li>Urządzenia: ${kuchUrz}</li>${v('f-kuwagi')?`<li>Uwagi: ${v('f-kuwagi')}</li>`:''}</ul>
-${pokHTML}
-<p><strong>Łazienka</strong></p><ul><li>Stan wizualny: ${sv('f-lw')}</li><li>Stan urządzeń: ${sv('f-lt')}</li><li>Pralka (1 szt.) – nowa</li>${v('f-luwagi')?`<li>Uwagi: ${v('f-luwagi')}</li>`:''}</ul>
-${v('f-protUwagi')?`<p class="sh">UWAGI OGÓLNE</p><p>${v('f-protUwagi')}</p>`:''}
-<p style="margin-top:16px;">Strony protokół sporządziły po szczegółowych oględzinach lokalu.</p>
-<table class="sig-table"><tr><td><div class="sig-line">___________________________<br>Wynajmujący</div></td><td><div class="sig-line">___________________________<br>Najemca</div></td></tr></table>
-</div>`;
-  const fMeta={
-    title:(v('f-nImie')||'Najemca')+' — Turystyczna '+(v('f-nrDomu')||'')+'/'+(v('f-nrMiesz')||''),
-    najemca:v('f-nImie'), lokal:'Turystyczna '+(v('f-nrDomu')||'')+'/'+(v('f-nrMiesz')||''),
-    type:'fiz', email:v('f-nEmail')||v('f-emailFakt')
-  };
-  showPreview(html, fMeta);
-}
-
-// ─── RAMOWA GENERATE ─────────────────────────────────────────────────────────
-function rGenerate(){
-  const dataZaw=v('r-dataZaw');
-  const sigName=rst.signer.includes('Arnold')?'Arnold Hertfelder':'Olena Dziubenko';
-  const firmaPelna=v('r-firmaPelna')||v('r-firma');
-  const firmaCity=v('r-firmaCity'),firmaAdres=v('r-firmaAdres'),firmaSad=v('r-firmaSad');
-  const firmaKRS=v('r-firmaKRS'),firmaNIP=v('r-firmaNIP'),firmaREGON=v('r-firmaREGON');
-  const firmaKap=v('r-firmaKap'),firmaRepr=v('r-firmaRepr'),firmaEmail=v('r-firmaEmail'),firmaKores=v('r-firmaKores');
-  const stawka=rst.typ==='posrednik'?'900,00':'1.000,00';
-  const isPosrednik=rst.typ==='posrednik';
-
-  const umowaTxt=buildUmowaRamowa(dataZaw,sigName,firmaPelna,firmaCity,firmaAdres,firmaSad,firmaKRS,firmaNIP,firmaREGON,firmaKap,firmaRepr,firmaEmail,firmaKores,stawka,isPosrednik,rst.signer);
-  const zamTxt=buildZamHTML('r-',dataZaw,sigName,firmaPelna,firmaCity,firmaAdres,firmaNIP,firmaREGON,firmaKRS,firmaRepr,firmaEmail,rst.signer);
-  const rMeta={
-    title:(v('r-firma')||'Firma')+' — Umowa ramowa',
-    najemca:v('r-firma'), lokal:'Turystyczna (wiele lokali)',
-    type:'firma', email:v('r-firmaEmail')
-  };
-  showPreview(umowaTxt+'<div style="height:40px;"></div>'+zamTxt, rMeta);
-}
-
-function buildUmowaRamowa(dataZaw,sigName,firmaPelna,firmaCity,firmaAdres,firmaSad,firmaKRS,firmaNIP,firmaREGON,firmaKap,firmaRepr,firmaEmail,firmaKores,stawka,isPosrednik,signerFull){
-  // Paragraph numbers depend on type
-  const p9  = '§ 9';
-  const p10 = '§ 10';
-  const p11 = '§ 11';
-
-  return `<div class="contract-preview">
-<h2>Umowa ramowa najmu</h2>
-<p class="sub">zawarta dnia ${fd(dataZaw)} roku w Łodzi, zwana dalej: „<strong>Umową</strong>"</p>
-<p>pomiędzy:</p>
-<p><strong>H4P spółką z ograniczoną odpowiedzialnością z siedzibą w Łodzi</strong> (90-514) przy ul. Wólczańskiej 66/C311<br>wpisaną do rejestru przedsiębiorców prowadzonego przez Sąd Rejonowy dla Łodzi Śródmieścia w Łodzi,<br>XX Wydział Gospodarczy KRS pod numerem KRS 0001137971,<br>posługująca się numerem NIP 7252349415, numerem REGON: 540166136,<br>o kapitale zakładowym w wysokości 5.000,00 zł,<br>reprezentowaną przez ${signerFull},<br>zwaną dalej „<strong>Wynajmującym</strong>",</p>
-<p>a</p>
-<p><strong>${firmaPelna} z siedzibą w ${firmaCity} przy ${firmaAdres}</strong><br>
-${firmaSad?`wpisaną do rejestru przedsiębiorców prowadzonego przez ${firmaSad}<br>pod numerem KRS ${firmaKRS},<br>posługująca się numerem NIP ${firmaNIP}, numerem REGON: ${firmaREGON},<br>o kapitale zakładowym w wysokości ${firmaKap} zł,`:`NIP: ${firmaNIP}, REGON: ${firmaREGON}, KRS: ${firmaKRS},`}<br>
-reprezentowaną przez ${firmaRepr},<br>
-zwaną dalej „<strong>Najemcą</strong>".</p>
-
-<p class="sh">§ 1. [Oświadczenia]</p>
-<ol>
-  <li>Wynajmujący oświadcza, że:
-    <ol>
-      <li>posiada prawo do oddania w najem lokali mieszkalnych znajdujących się w ${WSZYSTKIE_DOMY_TEKST} posadowionych na nieruchomości gruntowej stanowiącej działkę o numerach ewidencyjnych 427/16 położonej przy ulicy Turystycznej numer 15, 17, 19, 21, 23, 25, 27 oraz 29 w Nadarzynie, gminie Nadarzyn, powiecie pruszkowskim, województwie mazowieckim, obrębie ewidencyjnym 0001, dalej zwaną „<strong>Nieruchomością</strong>",</li>
-      <li>zawarcie Umowy nie naruszy jakichkolwiek praw przysługujących osobom trzecim,</li>
-      <li>Nieruchomość jest wolna od jakichkolwiek zobowiązań oraz nie jest obciążona prawami osób trzecich w sposób ograniczający używanie przez Najemcę,</li>
-      <li>jest czynnym podatnikiem podatku od towarów i usług (VAT),</li>
-      <li>do zawarcia i wykonania Umowy nie jest wymagana żadna zgoda, zatwierdzenie ani upoważnienie ze strony jakiejkolwiek osoby trzeciej lub sądu.</li>
-    </ol>
-  </li>
-  <li>Najemca oświadcza, że:
-    <ol>
-      <li>zapoznał się ze stanem technicznym Nieruchomości i nie wnosi w tym zakresie żadnych zastrzeżeń,</li>
-      <li>jest czynnym podatnikiem podatku od towarów i usług (VAT),</li>
-      <li>do zawarcia i wykonania Umowy nie jest wymagana żadna zgoda, zatwierdzenie ani upoważnienie ze strony jakiejkolwiek osoby trzeciej lub sądu,</li>
-      <li>będzie wykonywał Umowę w celach związanych z prowadzoną przez niego działalnością gospodarczą poprzez podnajmowanie przedmiotu najmu jako noclegi dla pracowników, zleceniobiorców i współpracowników dla jego kontrahentów (dalej jako: „<strong>Lokatorzy</strong>").</li>
-    </ol>
-  </li>
-</ol>
-
-<p class="sh">§ 2. [Przedmiot Umowy]</p>
-<ol>
-  <li>Na zasadach określonych niniejszą Umową Wynajmujący odda Najemcy do używania lokal bądź lokale mieszkalne znajdujące się w Nieruchomości (zwane dalej: „<strong>Lokalami</strong>") na zasadach określonych w zamówieniu, którego wzór stanowi załącznik nr 1 do Umowy (zwane dalej: „<strong>Zamówieniem</strong>").</li>
-  <li>Najemca oświadcza, że Lokale będą wykorzystywane wyłącznie w celach mieszkaniowych, jako baza noclegowa dla Lokatorów.</li>
-  <li>Każdorazowo wydanie przedmiotu najmu zostanie potwierdzone podpisanym przez Strony protokołem zdawczo-odbiorczym, który będzie określał stan przedmiotu najmu.</li>
-</ol>
-
-<p class="sh">§ 3. [Związanie Zamówieniem]</p>
-<ol>
-  <li>W celu związania Zamówieniem Najemca za pośrednictwem poczty elektronicznej wyśle z następującego adresu Najemcy <strong>${firmaEmail}</strong> na następujący adres Wynajmującego <strong>home4people.info@gmail.com</strong> zapytanie w formie wiadomości e-mail zawierające przynajmniej: ilość osób podlegających zakwaterowaniu w ramach Zamówienia oraz preferowany okres najmu, mające na celu doprowadzenie do związania Zamówieniem.</li>
-  <li>Wynajmujący w terminie 3 dni od otrzymania zapytania, o którym mowa w pkt 3.1. powyżej, w odpowiedzi przesyła wypełniony formularz Zamówienia na podstawie załącznika nr 1 lub odmawia realizacji przedmiotu zapytania. Brak odpowiedzi Wynajmującego w terminie, o którym mowa w zdaniu poprzedzającym, równoznaczny jest z odmową przyjęcia zapytania do realizacji.</li>
-  <li>Najemca w terminie 24 godzin od momentu otrzymania od Wynajmującego wypełnionego formularza Zamówienia dokonuje potwierdzenia lub odmowy potwierdzenia Zamówienia poprzez wydrukowanie skanu przesłanego Zamówienia, opatrzenia go podpisem, zeskanowania Zamówienia z podpisem i odesłania tegoż skanu na adres mailowy wskazany w pkt 3.1. powyżej. Brak odpowiedzi Najemcy w terminie, o którym mowa w zdaniu poprzedzającym, równoznaczny jest z odmową przyjęcia Zamówienia.</li>
-  <li>Po przeprowadzeniu procedury wskazanej w pkt 3.1.–3.3. powyżej, Strony są związane Zamówieniem.</li>
-</ol>
-
-<p class="sh">§ 4. [Czynsz]</p>
-<ol>
-  <li>Najemca będzie płacił Wynajmującemu miesięczny czynsz w wysokości wskazanej w Zamówieniach.</li>
-  <li>Czynsz za niepełny miesiąc jest obliczany proporcjonalnie do liczby dni zakwaterowania i stawki miesięcznej czynszu.</li>
-  <li>Czynsz płatny jest z góry w terminie do 14 dnia każdego miesiąca przelewem na rachunek bankowy Wynajmującego wskazany na fakturze VAT. W przypadku pierwszego miesiąca obowiązywania danego Zamówienia, czynsz jest płatny z góry w terminie 7 dni od dnia związania Zamówieniem.</li>
-  <li>Za dzień dokonania płatności uznaje się dzień uznania rachunku bankowego Wynajmującego.</li>
-  <li>Każdorazowo kwota czynszu określona w Zamówieniu zawiera w sobie również wszystkie opłaty związane z używaniem Lokalu (opłaty eksploatacyjne).</li>
-</ol>
-
-<p class="sh">§ 5. [Obowiązki Wynajmującego]</p>
-<ol>
-  <li>Wynajmujący oświadcza, że każdy oddany Najemcy Lokal będzie w stanie umożliwiającym zamieszkanie i spełniającym wymagania sanitarne.</li>
-  <li>Wynajmujący zobowiązuje się do:
-    <ol>
-      <li>umożliwienia Najemcy niezakłóconego korzystania z przedmiotu najmu,</li>
-      <li>niezwłocznego informowania Najemcy o każdej okoliczności mającej wpływ na przysługujące mu prawo do najmu przedmiotu najmu,</li>
-      <li>wykonywania napraw obciążających Wynajmującego.</li>
-    </ol>
-  </li>
-</ol>
-
-<p class="sh">§ 6. [Obowiązki Najemcy]</p>
-<ol>
-  <li>Najemca zobowiązuje się do:
-    <ol>
-      <li>używania przedmiotu najmu w sposób zgodny z jego przeznaczeniem,</li>
-      <li>korzystania z przedmiotu najmu w sposób nie utrudniający i nie przeszkadzający innym użytkownikom Nieruchomości,</li>
-      <li>terminowego uiszczania czynszu i innych opłat wynikających z Umowy,</li>
-      <li>utrzymywania przedmiotu najmu w należytym stanie i dbania o czystość zarówno w przedmiocie najmu jak i częściach wspólnych Nieruchomości,</li>
-      <li>wykonywania napraw obciążających Najemcę,</li>
-      <li>przestrzegania przepisów dotyczących ochrony przeciwpożarowej oraz bhp,</li>
-      <li>powstrzymania się od podejmowania działań mogących wywołać bezpośrednie niebezpieczeństwo powstania szkody w przedmiocie najmu,</li>
-      <li>przekazania informacji dotyczących szkody w Nieruchomości, spowodowanych działalnością osób trzecich,</li>
-      <li>przestrzegania przez niego i Lokatorów zakazu palenia w Nieruchomości.</li>
-    </ol>
-  </li>
-  <li>Najemca dołoży wszelkich starań w celu umożliwienia Wynajmującemu dokonywania kontroli przestrzegania przez Najemcę warunków Umowy.</li>
-  <li>Najemca nie jest uprawniony do zakwaterowania większej ilości osób niż wskazana w Zamówieniu.</li>
-</ol>
-
-<p class="sh">§ 7. [Kaucja]</p>
-<ol>
-  <li>Najemca zapłaci Wynajmującemu kaucję w wysokości i w terminie określonym w Zamówieniu.</li>
-  <li>Kaucja jest pobierana jako zabezpieczenie ewentualnych roszczeń Wynajmującego wynikających z Umowy.</li>
-  <li>Kaucja nie jest przychodem Wynajmującego i nie podlega waloryzacji ani oprocentowaniu.</li>
-  <li>W przypadku wykorzystania przez Wynajmującego części lub całości kaucji na cele wskazane w pkt 7.2 powyżej Najemca uzupełni kaucję do pierwotnej wysokości w terminie 7 dni od daty otrzymania wezwania.</li>
-  <li>W przypadku, gdy Wynajmujący nie ma w stosunku do Najemcy żadnych roszczeń powstałych w związku z Umową lub Zamówieniem, kaucja podlega zwrotowi w terminie 14 dni od daty zwrotu przedmiotu najmu.</li>
-</ol>
-
-<p class="sh">§ 8. [Podnajem]</p>
-<ol>
-  <li>Najemcy nie przysługuje prawo do oddania przedmiotu najmu w podnajem lub do oddania do jakiegokolwiek innego używania, bez uzyskania uprzedniej zgody Wynajmującego, chyba że podnajemcą będzie pracownik lub zleceniobiorca Najemcy.</li>
-</ol>
-
-
-
-<p class="sh">${p9}. [Czas trwania i rozwiązanie Umowy]</p>
-<ol>
-  <li>Umowa zostaje zawarta na czas nieokreślony.</li>
-  <li>Strony mogą m.in. wypowiedzieć Umowę z zachowaniem miesięcznego okresu wypowiedzenia. Bieg wypowiedzenia rozpoczyna się pierwszego dnia miesiąca następującego po tym, w którym dokonano wypowiedzenia. W okresie biegu wypowiedzenia Strony nie będą zawiązywały nowych Zamówień.</li>
-  <li>Wynajmujący uprawniony jest do wstrzymania się z realizacją Zamówień oraz rozwiązania Umowy z zachowaniem siedmiodniowego okresu wypowiedzenia, m.in. jeżeli: a) Najemca będzie opóźniał się z zapłatą całości bądź części czynszu w sposób przekraczający 30 dni; b) którykolwiek Lokal wykorzystywany będzie przez Najemcę niezgodnie z postanowieniami Umowy; c) Najemca dopuści się zakwaterowania większej ilości osób niż wskazana w którymkolwiek Zamówieniu; d) Najemca dopuści się naruszenia zakazu podnajmu.</li>
-  <li>Wypowiedzenie Umowy winno nastąpić w sposób pisemny pod rygorem jego nieważności.</li>
-  <li>Niezależnie od rozwiązania Umowy, Strony mogą też rozwiązać stosunek najmu zawarty na podstawie jednego, kilku albo wszystkich Zamówień na zasadach określonych w tych Zamówieniach. Ponadto Wynajmujący może rozwiązać stosunek najmu zawarty na podstawie jednego, kilku albo wszystkich Zamówień z zachowaniem siedmiodniowego okresu wypowiedzenia, jeżeli: a) Najemca będzie opóźniał się z zapłatą całości bądź części czynszu wynikającego z Zamówienia w sposób przekraczający 30 dni; b) Lokal będący przedmiotem Zamówienia będzie wykorzystywany przez Najemcę niezgodnie z postanowieniami Umowy; c) Najemca dopuści się zakwaterowania większej ilości osób niż wskazana w Zamówieniu; d) Najemca nie wpłaci kaucji w terminie wskazanym w Zamówieniu.</li>
-  <li>W przypadku rozwiązania Umowy Najemca zwróci Lokale z dniem jej zakończenia w stanie niepogorszonym. Analogicznie, w przypadku zakończenia związania Zamówieniem, Najemca zwróci lokale mieszkalne stanowiące przedmiot Zamówienia z dniem ustania stosunku najmu także w stanie niepogorszonym.</li>
-  <li>Wszelkie nakłady poczynione na Lokale przez Najemcę są wyłącznie jego własnym kosztem bez prawa zwrotu wartości nakładów po zakończeniu okresu najmu, chyba że Strony postanowią na piśmie inaczej przed dokonaniem nakładów.</li>
-  <li>Dalsze korzystanie przez Najemcę z przedmiotu najmu po upływie okresu najmu nie będzie uważane za przedłużenie stosunku najmu (wyłączenie stosowania art. 674 Kodeksu cywilnego).</li>
-</ol>
-
-<p class="sh">${p10}. [Odpowiedzialność i kary umowne]</p>
-<ol>
-  <li>Wynajmujący nie ponosi odpowiedzialności za mienie wniesione do Lokalu przez Najemcę lub Lokatorów, którzy powinni je zabezpieczyć przed kradzieżą czy zniszczeniem we własnym zakresie.</li>
-  <li>${isPosrednik?'Odpowiedzialność Wynajmującego za szkody powstałe w majątku Najemcy lub Lokatorów w wyniku działania osób trzecich lub będących wynikiem niezawinionej przez Wynajmującego awarii urządzeń wodno-kanalizacyjnych, elektrycznych czy centralnego ogrzewania. Wynajmujący zapewnia, że Nieruchomość jest ubezpieczona od szkód spowodowanych przez ogień, zalanie, przepięcie, burze, od szkód podstawowych i spowodowanych przez instalację wodną.':'Wynajmujący nie ponosi odpowiedzialności za szkody powstałe w majątku Najemcy lub Lokatorów w wyniku działania osób trzecich lub będących wynikiem niezawinionej przez Wynajmującego awarii urządzeń wodno-kanalizacyjnych, elektrycznych, czy centralnego ogrzewania.'}</li>
-  <li>Najemca zapłaci na rzecz Wynajmującego następujące kary umowne:
-    <ol>
-      <li>w przypadku każdorazowego naruszenia zakazu palenia w Nieruchomości wskazanego w pkt 6.1.9. Umowy – w wysokości 500,00 zł za każde naruszenie,</li>
-      <li>w przypadku każdorazowego zakwaterowania większej ilości osób niż wskazana w Zamówieniu – w wysokości 50 zł dziennie za każdą osobę ponad umówiony limit, z tym zastrzeżeniem, że naliczona na tej podstawie kara umowna nie może przekroczyć wartości miesięcznego czynszu dla Zamówienia, dla którego nastąpiło naruszenie,</li>
-      <li>w przypadku każdorazowego naruszenia zakazu podnajmu – w wysokości 10.000 zł za każde naruszenie.</li>
-    </ol>
-  </li>
-  <li>Wynajmującemu przysługuje uprawnienie do dochodzenia odszkodowania przewyższającego zastrzeżone kary umowne.</li>
-</ol>
-
-<p class="sh">${p11}. [Postanowienia końcowe]</p>
-<ol>
-  <li>W sprawach nieuregulowanych Umową mają zastosowanie przepisy prawa polskiego.</li>
-  <li>Strony wskazują następujące dane do korespondencji, z wyłączeniem czynności dotyczących składania Zamówienia opisanych w pkt 3 Umowy, dla których wyłącznie właściwe są adresy e-mail wskazane w pkt 3 Umowy:
-    <ol>
-      <li>Wynajmujący – home4people.info@gmail.com,</li>
-      <li>Najemca – ${firmaEmail}, ${firmaKores}.</li>
-    </ol>
-  </li>
-  <li>Strony będą niezwłocznie, nie później niż w terminie 3 dni, informować się pisemnie lub za pośrednictwem wiadomości e-mail o zmianie danych, o których mowa w pkt ${p11}.2. powyżej. W przypadku braku wskazania nowych danych, przesłanie korespondencji na dotychczasowe dane kontaktowe uważa się za skutecznie doręczone.</li>
-  <li>Wszelkie spory wynikłe na tle niniejszej Umowy rozstrzygane będą przez sąd właściwy dla siedziby powoda.</li>
-  <li>Umowę sporządzono w dwóch jednobrzmiących egzemplarzach, po jednym dla każdej ze Stron.</li>
-  <li>Zmiany postanowień Umowy wymagają formy pisemnej pod rygorem nieważności.</li>
-  <li>Załącznik nr 1 – wzór zamówienia – stanowi integralną część Umowy.</li>
-</ol>
-<table class="sig-table"><tr>
-  <td><div class="sig-line">___________________________<br>za Wynajmującego<br><small>${sigName}</small></div></td>
-  <td><div class="sig-line">___________________________<br>za Najemcę<br><small>${firmaRepr}</small></div></td>
-</tr></table>
-</div>`;
-}
-
-// ─── TYLKO ZAMÓWIENIE GENERATE ────────────────────────────────────────────────
-function zGenerate(){
-  const sigName=zst.signer.includes('Arnold')?'Arnold Hertfelder':'Olena Dziubenko';
-  const dataRamowa=v('z-dataRamowa');
-  const firmaPelna=v('z-firmaPelna')||v('z-firma');
-  const firmaAdresCity=v('z-firmaAdres');
-  const firmaRepr=v('z-firmaRepr');
-  const firmaEmail=v('z-firmaEmail');
-  const firmaNIP=v('z-firmaNIP'),firmaREGON=v('z-firmaREGON'),firmaKRS=v('z-firmaKRS');
-  const html=buildZamHTML('z-',dataRamowa,sigName,firmaPelna,firmaAdresCity,'',firmaNIP,firmaREGON,firmaKRS,firmaRepr,firmaEmail,zst.signer);
-  const zMeta={title:(v('z-firma')||'Firma')+' — Zamówienie',najemca:v('z-firma'),lokal:v('z-firmaAdres'),type:'zam'};
-  showPreview(html, zMeta);
-}
-
-// ─── PREVIEW / NEW ────────────────────────────────────────────────────────────
-function showPreview(html, meta){
-  document.getElementById('out').innerHTML=html;
-  document.getElementById('form-area').style.display='none';
-  document.getElementById('preview-area').style.display='block';
-  document.getElementById('main-tabs').style.display='none';
-  window._docMeta=meta||{};
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function startNew(){
-  document.getElementById('form-area').style.display='';
-  document.getElementById('preview-area').style.display='none';
-  document.getElementById('main-tabs').style.display='';
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-// ─── CLIENT DATABASE ─────────────────────────────────────────────────────────
-const DB_KEY = 'h4p_clients_v1';
-
-const INITIAL_CLIENTS = [
-  // --- OSOBY FIZYCZNE ---
-  {type:'fiz', name:'Asinskaya Antanina', pesel:'', dowod:'', adres:'', tel:'', email:'tonya080975@gmail.com'},
-  {type:'fiz', name:'Buniatov Vladyslav', pesel:'95042313074', dowod:'', adres:'', tel:'+48 505 951 656', email:'vbuniatov@gmail.com'},
-  {type:'fiz', name:'Diakiv Volodymyr', pesel:'', dowod:'', adres:'', tel:'+48 883 492 759', email:'autonaprawawabrzozowa14@gmail.com'},
-  {type:'fiz', name:'Gertfelder Roman', pesel:'', dowod:'', adres:'', tel:'+48 500 560 698', email:''},
-  {type:'fiz', name:'Gryzlova Alina', pesel:'81031921186', dowod:'', adres:'', tel:'+48 662 608 468', email:'alinagrizlova2009@gmail.com'},
-  {type:'fiz', name:'Kaleniuk Dariia', pesel:'', dowod:'', adres:'', tel:'+48 735 711 009', email:'kalenyk099@gmail.com'},
-  {type:'fiz', name:'Kolesnyk Olena', pesel:'81071022188', dowod:'', adres:'', tel:'+48 886 701 771', email:'10071981ek@gmail.com'},
-  {type:'fiz', name:'Kravchuk Volodymyr', pesel:'68030516458', dowod:'', adres:'', tel:'+48 606 242 052', email:'kravchukvolodya21@gmail.com'},
-  {type:'fiz', name:'Krystian Andrzej Włoch', pesel:'82050315451', dowod:'', adres:'', tel:'+48 690 614 827', email:'krystianwloch@cukierniaolsha.pl'},
-  {type:'fiz', name:'Kurii Hanna', pesel:'7252349415', dowod:'', adres:'', tel:'+48 576 517 231', email:'annakurij2@gmail.com'},
-  {type:'fiz', name:'Kuzmeniuk Nadiia', pesel:'5311512547', dowod:'', adres:'', tel:'+38 068 351 68 44', email:'nadiakyzmeniyk@gmail.com'},
-  {type:'fiz', name:'Lahernyi Danylo', pesel:'4233012931', dowod:'', adres:'', tel:'+48 791 811 105', email:'volchkov180@gmail.com'},
-  {type:'fiz', name:'Liubov Nelha', pesel:'', dowod:'', adres:'', tel:'+48 788 156 373', email:'lubochka.nelga@gmail.com'},
-  {type:'fiz', name:'Mykytiuk Kamila', pesel:'', dowod:'', adres:'', tel:'', email:'mikitukkamila37@gmail.com'},
-  {type:'fiz', name:'Oksana Blonska', pesel:'', dowod:'', adres:'', tel:'+48 733 159 728', email:'blonskaoksana9@gmail.com'},
-  {type:'fiz', name:'Oliinyk Iryna', pesel:'64053016249', dowod:'', adres:'', tel:'+48 886 773 421', email:'oleynik.iryna64@gmail.com'},
-  {type:'fiz', name:'Ovcharenko Iryna', pesel:'74061919681', dowod:'', adres:'', tel:'+48 694 033 704', email:'ovcarenkoirina60@gmail.com'},
-  {type:'fiz', name:'Pavliuk Oleg', pesel:'650212215910', dowod:'', adres:'', tel:'+48 888 087 944', email:'pavluko694@gmail.com'},
-  {type:'fiz', name:'Pratasevich Dzmitry', pesel:'', dowod:'', adres:'', tel:'+48 539 683 756', email:'dzmitry569@gmail.com'},
-  {type:'fiz', name:'Rohulska Yuliia', pesel:'', dowod:'', adres:'', tel:'+380 68 007 1490', email:'0901yulya@gmail.com'},
-  {type:'fiz', name:'Roman Pavlovskyi', pesel:'786126779', dowod:'', adres:'', tel:'', email:'rnm1527@gmail.com'},
-  {type:'fiz', name:'Shenkovych Nazar', pesel:'7302413550', dowod:'', adres:'', tel:'+48 539 997 382', email:'antonisenkevic5@gmail.com'},
-  {type:'fiz', name:'Shkolna Olha', pesel:'91122016383', dowod:'', adres:'', tel:'+48 888 831 942', email:'skolnaola@gmail.com'},
-  {type:'fiz', name:'Shybovskyi Mykola', pesel:'6252810772', dowod:'', adres:'', tel:'+48 783 083 319', email:'Mukolashu2805@gmail.com'},
-  {type:'fiz', name:'Sibirtseva Iryna', pesel:'87121314928', dowod:'', adres:'', tel:'+48 662 608 468', email:'irinasibirceva32@gmail.com'},
-  {type:'fiz', name:'Skichko Oleksii', pesel:'', dowod:'', adres:'', tel:'+48 576 764 474', email:'skichkoaleksey@gmail.com'},
-  {type:'fiz', name:'Vadets Vladyslav', pesel:'', dowod:'', adres:'', tel:'+48 786 344 878', email:'pirnacz@gmail.com'},
-  // --- FIRMY ---
-  {type:'firma', nazwa:'BEUMER INSTALLATION SERVICES Sp. z o.o.', pelna:'BEUMER INSTALLATION SERVICES SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Gliwice (44-109)', adres:'ul. Anny Jagiellonki 26', sad:'Sąd Rejonowy w Gliwicach, X Wydział Gospodarczy KRS', krs:'1056610', nip:'9691659627', regon:'526314872', kap:'', repr:'Aleksandra Nabialkowska', email:'Aleksandra.Nabialkowska@beumer.com', kores:'Gliwice (44-109), ul. Anny Jagiellonki 26'},
-  {type:'firma', nazwa:'Clean HR Sp. z o.o.', pelna:'CLEAN HR SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Lublin', adres:'ul. Fryderyka Chopina 14/U-32', sad:'', krs:'0001121122', nip:'5253013099', regon:'529365568', kap:'', repr:'', email:'P.krupa@clean.net.pl', kores:'ul. Fryderyka Chopina 14/U-32, Lublin'},
-  {type:'firma', nazwa:'Emolan Sp. z o.o.', pelna:'EMOLAN SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Warszawa', adres:'ul. Górczewska 137, lok. 5', sad:'', krs:'0001167492', nip:'5273160627', regon:'54146816400000', kap:'', repr:'', email:'', kores:'Warszawa, ul. Górczewska 137, lok. 5'},
-  {type:'firma', nazwa:'EUROPAV Sp. z o.o.', pelna:'EUROPAV SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Częstochowa (42-200)', adres:'Kiedrzyńska 65/4', sad:'', krs:'0000925108', nip:'9492250657', regon:'520175659', kap:'', repr:'', email:'Kontakt@europav.pl', kores:'Kiedrzyńska 65/4, 42-200 Częstochowa'},
-  {type:'firma', nazwa:'FOLGA OUT Sp. z o.o.', pelna:'FOLGA OUT SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Toruń (87-100)', adres:'ul. Grudziądzka 110-114 lok. 304', sad:'', krs:'0001060240', nip:'7011166541', regon:'52647989200000', kap:'', repr:'', email:'kwatery@folga.com.pl', kores:'ul. Grudziądzka 110-114 lok. 304, 87-100 Toruń'},
-  {type:'firma', nazwa:'Hal-dach Beata Wrona', pelna:'Hal-dach Beata Wrona', city:'Podlechy (11-430)', adres:'ul. Podlechy 24A', sad:'', krs:'', nip:'7421268330', regon:'280283848', kap:'', repr:'Beata Wrona', email:'wronarobert@o2.pl', kores:'ul. Podlechy 24A, 11-430 Podlechy'},
-  {type:'firma', nazwa:'INPOLMON Sp. z o.o.', pelna:'INPOLMON SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Warszawa (00-029)', adres:'ul. Nowy Świat 33 lok. 13', sad:'', krs:'0000842295', nip:'5291830877', regon:'38610363700000', kap:'', repr:'', email:'office.inpolmon@gmail.com', kores:'ul. Nowy Świat 33 lok. 13, 00-029 Warszawa'},
-  {type:'firma', nazwa:'JOB CONTRACT Sp. z o.o.', pelna:'JOB CONTRACT SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Warszawa (00-526)', adres:'ul. Krucza 16/22', sad:'', krs:'0000966744', nip:'7011084607', regon:'521817580', kap:'', repr:'Bartłomiej Regulski', email:'bartek.regulski@job-contract.com', kores:'ul. Krucza 16/22, 00-526 Warszawa'},
-  {type:'firma', nazwa:'KBP BUDOWNICTWO Sp. z o.o.', pelna:'KBP BUDOWNICTWO SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Żółwin (05-807)', adres:'ul. Ptasia 16', sad:'', krs:'0001024445', nip:'5342662014', regon:'52470959500000', kap:'', repr:'Paweł Szumyło', email:'p.szumylo@kbpbudownictwo.pl', kores:'05-807 Żółwin, ul. Ptasia 16'},
-  {type:'firma', nazwa:'POLONIA PROPERTIES Sp. z o.o.', pelna:'POLONIA PROPERTIES SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Będzin (42-500)', adres:'ul. Modrzejowska 22', sad:'', krs:'0001060016', nip:'6252489995', regon:'526470336', kap:'', repr:'Kacper Krasuski – Prezes Zarządu', email:'biuro@poloniaproperties.pl', kores:'ul. Modrzejowska 22, 42-500 Będzin'},
-  {type:'firma', nazwa:'Ralen Group Sp. z o.o.', pelna:'RALEN GROUP SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Czechowice-Dziedzice (43-502)', adres:'ul. Wąska 38K', sad:'', krs:'0001089281', nip:'6521754963', regon:'527844744', kap:'', repr:'', email:'faktury@ralen.com.pl', kores:'ul. Wąska 38K, 43-502 Czechowice-Dziedzice'},
-  {type:'firma', nazwa:'Spectrum Group Sp. z o.o.', pelna:'SPECTRUM GROUP SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Pęcice', adres:'ul. Parkowa 85', sad:'', krs:'0000560153', nip:'5342505042', regon:'36161522000000', kap:'', repr:'', email:'anna@spectrumfilaments.com', kores:'ul. Parkowa 85, Pęcice'},
-  {type:'firma', nazwa:'Synergie Poland Sp. z o.o.', pelna:'SYNERGIE POLAND SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Kraków (30-415)', adres:'ul. Wadowicka 6', sad:'Sąd Rejonowy dla Krakowa Śródmieścia w Krakowie, XI Wydział Gospodarczy KRS', krs:'0000272214', nip:'6762336026', regon:'120367970', kap:'604.800,00', repr:'Urszula Bielińska-Gryszówka – Członek Zarządu, Magdalena Winiarska – Członek Zarządu', email:'r.murawski@synergie.pl', kores:'Kraków (30-415), ul. Wadowicka 6'},
-  {type:'firma', nazwa:'TOP HIRE PARTNERS Sp. z o.o.', pelna:'TOP HIRE PARTNERS SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Warszawa (00-697)', adres:'Al. Jerozolimskie 65/79', sad:'', krs:'0001163009', nip:'5273157051', regon:'541230959', kap:'', repr:'Viktoriia Bahatko', email:'v.bahatko@tophire.eu', kores:'Al. Jerozolimskie 65/79, 00-697 Warszawa'},
-  {type:'firma', nazwa:'TRANS-ZIEM INŻYNIERIA Sp. z o.o.', pelna:'TRANS-ZIEM INŻYNIERIA SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Strzyżawa (86-070)', adres:'bud. nr 33', sad:'', krs:'0000837916', nip:'5542984685', regon:'38592089000000', kap:'', repr:'', email:'Mb@transziem.eu', kores:'86-070 Strzyżawa bud. nr 33'},
-  {type:'firma', nazwa:'URBAN GROUP POLAND Sp. z o.o.', pelna:'URBAN GROUP POLAND SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Łódź (91-408)', adres:'ul. Pomorska 40', sad:'', krs:'0000819527', nip:'7252295725', regon:'385093842', kap:'', repr:'Andrzej', email:'ksiegowosc@urbangroup.pl', kores:'ul. Pomorska 40, 91-408 Łódź'},
-  {type:'firma', nazwa:'WE GO JOB Sp. z o.o.', pelna:'WE GO JOB SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ', city:'Piotrków Trybunalski (97-300)', adres:'ul. Gen. Stefana Grota-Roweckiego 7/C,D', sad:'', krs:'0001037935', nip:'7712925488', regon:'52538203800000', kap:'', repr:'Norbert Latocha – Prezes Zarządu', email:'', kores:'ul. Gen. Stefana Grota-Roweckiego 7/C,D, 97-300 Piotrków Trybunalski'},
-];
-
-function loadClients(){
-  try{
-    const saved=localStorage.getItem(DB_KEY);
-    if(saved) return JSON.parse(saved);
-  }catch(e){}
-  return JSON.parse(JSON.stringify(INITIAL_CLIENTS));
-}
-function saveClients(clients){
-  try{localStorage.setItem(DB_KEY,JSON.stringify(clients));}catch(e){}
-}
-let clients=loadClients();
-
-// ─── CLIENT SELECTOR WIDGET ───────────────────────────────────────────────────
-// mode: 'fiz' | 'firma'
-function buildClientSelector(containerId, mode, fillFn){
-  const wrap=document.getElementById(containerId);
-  if(!wrap)return;
-  const filtered=clients.filter(c=>c.type===mode);
-  wrap.innerHTML=`
-    <div style="background:var(--cream2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:4px;">
-      <div class="sl" style="margin-bottom:10px;">📂 Wybierz z bazy lub wpisz nowego</div>
-      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-        <select id="${containerId}-sel" style="flex:1;min-width:200px;" onchange="onClientSelect('${containerId}','${mode}')">
-          <option value="">— Nowy ${mode==='fiz'?'najemca':'kontrahent'} —</option>
-          ${filtered.map((c,i)=>`<option value="${c.type==='fiz'?c.name:c.nazwa}">${c.type==='fiz'?c.name:c.nazwa}</option>`).join('')}
-        </select>
-        <button onclick="openAddClient('${containerId}','${mode}')" style="padding:9px 16px;background:var(--gold);border:none;border-radius:8px;font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;color:var(--navy);cursor:pointer;white-space:nowrap;">＋ Dodaj do bazy</button>
-      </div>
-    </div>
-    <div id="${containerId}-add-panel" style="display:none;background:#f0f7f2;border:1px solid #b8d9c4;border-radius:10px;padding:14px 16px;margin-top:8px;">
-      <div class="sl" style="margin-bottom:10px;color:var(--green);">Nowy wpis do bazy</div>
-      <div id="${containerId}-add-fields"></div>
-      <div style="display:flex;gap:10px;margin-top:12px;">
-        <button onclick="saveNewClient('${containerId}','${mode}')" style="padding:9px 18px;background:var(--green);border:none;border-radius:8px;font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;color:#fff;cursor:pointer;">💾 Zapisz w bazie</button>
-        <button onclick="document.getElementById('${containerId}-add-panel').style.display='none'" style="padding:9px 14px;background:transparent;border:1.5px solid var(--border);border-radius:8px;font-family:DM Sans,sans-serif;font-size:13px;cursor:pointer;">Anuluj</button>
-      </div>
-    </div>`;
-  wrap._fillFn=fillFn;
-}
-
-function onClientSelect(containerId, mode){
-  const sel=document.getElementById(containerId+'-sel');
-  const chosen=sel.value;
-  if(!chosen)return;
-  const c=clients.find(x=>(x.type==='fiz'?x.name:x.nazwa)===chosen);
-  if(!c||!document.getElementById(containerId)._fillFn)return;
-  document.getElementById(containerId)._fillFn(c);
-}
-
-function openAddClient(containerId, mode){
-  const panel=document.getElementById(containerId+'-add-panel');
-  panel.style.display='block';
-  const f=document.getElementById(containerId+'-add-fields');
-  if(mode==='fiz'){
-    f.innerHTML=`
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px;">
-        <div class="field"><label>Imię i nazwisko*</label><input type="text" id="${containerId}-new-name" placeholder="Jan Kowalski"></div>
-        <div class="field"><label>PESEL</label><input type="text" id="${containerId}-new-pesel"></div>
-        <div class="field"><label>Nr dowodu</label><input type="text" id="${containerId}-new-dowod"></div>
-        <div class="field"><label>Adres</label><input type="text" id="${containerId}-new-adres"></div>
-        <div class="field"><label>Telefon</label><input type="text" id="${containerId}-new-tel"></div>
-        <div class="field"><label>E-mail</label><input type="email" id="${containerId}-new-email"></div>
-      </div>`;
-  } else {
-    f.innerHTML=`
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px;">
-        <div class="field"><label>Nazwa skrócona*</label><input type="text" id="${containerId}-new-nazwa" placeholder="Firma Sp. z o.o."></div>
-        <div class="field"><label>Pełna nazwa</label><input type="text" id="${containerId}-new-pelna"></div>
-        <div class="field"><label>Miasto + kod</label><input type="text" id="${containerId}-new-city"></div>
-        <div class="field"><label>Ulica i numer</label><input type="text" id="${containerId}-new-adres"></div>
-        <div class="field"><label>NIP</label><input type="text" id="${containerId}-new-nip"></div>
-        <div class="field"><label>REGON</label><input type="text" id="${containerId}-new-regon"></div>
-        <div class="field"><label>KRS</label><input type="text" id="${containerId}-new-krs"></div>
-        <div class="field"><label>Kapitał zakładowy</label><input type="text" id="${containerId}-new-kap"></div>
-        <div class="field"><label>Sąd rejestrowy</label><input type="text" id="${containerId}-new-sad"></div>
-        <div class="field"><label>Reprezentowana przez</label><input type="text" id="${containerId}-new-repr"></div>
-        <div class="field"><label>E-mail</label><input type="email" id="${containerId}-new-email"></div>
-        <div class="field"><label>Adres korespondencyjny</label><input type="text" id="${containerId}-new-kores"></div>
-      </div>`;
-  }
-}
-
-function nv(id){const el=document.getElementById(id);return el?el.value.trim():'';}
-
-function saveNewClient(containerId, mode){
-  let newC;
-  if(mode==='fiz'){
-    const name=nv(containerId+'-new-name');
-    if(!name){alert('Podaj imię i nazwisko!');return;}
-    newC={type:'fiz',name,pesel:nv(containerId+'-new-pesel'),dowod:nv(containerId+'-new-dowod'),adres:nv(containerId+'-new-adres'),tel:nv(containerId+'-new-tel'),email:nv(containerId+'-new-email')};
-  } else {
-    const nazwa=nv(containerId+'-new-nazwa');
-    if(!nazwa){alert('Podaj nazwę firmy!');return;}
-    newC={type:'firma',nazwa,pelna:nv(containerId+'-new-pelna')||nazwa,city:nv(containerId+'-new-city'),adres:nv(containerId+'-new-adres'),nip:nv(containerId+'-new-nip'),regon:nv(containerId+'-new-regon'),krs:nv(containerId+'-new-krs'),kap:nv(containerId+'-new-kap'),sad:nv(containerId+'-new-sad'),repr:nv(containerId+'-new-repr'),email:nv(containerId+'-new-email'),kores:nv(containerId+'-new-kores')};
-  }
-  clients.push(newC);
-  saveClients(clients);
-  // Refresh all selectors
-  initAllSelectors();
-  // Auto-select new entry
-  const sel=document.getElementById(containerId+'-sel');
-  if(sel){sel.value=mode==='fiz'?newC.name:newC.nazwa;onClientSelect(containerId,mode);}
-  document.getElementById(containerId+'-add-panel').style.display='none';
-  alert('✅ Zapisano w bazie!');
-}
-
-// ─── INIT ALL SELECTORS ──────────────────────────────────────────────────────
-function initAllSelectors(){
-  // Fizyczna - step 2
-  buildClientSelector('f-client-selector-wrap','fiz',function(c){
-    setVal('f-nImie',c.name);setVal('f-nPesel',c.pesel);setVal('f-nDowod',c.dowod);
-    setVal('f-nAdres',c.adres);setVal('f-nTel',c.tel);setVal('f-nEmail',c.email);
-    setVal('f-emailFakt',c.email);
-  });
-  // Ramowa - step 2
-  buildClientSelector('r-client-selector-wrap','firma',function(c){
-    setVal('r-firma',c.nazwa);setVal('r-firmaPelna',c.pelna);setVal('r-firmaCity',c.city);
-    setVal('r-firmaAdres',c.adres);setVal('r-firmaSad',c.sad);setVal('r-firmaKRS',c.krs);
-    setVal('r-firmaNIP',c.nip);setVal('r-firmaREGON',c.regon);setVal('r-firmaKap',c.kap);
-    setVal('r-firmaRepr',c.repr);setVal('r-firmaEmail',c.email);setVal('r-firmaKores',c.kores);
-  });
-  // Tylko zamówienie - step 1
-  buildClientSelector('z-client-selector-wrap','firma',function(c){
-    setVal('z-firma',c.nazwa);setVal('z-firmaPelna',c.pelna);
-    setVal('z-firmaAdres',(c.city?c.city+', ':'')+c.adres);
-    setVal('z-firmaNIP',c.nip);setVal('z-firmaREGON',c.regon);setVal('z-firmaKRS',c.krs);
-    setVal('z-firmaRepr',c.repr);setVal('z-firmaEmail',c.email);
-  });
-}
-
-function setVal(id, val){const el=document.getElementById(id);if(el&&val!==undefined)el.value=val;}
-
-// ─── AUTO CALC CZYNSZ §3.1 ───────────────────────────────────────────────────
-function fAutoCalc(){
-  const od=document.getElementById('f-c1od')?.value;
-  const doD=document.getElementById('f-c1do')?.value;
-  const mies=parseFloat(document.getElementById('f-c2kw')?.value)||0;
-  const info=document.getElementById('f-calc-info');
-  if(!od||!doD||!mies){if(info)info.style.display='none';return;}
-  const d1=new Date(od),d2=new Date(doD);
-  if(d2<=d1){if(info)info.style.display='none';return;}
-  // days inclusive
-  const days=Math.round((d2-d1)/(1000*60*60*24))+1;
-  // days in that month
-  const daysInMonth=new Date(d1.getFullYear(),d1.getMonth()+1,0).getDate();
-  const kwota=Math.round((mies/daysInMonth)*days);
-  const kwotaEl=document.getElementById('f-c1kw');
-  if(kwotaEl){kwotaEl.value=kwota;upSl('f-c1kw','f-c1sl');}
-  if(info){
-    info.style.display='block';
-    info.textContent=`${days} dni × (${mies.toLocaleString('pl')} zł ÷ ${daysInMonth} dni w miesiącu) = ${kwota.toLocaleString('pl')} zł`;
-  }
-}
-
-// ─── PRICE SUGGESTION WITH SKLAD ─────────────────────────────────────────────
-function fUpdatePrice(){
-  const total=1+fDorosli.length;
-  const pm={1:3000,2:4000,3:4500,4:5000,5:5500,6:6000};
-  const sklad=fst.sklad;
-  const hint=document.getElementById('f-price-hint');
-  let msg='';
-  if(sklad==='2'){
-    // 2 rooms flat rate
-    msg=`Lokal 2-pokojowy → czynsz: 3 600 zł/mies. (niezależnie od liczby osób)`;
-  } else {
-    const price=pm[Math.min(total,6)]||6000;
-    msg=`${total} dorosł${total===1?'a':'ych'} osob${total===1?'a':'y'} · lokal 3-pokojowy → sugerowany czynsz: ${price.toLocaleString('pl')} PLN/mies.`;
-  }
-  document.getElementById('f-price-hint-txt').textContent=msg;
-  hint.style.display='flex';
-}
-
-// ─── SAVE AS WORD ─────────────────────────────────────────────────────────────
-function saveWord(){
-  const content=document.getElementById('out').innerHTML;
-  // Detect if this is just a zamowienie (no umowa ramowa) or full doc
-  const isZamOnly=content.includes('Zamówienie nr') && !content.includes('§ 1. [Oświadczenia]');
-
-  // Word-specific CSS with tight margins and small fonts for zamowienie
-  const zamCSS=`
-    @page{margin:1.5cm 2cm;}
-    body{font-family:'Times New Roman',Times,serif;font-size:9pt;line-height:1.35;color:#000;}
-    h2{font-size:12pt;text-align:center;text-transform:uppercase;margin:6pt 0 3pt;letter-spacing:1pt;}
-    .sub{text-align:center;font-size:8pt;color:#555;margin-bottom:10pt;}
-    p{margin:3pt 0;font-size:9pt;}
-    .sh{font-weight:bold;margin:8pt 0 3pt;font-size:9pt;}
-    ol{margin:2pt 0;padding-left:16pt;}
-    ol li{margin:1pt 0;font-size:9pt;}
-    table.zam-table{width:100%;border-collapse:collapse;margin:8pt 0;font-size:8.5pt;}
-    table.zam-table td{border:0.5pt solid #999;padding:4pt 6pt;vertical-align:top;}
-    table.zam-table td:first-child{font-weight:bold;width:36%;background:#f5f5f5;}
-    table.sig-table{width:100%;margin-top:20pt;border-collapse:collapse;}
-    table.sig-table td{width:50%;text-align:center;padding:6pt;font-size:8.5pt;}
-    .sig-line{border-top:0.5pt solid #000;padding-top:4pt;margin-top:28pt;}
-    .contract-preview{margin-bottom:0;page-break-after:always;}
-    .contract-preview:last-child{page-break-after:auto;}
-    strong{font-weight:bold;}
-  `;
-
-  const umowaCSS=`
-    @page{margin:2cm 2.5cm;}
-    body{font-family:'Times New Roman',Times,serif;font-size:10pt;line-height:1.5;color:#000;}
-    h2{font-size:13pt;text-align:center;text-transform:uppercase;margin:8pt 0 4pt;letter-spacing:0.5pt;}
-    .sub{text-align:center;font-size:9pt;color:#555;margin-bottom:12pt;}
-    p{margin:4pt 0;font-size:10pt;}
-    .sh{font-weight:bold;margin:10pt 0 4pt;font-size:10pt;}
-    ol{margin:3pt 0;padding-left:18pt;}
-    ol li{margin:2pt 0;font-size:10pt;}
-    table.zam-table{width:100%;border-collapse:collapse;margin:8pt 0;}
-    table.zam-table td{border:0.5pt solid #999;padding:5pt 8pt;vertical-align:top;font-size:9pt;}
-    table.zam-table td:first-child{font-weight:bold;width:36%;background:#f5f5f5;}
-    table.sig-table{width:100%;margin-top:28pt;border-collapse:collapse;}
-    table.sig-table td{width:50%;text-align:center;padding:8pt;font-size:9pt;}
-    .sig-line{border-top:0.5pt solid #000;padding-top:5pt;margin-top:32pt;}
-    .contract-preview{margin-bottom:0;page-break-after:always;}
-    .contract-preview:last-child{page-break-after:auto;}
-    strong{font-weight:bold;}
-  `;
-
-  const css=isZamOnly?zamCSS:umowaCSS;
-
-  const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
-<head><meta charset="UTF-8">
-<style>${css}</style>
-</head><body>${content}</div>
+</div></div>
 <div id="gremi-app" style="display:none;"><header>
   <div class="logo">Umowy Najmu</div>
   <div class="header-tag">wersja 1.0</div>
@@ -2495,30 +1381,15 @@ function saveWord(){
 </div>
 </div></div>
 <script>
-function showApp(app){
-  document.getElementById('app-landing').style.display='none';
-  document.getElementById('h4p-app').style.display='none';
-  document.getElementById('gremi-app').style.display='none';
-  document.getElementById('back-btn').style.display='flex';
-  if(app==='h4p'){document.getElementById('h4p-app').style.display='block';document.title='H4P — Generator Umów';}
-  else{document.getElementById('gremi-app').style.display='block';document.title='Gremi Invest — Generator Umów';}
-  window.scrollTo(0,0);
-}
-function showLanding(){
-  document.getElementById('app-landing').style.display='';
-  document.getElementById('h4p-app').style.display='none';
-  document.getElementById('gremi-app').style.display='none';
-  document.getElementById('back-btn').style.display='none';
-  document.title='Generator Umów';window.scrollTo(0,0);
-}
+function showApp(app){document.getElementById('app-landing').style.display='none';document.getElementById('h4p-app').style.display='none';document.getElementById('gremi-app').style.display='none';document.getElementById('back-btn').style.display='flex';if(app==='h4p'){document.getElementById('h4p-app').style.display='block';document.title='H4P — Generator Umów';}else{document.getElementById('gremi-app').style.display='block';document.title='Gremi Invest — Generator Umów';}window.scrollTo(0,0);}
+function showLanding(){document.getElementById('app-landing').style.display='';document.getElementById('h4p-app').style.display='none';document.getElementById('gremi-app').style.display='none';document.getElementById('back-btn').style.display='none';document.title='Generator Umów';window.scrollTo(0,0);}
 </script>
-<script>
-// H4P
+<script>// H4P
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
-const fst={signer:'Prezesem Arnold Hertfelder',pred:'lokal',kaucja:'jed',sklad:'3'};
-const rst={signer:'Prezesa Zarządu – Arnold Hertfelder',typ:'posrednik'};
-const zst={signer:'Prezesa Zarządu – Arnold Hertfelder',typ:'posrednik'};
+const fst={signer:'Prezesa Zarządu – Arnolda Hertfeldera',pred:'lokal',kaucja:'jed',sklad:'3'};
+const rst={signer:'Prezesa Zarządu – Arnolda Hertfeldera',typ:'posrednik'};
+const zst={signer:'Prezesa Zarządu – Arnolda Hertfeldera',typ:'posrednik'};
 let fDorosli=[],fDzieci=[],fBedTypes={};
 
 // Wszystkie domy - stałe
@@ -2930,6 +1801,20 @@ ${v(prefix+'protUwagi')?`<p class="sh">UWAGI OGÓLNE</p><p>${v(prefix+'protUwagi
 }
 
 // ─── FIZ GENERATE ────────────────────────────────────────────────────────────
+function fBuildC31(c1kwFmt){
+  const od=v('f-c1od'),doD=v('f-c1do'),kw=v('f-c1kw');
+  if(!od||!doD||!kw) return '';
+  const mies=parseFloat(v('f-c2kw'))||0;
+  let calc='';
+  if(od&&doD&&mies){
+    const d1=new Date(od),d2=new Date(doD);
+    const days=Math.round((d2-d1)/(1000*60*60*24))+1;
+    const dim=new Date(d1.getFullYear(),d1.getMonth()+1,0).getDate();
+    calc=` (${days} dni × ${mies.toLocaleString('pl')} zł ÷ ${dim} dni = ${Math.round(mies/dim*days).toLocaleString('pl')} zł)`;
+  }
+  return `<li>Najemca zapłaci Wynajmującemu czynsz w okresie ${fd(od)} r. – ${fd(doD)} r. w wysokości: ${c1kwFmt}${calc}.</li>`;
+}
+
 function fGenerate(){
   const isPokoj=fst.pred==='pokoj';
   const dom=v('f-nrDomu'),mNr=v('f-nrMiesz'),dataZaw=v('f-dataZaw');
@@ -2937,13 +1822,13 @@ function fGenerate(){
   const skladTxt=fst.sklad==='3'?'trzy pokoje, kuchnia, łazienka połączona z WC oraz przedpokój':'dwa pokoje, kuchnia, łazienka połączona z WC oraz przedpokój';
   const najEmail=v('f-nEmail')||v('f-emailFakt');
   const najAdr=`Nadarzyn, ul. Turystyczna ${dom}/${mNr}, adres e-mail: ${najEmail}, tel. ${v('f-nTel')}`;
-  const sigName=fst.signer==='Prezesem Arnold Hertfelder'?'Arnold Hertfelder':'Olena Dziubenko';
+  const sigName=fst.signer.includes('Arnolda')?'Arnold Hertfelder':'Olena Dziubenko';
   let kaucjaTxt='';
   if(fst.kaucja==='jed'){kaucjaTxt=`Najemca zapłaci Wynajmującemu kaucję w wysokości ${v('f-k1kw')} PLN (słownie: ${v('f-k1sl')}) do dnia ${fd(v('f-k1dt'))} na rachunek bankowy o nr 49 1140 1108 0000 7107 5200 1001.`;}
   else{kaucjaTxt=`Najemca zapłaci Wynajmującemu kaucję w dwóch ratach:<br>– I rata: ${v('f-k2akw')} PLN (${v('f-k2asl')}) do dnia ${fd(v('f-k2adt'))};<br>– II rata: ${v('f-k2bkw')} PLN (${v('f-k2bsl')}) do dnia ${fd(v('f-k2bdt'))}<br>na rachunek bankowy o nr 49 1140 1108 0000 7107 5200 1001.`;}
   let wspolArr=[];
-  fDorosli.forEach(id=>{wspolArr.push(`${document.getElementById('fpn'+id)?.value||'…'}, PESEL: ${document.getElementById('fpi'+id)?.value||'…'}`);});
-  fDzieci.forEach(id=>{wspolArr.push(`${document.getElementById('fpn'+id)?.value||'…'} (dziecko, ur./PESEL: ${document.getElementById('fpi'+id)?.value||'…'})`);});
+  fDorosli.forEach(id=>{wspolArr.push(`${document.getElementById('fpn'+id)?.value||'…'}`);});
+  fDzieci.forEach(id=>{wspolArr.push(`${document.getElementById('fpn'+id)?.value||'…'}`);});
   const totalOsoby=1+fDorosli.length;
   let predTxt=isPokoj?`Na zasadach określonych niniejszą Umową Wynajmujący oddaje Najemcy do wyłącznego używania pokój o wielkości ${v('f-pokM2')||'…'} m² (${v('f-pokNazwa')||'pokój'}) znajdujący się w Lokalu (zwany dalej: „<strong>Przedmiotem Najmu</strong>").`:`Na zasadach określonych niniejszą Umową Wynajmujący oddaje Najemcy do używania lokal (zwany dalej: „<strong>Przedmiotem Najmu</strong>").`;
   const sklTxt=`lokal mieszkalny nr ${mNr} składający się z następujących pomieszczeń: ${skladTxt}, znajdujący się w budynku mieszkalnym nr ${dom} przy ul. Turystycznej w miejscowości Nadarzyn`;
@@ -2964,77 +1849,71 @@ function fGenerate(){
 <h2>Umowa najmu</h2>
 <p class="sub">zawarta dnia ${fd(dataZaw)} roku w Łodzi, zwana dalej; „<strong>Umową</strong>"</p>
 <p>pomiędzy:</p>
-<p><strong>H4P spółką z ograniczoną odpowiedzialnością z siedzibą w Łodzi</strong> (90-514) przy ul. Wólczańskiej 66/C311 wpisaną do rejestru przedsiębiorców prowadzonego przez Sąd Rejonowy dla Łodzi Śródmieścia w Łodzi, XX Wydział Gospodarczy KRS pod numerem KRS 0001137971, posługująca się numerem NIP 7252349415, numerem REGON: 540166136, o kapitale zakładowym w wysokości 5.000,00 zł,<br><br>reprezentowaną przez ${fst.signer},<br><br>zwaną dalej „<strong>Wynajmującym</strong>",</p>
+<p>H4P spółką z ograniczoną odpowiedzialnością z siedzibą w Łodzi (90-514) przy ul. Wólczańskiej 66/C311 wpisaną do rejestru przedsiębiorców prowadzonego przez Sąd Rejonowy dla Łodzi Śródmieścia w Łodzi, XX Wydział Gospodarczy KRS pod numerem KRS 0001137971, posługująca się numerem NIP 7252349415, numerem REGON: 540166136, o kapitale zakładowym w wysokości 5.000,00 zł,<br>
+reprezentowaną przez ${fst.signer},<br>
+zwaną dalej „<strong>Wynajmującym</strong>",</p>
 <p>a</p>
-<p><strong>${v('f-nImie')}</strong>,<br><br>zwanym dalej „<strong>Najemcą</strong>".</p>
-<p class="sh">§ 1. [Oświadczenia]</p>
+<p>${v('f-nImie')}, PESEL: ${v('f-nPesel')}, nr dok.: ${v('f-nDowod')},<br>
+zwany dalej „<strong>Najemcą</strong>".</p>
+<p class="sh">[Oświadczenia]</p>
 <ol>
 <li>Wynajmujący oświadcza, że:
-  <ol>
-    <li>posiada prawo do oddania w najem ${sklTxt} posadowionym na nieruchomości gruntowej stanowiącą działkę o numerach ewidencyjnych 427/16, gminie Nadarzyn, powiecie pruszkowskim, województwie mazowieckim, obrębie ewidencyjnym 0001, dalej zwanym „<strong>Lokalem</strong>",</li>
-    <li>zawarcie Umowy nie naruszy jakichkolwiek praw przysługujących osobom trzecim.</li>
-  </ol>
+<ol>
+<li>posiada prawo do oddania w najem ${sklTxt} dalej zwanym „<strong>Lokalem</strong>",</li>
+<li>zawarcie Umowy nie naruszy jakichkolwiek praw przysługujących osobom trzecim,</li>
+</ol>
 </li>
 <li>Najemca oświadcza, że:
-  <ol>
-    <li>zapoznał się ze stanem technicznym Lokalu i nie wnosi w tym zakresie żadnych zastrzeżeń,</li>
-    <li>do zawarcia i wykonania Umowy nie jest wymagana żadna zgoda, zatwierdzenie ani upoważnienie ze strony jakiejkolwiek osoby trzeciej lub sądu,</li>
-    <li>będzie wykorzystywał Lokal wyłącznie w celach mieszkaniowych.</li>
-  </ol>
+<ol>
+<li>zapoznał się ze stanem technicznym Lokalu i nie wnosi w tym zakresie żadnych zastrzeżeń,</li>
+<li>do zawarcia i wykonania Umowy nie jest wymagana żadna zgoda, zatwierdzenie ani upoważnienie ze strony jakiejkolwiek osoby trzeciej lub sądu,</li>
+<li>będzie wykorzystywał Lokal wyłącznie w celach mieszkaniowych.</li>
+</ol>
 </li>
 </ol>
-<p class="sh">§ 2. [Przedmiot Umowy]</p>
+<p class="sh">[Przedmiot Umowy]</p>
 <ol>
 <li>${predTxt}</li>
-${isPokoj?`<li>W ramach Umowy Najemca jest także uprawniony do wspólnego korzystania wraz z innymi najemcami z następujących pomieszczeń znajdujących się w Lokalu: ${v('f-wspolne')||'…'} .</li>`:'<li>Najemca oświadcza, że Lokal będzie wykorzystywany wyłącznie w celach mieszkaniowych.</li>'}
+${isPokoj?`<li>W ramach Umowy Najemca jest także uprawniony do wspólnego korzystania wraz z innymi najemcami z następujących pomieszczeń znajdujących się w Lokalu: ${v('f-wspolne')||'…'}.</li>`:'<li>Najemca oświadcza, że Lokal będzie wykorzystywany wyłącznie w celach mieszkaniowych.</li>'}
 <li>Każdorazowo wydanie Przedmiotu Najmu zostanie potwierdzone podpisanym przez Strony protokołem zdawczo-odbiorczym, który będzie określał stan Przedmiotu Najmu.</li>
 </ol>
-<p class="sh">§ 3. [Czynsz]</p>
+<p class="sh">[Czynsz]</p>
 <ol>
-<li>Najemca zapłaci Wynajmującemu czynsz w okresie ${fd(v('f-c1od'))} r. – ${fd(v('f-c1do'))} r. w wysokości: ${c1kwFmt}${(()=>{
-  const od=v('f-c1od'),doD=v('f-c1do'),mies=parseFloat(v('f-c2kw'))||0;
-  if(od&&doD&&mies){
-    const d1=new Date(od),d2=new Date(doD);
-    const days=Math.round((d2-d1)/(1000*60*60*24))+1;
-    const dim=new Date(d1.getFullYear(),d1.getMonth()+1,0).getDate();
-    return ` (${days} dni × ${mies.toLocaleString('pl')} zł ÷ ${dim} dni = ${Math.round(mies/dim*days).toLocaleString('pl')} zł)`;
-  }return '';
-})()}.</li>
+${fBuildC31(c1kwFmt)}
 <li>Najemca będzie płacił Wynajmującemu miesięczny czynsz od ${mn(v('f-c2od'))} w wysokości ${c2kwFmt}.</li>
 <li>Czynsz za niepełny miesiąc jest obliczany proporcjonalnie do liczby dni zakwaterowania i stawki miesięcznej czynszu.</li>
-<li>Czynsz płatny jest z góry, w terminie do 14. dnia każdego miesiąca przelewem na rachunek bankowy Wynajmującego wskazany na fakturze VAT. W przypadku pierwszego miesiąca obowiązywania Umowy, czynsz jest płatny z góry w terminie 7 dni od dnia zawarcia Umowy.</li>
+<li>Czynsz płatny jest z góry, w okresach miesięcznych, na podstawie faktury w terminie 14 dni od jej wysłania na następujący adres e-mail Najemcy ${eF}, na rachunek bankowy Wynajmującego wskazany w fakturze. W przypadku pierwszego miesiąca obowiązywania Umowy, czynsz jest płatny z góry w terminie 7 dni od dnia zawarcia Umowy.</li>
+<li>Wysokość czynszu najmu zawiera w sobie również opłaty związane z używaniem lokalu (opłaty eksploatacyjne) w wysokości 200 zł/os. W sytuacji, gdy koszty opłat eksploatacyjnych przekroczą ustalony limit, Wynajmujący ma prawo do przeniesienia płatności nadwyżki na najemcę.</li>
 <li>Za dzień dokonania płatności uznaje się dzień uznania rachunku bankowego Wynajmującego.</li>
 </ol>
-<p class="sh">§ 4. [Obowiązki Wynajmującego]</p>
+<p class="sh">[Obowiązki Wynajmującego]</p>
 <ol>
-<li>Wynajmujący oświadcza, że oddany Najemcy Lokal będzie w stanie umożliwiającym zamieszkanie i spełniającym wymagania sanitarne.</li>
 <li>Wynajmujący zobowiązuje się do:
-  <ol>
-    <li>umożliwienia Najemcy niezakłóconego korzystania z przedmiotu najmu,</li>
-    <li>niezwłocznego informowania Najemcy o każdej okoliczności mającej wpływ na przysługujące mu prawo do najmu przedmiotu najmu,</li>
-    <li>wykonywania napraw obciążających Wynajmującego.</li>
-  </ol>
+<ol>
+<li>umożliwienia Najemcy niezakłóconego korzystania z Przedmiotu Najmu,</li>
+<li>niezwłocznego informowania Najemcy o każdej okoliczności mającej wpływ na przysługujące mu prawo do najmu Przedmiotu Najmu,</li>
+<li>wykonywania napraw obciążających Wynajmującego.</li>
+</ol>
 </li>
 </ol>
-<p class="sh">§ 5. [Obowiązki Najemcy]</p>
+<p class="sh">[Obowiązki Najemcy]</p>
 <ol>
 <li>Najemca zobowiązuje się do:
-  <ol>
-    <li>używania przedmiotu najmu w sposób zgodny z jego przeznaczeniem,</li>
-    <li>korzystania z przedmiotu najmu w sposób nie utrudniający i nie przeszkadzający innym użytkownikom Nieruchomości,</li>
-    <li>terminowego uiszczania czynszu i innych opłat wynikających z Umowy,</li>
-    <li>utrzymywania Lokalu w należytym stanie i dbania o czystość zarówno w Lokalu jak i częściach wspólnych nieruchomości, której Lokal jest częścią,</li>
-    <li>wykonywania napraw obciążających Najemcę,</li>
-    <li>przestrzegania przepisów dotyczących ochrony przeciwpożarowej oraz bhp,</li>
-    <li>powstrzymania się od podejmowania działań mogących wywołać bezpośrednie niebezpieczeństwo powstania szkody w Lokalu,</li>
-    <li>przekazania informacji dotyczących szkody w Nieruchomości, spowodowanych działalnością osób trzecich,</li>
-    <li>przestrzegania przez niego i osób z nim zamieszkujących zakazu palenia w Lokalu i w nieruchomości, której Lokal jest częścią,</li>
-    <li>nie dokonywać jakichkolwiek ingerencji ani zmian w Lokalu, w szczególności nie wykonywać otworów w ścianach, suficie ani podłodze. W przypadku konieczności dokonania takiej ingerencji Najemca może zwrócić się do Wynajmującego z odpowiednim wnioskiem. Wynajmujący, według własnego uznania, może dokonać stosownej czynności we własnym zakresie.</li>
-  </ol>
+<ol>
+<li>używania Przedmiotu Najmu w sposób zgodny z jego przeznaczeniem,</li>
+<li>korzystania z Przedmiotu Najmu w sposób nie utrudniający i nie przeszkadzający innym użytkownikom nieruchomości, której Lokal jest częścią,</li>
+<li>terminowego uiszczania czynszu i innych opłat wynikających z Umowy,</li>
+<li>utrzymywania Lokalu w należytym stanie i dbanie o czystość zarówno w Lokalu jak i częściach wspólnych nieruchomości, której Lokal jest częścią,</li>
+<li>wykonywania napraw obciążających Najemcę,</li>
+<li>przestrzegania przepisów dotyczących ochrony przeciwpożarowej oraz bhp,</li>
+<li>powstrzymania się od podejmowania działań mogących wywołać bezpośrednie niebezpieczeństwo powstania szkody w Lokalu,</li>
+<li>przestrzegania przez niego i osób z nim zamieszkujących zakazu palenia w Lokalu i w nieruchomości, której Lokal jest częścią,</li>
+<li>nie dokonywać jakichkolwiek ingerencji ani zmian w Lokalu, w szczególności nie wykonywać otworów w ścianach, suficie ani podłodze. W przypadku konieczności dokonania takiej ingerencji Najemca może zwrócić się do Wynajmującego z odpowiednim wnioskiem. Wynajmujący, według własnego uznania, może dokonać stosownej czynności we własnym zakresie.</li>
+</ol>
 </li>
 <li>Najemca dołoży wszelkich starań w celu umożliwienia Wynajmującemu dokonywania kontroli przestrzegania przez Najemcę warunków Umowy.</li>
 </ol>
-<p class="sh">§ 6. [Kaucja]</p>
+<p class="sh">[Kaucja]</p>
 <ol>
 <li>${kaucjaTxt}</li>
 <li>Kaucja jest pobierana jako zabezpieczenie ewentualnych roszczeń Wynajmującego wynikających z Umowy.</li>
@@ -3042,64 +1921,64 @@ ${isPokoj?`<li>W ramach Umowy Najemca jest także uprawniony do wspólnego korzy
 <li>W przypadku wykorzystania przez Wynajmującego części lub całości kaucji na cele wskazane w pkt 6.2 powyżej Najemca uzupełni kaucję do pierwotnej wysokości w terminie 7 dni od daty otrzymania wezwania.</li>
 <li>W przypadku, gdy Wynajmujący nie ma w stosunku do Najemcy żadnych roszczeń powstałych w związku z Umową, kaucja podlega zwrotowi w terminie 14 dni od daty zwrotu Przedmiotu Najmu.</li>
 </ol>
-<p class="sh">§ 7. [Podnajem]</p>
+<p class="sh">[Podnajem]</p>
 <ol>
 <li>Najemcy nie przysługuje prawo do oddania Przedmiotu Najmu w podnajem lub do oddania do jakiegokolwiek innego używania, bez uzyskania uprzedniej zgody Wynajmującego.</li>
 <li>Wynajmujący wyraża zgodę na wspólne zamieszkiwanie Najemcy z: ${wspolArr.length?wspolArr.join('; '):'nie dotyczy'}.</li>
 </ol>
-<p class="sh">§ 8. [Czas trwania i rozwiązanie Umowy]</p>
+<p class="sh">[Czas trwania i rozwiązanie Umowy]</p>
 <ol>
 <li>Umowa zostaje zawarta na czas nieokreślony.</li>
 <li>Strony mogą m.in. wypowiedzieć Umowę z zachowaniem miesięcznego okresu wypowiedzenia. Bieg wypowiedzenia rozpoczyna się pierwszego dnia miesiąca następującego po tym, w którym dokonano wypowiedzenia.</li>
 <li>Wynajmujący uprawniony jest do rozwiązania Umowy m.in. z zachowaniem siedmiodniowego okresu wypowiedzenia, jeżeli:
-  <ol>
-    <li>Najemca będzie opóźniał się z zapłatą całości bądź części czynszu w sposób przekraczający 30 dni lub</li>
-    <li>Lokal wykorzystywany będzie przez Najemcę niezgodnie z postanowieniami Umowy, w tym, jeśli:
-      <ol>
-        <li>Najemca dopuści się niszczenia Lokalu bądź pomieszczeń lub urządzeń przeznaczonych do wspólnego korzystania, lub</li>
-        <li>Najemca w sposób rażący lub uporczywy wykracza przeciwko porządkowi domowemu, czyniąc uciążliwym korzystanie z Lokalu bądź innych lokali, lub</li>
-        <li>Najemca dopuści się naruszenia zakazu podnajmu lub oddania do jakiegokolwiek innego używania, lub</li>
-        <li>Najemca nie wpłacił kaucji w terminie wskazanym w Umowie.</li>
-      </ol>
-    </li>
-  </ol>
+<ol>
+<li>Najemca będzie opóźniał się z zapłatą całości bądź części czynszu w sposób przekraczający 30 dni lub</li>
+<li>Lokal wykorzystywany będzie przez Najemcę niezgodnie z postanowieniami Umowy, w tym, jeśli:
+<ol>
+<li>Najemca dopuści się niszczenia Lokalu bądź pomieszczeń lub urządzeń przeznaczonych do wspólnego korzystania, lub</li>
+<li>Najemca w sposób rażący lub uporczywy wykracza przeciwko porządkowi domowemu, czyniąc uciążliwym korzystanie z Lokalu bądź innych lokali, lub</li>
+<li>Najemca dopuści się naruszenia zakazu podnajmu lub oddania do jakiegokolwiek innego używania, lub</li>
+<li>Najemca nie wpłacił kaucji w terminie wskazanym w Umowie.</li>
+</ol>
+</li>
+</ol>
 </li>
 <li>Wypowiedzenie Umowy może nastąpić w formie dokumentowej.</li>
 <li>W przypadku rozwiązania Umowy Najemca zwróci Przedmiot Najmu z dniem jej zakończenia w stanie niepogorszonym. Z czynności zwrotu Przedmiotu Najmu zostanie sporządzony protokół zdawczo-odbiorczy.</li>
 <li>Wszelkie nakłady poczynione na Lokal przez Najemcę są wyłącznie jego własnym kosztem bez prawa zwrotu wartości nakładów po zakończeniu okresu najmu, chyba że Strony postanowią na piśmie inaczej przed dokonaniem nakładów.</li>
 <li>Dalsze korzystanie przez Najemcę z Przedmiotu Najmu po upływie okresu najmu nie będzie uważane za przedłużenie stosunku najmu (wyłączenie stosowania art. 674 Kodeksu cywilnego).</li>
 </ol>
-<p class="sh">§ 9. [Odpowiedzialność i kary umowne]</p>
+<p class="sh">[Odpowiedzialność i kary umowne]</p>
 <ol>
 <li>Wynajmujący nie ponosi odpowiedzialności za mienie wniesione do Lokalu przez Najemcę.</li>
 <li>Wynajmujący nie ponosi odpowiedzialności za szkody powstałe w majątku Najemcy w wyniku działania osób trzecich lub będących wynikiem niezawinionej przez Wynajmującego awarii urządzeń wodno-kanalizacyjnych, elektrycznych, czy centralnego ogrzewania.</li>
 <li>Najemca zobowiązuje się nie trzymać w Lokalu żadnych zwierząt, bez względu na ich gatunek czy wielkość, chyba że Wynajmujący wyrazi na to uprzednią, pisemną zgodę; w przypadku naruszenia zakazu Najemca ponosi odpowiedzialność za wszelkie wynikłe szkody oraz poddaje się egzekucji opróżnienia i wydania Lokalu.</li>
 <li>Najemca zapłaci na rzecz Wynajmującego następujące kary umowne:
-  <ol>
-    <li>w przypadku każdorazowego naruszenia zakazu palenia w Nieruchomości wskazanego w pkt 5.1.9. Umowy – w wysokości 500,00 zł za każde naruszenie,</li>
-    <li>w przypadku każdorazowego naruszenia zakazu wskazanego w pkt 7.1. Umowy – w wysokości 500 zł za każde naruszenie,</li>
-    <li>w przypadku przebywania w Lokalu więcej niż ${totalOsoby} ${totalOsoby===1?'osoby':totalOsoby<5?'osób':'osób'} Najemca zobowiązany będzie do uiszczenia kary umownej w wysokości 2.000,00 zł.</li>
-  </ol>
+<ol>
+<li>w przypadku każdorazowego naruszenia zakazu palenia w Nieruchomości wskazanego w pkt 5.1.9. Umowy – w wysokości 500,00 zł za każde naruszenie,</li>
+<li>w przypadku każdorazowego naruszenia zakazu wskazanego w pkt 7.1. Umowy – w wysokości 500 zł za każde naruszenie,</li>
+<li>W przypadku przebywania w Lokalu więcej niż ${totalOsoby} ${totalOsoby===1?'osoby':totalOsoby<5?'osoby':'osób'} Najemca zobowiązany będzie do uiszczenia kary umownej w wysokości 2.000,00 zł.</li>
+</ol>
 </li>
 <li>Wynajmującemu przysługuje uprawnienie do dochodzenia odszkodowania przewyższającego zastrzeżone kary umowne.</li>
 </ol>
-<p class="sh">§ 10. [Postanowienia końcowe]</p>
+<p class="sh">[Postanowienia końcowe]</p>
 <ol>
 <li>W sprawach nieuregulowanych Umową mają zastosowanie przepisy prawa polskiego.</li>
 <li>Strony wskazują następujące dane do korespondencji:
-  <ol>
-    <li>Wynajmujący – (90-514) Łódź, ul. Wólczańska 66 lok. C311, adres e-mail: home4people.info@gmail.com.</li>
-    <li>Najemca – ${najAdr}, adres e-mail: ${v('f-nEmail')||'…'}.</li>
-  </ol>
+<ol>
+<li>Wynajmujący – (90-516) Łódź, ul. Wólczańska 66 lok. C311, adres e-mail: home4people.info@gmail.com.</li>
+<li>Najemca – ${najAdr}${v('f-nEmail')?', adres e-mail: '+v('f-nEmail'):''} .</li>
+</ol>
 </li>
 <li>Strony będą niezwłocznie, nie później niż w terminie 3 dni, informować się pisemnie lub za pośrednictwem wiadomości e-mail o zmianie danych, o których mowa w pkt 10.2. powyżej. W przypadku braku wskazania nowych danych, przesłanie korespondencji na dotychczasowe dane kontaktowe uważa się za skutecznie doręczone.</li>
 <li>Najemca oświadcza, że treść niniejszej umowy jest dla niego jasna, zrozumiała i nie budzi zastrzeżeń.</li>
 <li>Umowę sporządzono w dwóch jednobrzmiących egzemplarzach, po jednym dla każdej ze Stron.</li>
 <li>Zmiany postanowień Umowy wymagają formy pisemnej pod rygorem nieważności.</li>
 </ol>
-<table class="sig-table"><tr>
-  <td><div class="sig-line">_____________________________<br>za Wynajmującego<br><small>${sigName}</small></div></td>
-  <td><div class="sig-line">_____________________________<br>za Najemcę<br><small>${v('f-nImie')}</small></div></td>
+<table class="sig-table" style="width:100%;margin-top:40px;"><tr>
+  <td style="width:50%;text-align:center;"><div class="sig-line">_____________________________<br>za Wynajmującego<br><small>${sigName}</small></div></td>
+  <td style="width:50%;text-align:center;"><div class="sig-line">_____________________________<br>za Najemcę<br><small>${v('f-nImie')}</small></div></td>
 </tr></table>
 </div>
 <div style="height:40px;"></div>
@@ -3165,7 +2044,7 @@ ${firmaSad?`wpisaną do rejestru przedsiębiorców prowadzonego przez ${firmaSad
 reprezentowaną przez ${firmaRepr},<br>
 zwaną dalej „<strong>Najemcą</strong>".</p>
 
-<p class="sh">§ 1. [Oświadczenia]</p>
+<p class="sh">[Oświadczenia]</p>
 <ol>
   <li>Wynajmujący oświadcza, że:
     <ol>
@@ -3186,7 +2065,7 @@ zwaną dalej „<strong>Najemcą</strong>".</p>
   </li>
 </ol>
 
-<p class="sh">§ 2. [Przedmiot Umowy]</p>
+<p class="sh">[Przedmiot Umowy]</p>
 <ol>
   <li>Na zasadach określonych niniejszą Umową Wynajmujący odda Najemcy do używania lokal bądź lokale mieszkalne znajdujące się w Nieruchomości (zwane dalej: „<strong>Lokalami</strong>") na zasadach określonych w zamówieniu, którego wzór stanowi załącznik nr 1 do Umowy (zwane dalej: „<strong>Zamówieniem</strong>").</li>
   <li>Najemca oświadcza, że Lokale będą wykorzystywane wyłącznie w celach mieszkaniowych, jako baza noclegowa dla Lokatorów.</li>
@@ -4212,8 +3091,7 @@ setTimeout(()=>{
 },600);
 
 </script>
-<script>
-// GREMI
+<script>// GREMI
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
 const SPOLKI = {
@@ -28373,5 +27251,4 @@ var __async = (__this, __arguments, generator) => {
 
 
 </script>
-</body>
-</html>
+</body></html>
