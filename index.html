@@ -7,7 +7,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
-:root{--bg:#0d0f0e;--sf:#161a17;--sf2:#1e2420;--ac:#4ade80;--ac2:#22c55e;--mu:#4a5568;--tx:#e2e8f0;--tx2:#94a3b8;--bd:#2d3748;--red:#f87171;--yw:#fbbf24;}
+:root{--bg:#0d0f0e;--sf:#161a17;--sf2:#1e2420;--ac:#4ade80;--ac2:#22c55e;--tx:#e2e8f0;--tx2:#94a3b8;--bd:#2d3748;--red:#f87171;--yw:#fbbf24;}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;max-width:500px;margin:0 auto;padding-bottom:60px;}
 header{padding:16px 20px 12px;border-bottom:1px solid var(--bd);background:var(--sf);}
@@ -18,76 +18,99 @@ header p{font-size:11px;color:var(--tx2);margin-top:3px;font-family:'IBM Plex Mo
 .ps.done{background:var(--ac2)}.ps.act{background:var(--ac)}
 .sec{padding:18px 20px;}
 .stitle{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--tx2);text-transform:uppercase;margin-bottom:12px;}
-.meter-card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;transition:all .15s;}
-.meter-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--mu);transition:background .2s;}
-.meter-card:active{transform:scale(.98)}
-.meter-card.sel{border-color:var(--ac);background:#0f2318}.meter-card.sel::before{background:var(--ac)}
-.meter-card.done{border-color:#1e4d2b}.meter-card.done::before{background:var(--ac2)}
+.mcard{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;transition:border-color .15s,background .15s;}
+.mcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#4a5568;transition:background .2s;}
+.mcard.sel{border-color:var(--ac);background:#0f2318}.mcard.sel::before{background:var(--ac)}
+.mcard.done{border-color:#1e4d2b}.mcard.done::before{background:var(--ac2)}
 .mi{width:38px;height:38px;background:var(--sf2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;}
-.meter-card.done .mi{background:#0f2318}
+.mcard.done .mi{background:#0f2318}
 .minfo{flex:1;min-width:0}
-.mhouse{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--tx)}
+.mhouse{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;}
 .mser{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2);margin-top:2px}
-.mbadge{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:2px 7px;border-radius:6px;background:var(--sf2);color:var(--tx2);flex-shrink:0;text-align:right;line-height:1.6}
-.meter-card.done .mbadge{background:#0f2318;color:var(--ac)}
-.cam-panel{display:none;background:var(--sf);border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin-top:14px;}
-.cam-panel.vis{display:block}
-.cam-hdr{padding:10px 14px;border-bottom:1px solid var(--bd);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ac);letter-spacing:.08em;}
-.cam-body{padding:14px}
-.photo-trig{width:100%;background:var(--sf2);border:1.5px dashed var(--bd);border-radius:8px;height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
-.photo-trig:active{transform:scale(.98);border-color:var(--ac)}
-.photo-trig.hp{border-style:solid;border-color:var(--ac2)}
-.photo-trig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.8}
-.photo-trig .cl{font-size:12px;color:var(--tx2);text-align:center;position:relative;z-index:1}
-.photo-trig .ci{font-size:26px;position:relative;z-index:1}
-.photo-trig.hp .cl{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.8);font-weight:500}
-#file-input{display:none}
-.ocr-box{margin-top:12px;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:12px;}
-.ocr-lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
-.ocr-row{display:flex;align-items:center;gap:8px}
-.ocr-val{flex:1;padding:10px 12px;border-radius:8px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:600;text-align:center;-webkit-appearance:none;}
-.ocr-val:focus{outline:none;border-color:var(--ac)}
-.ocr-unit{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--tx2);}
-.ocr-status{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:6px 10px;border-radius:6px;margin-top:8px;text-align:center;display:none;}
-.ocr-status.show{display:block}
-.ocr-status.scanning{background:#3d2f0a;color:var(--yw)}
-.ocr-status.ok{background:#0f2318;color:var(--ac)}
-.ocr-status.err{background:#2d1212;color:var(--red)}
-.cam-actions{display:flex;gap:8px;margin-top:10px}
-.btn{flex:1;padding:11px;border-radius:8px;border:1px solid var(--bd);background:var(--sf2);color:var(--tx);font-family:'IBM Plex Mono',monospace;font-size:12px;cursor:pointer;text-align:center;letter-spacing:.05em;transition:all .15s;-webkit-appearance:none;}
-.btn:active{transform:scale(.97)}
-.btn-ac{background:var(--ac);color:#0d1f14;border-color:var(--ac);font-weight:600}
-.btn-ac:active{background:var(--ac2)}
-.btn-ac:disabled{opacity:.4;pointer-events:none}
-.btn-red{border-color:#4a1c1c;color:var(--red)}
-.tbl-wrap{overflow-x:auto;margin-top:8px;border-radius:8px;border:1px solid var(--bd);}
+.mbadge{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:3px 8px;border-radius:6px;background:var(--sf2);color:var(--tx2);flex-shrink:0;}
+.mcard.done .mbadge{background:#0f2318;color:var(--ac)}
+
+/* Camera panel */
+.cpanel{display:none;background:var(--sf);border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin-top:12px;}
+.cpanel.vis{display:block}
+.chdr{padding:10px 14px;border-bottom:1px solid var(--bd);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ac);}
+.cbody{padding:14px;display:flex;flex-direction:column;gap:10px;}
+
+/* Photo area */
+.photo-area{
+  width:100%;height:160px;
+  background:var(--sf2);
+  border:2px dashed var(--bd);
+  border-radius:8px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:8px;cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:border-color .2s;
+  /* IMPORTANT: no pointer-events none, no label wrapper */
+}
+.photo-area:active{border-color:var(--ac);}
+.photo-area.has-photo{border-style:solid;border-color:var(--ac2);}
+.photo-area img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.photo-area .overlay{position:relative;z-index:2;text-align:center;padding:8px;}
+.photo-area .overlay span{display:block;font-size:28px;line-height:1;}
+.photo-area .overlay p{font-size:12px;color:var(--tx2);margin-top:6px;}
+.photo-area.has-photo .overlay p{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.9);font-weight:500;}
+
+/* OCR box */
+.obox{background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:12px;display:none;}
+.obox.vis{display:block}
+.olbl{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
+.orow{display:flex;align-items:center;gap:8px;}
+.oval{flex:1;padding:10px;border-radius:8px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;text-align:center;width:100%;}
+.oval:focus{outline:none;border-color:var(--ac);}
+.ounit{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--tx2);}
+.ost{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:7px 10px;border-radius:6px;margin-top:8px;text-align:center;display:none;}
+.ost.vis{display:block}
+.ost.scan{background:#3d2f0a;color:var(--yw);}
+.ost.ok{background:#0f2318;color:var(--ac);}
+.ost.err{background:#2d1212;color:var(--red);}
+
+/* Buttons */
+.row{display:flex;gap:8px;}
+.btn{flex:1;padding:13px;border-radius:8px;border:1px solid var(--bd);background:var(--sf2);color:var(--tx);font-family:'IBM Plex Mono',monospace;font-size:13px;cursor:pointer;text-align:center;transition:all .15s;-webkit-appearance:none;display:block;width:100%;}
+.btn:active{transform:scale(.97);}
+.btn-g{background:var(--ac);color:#0d1f14;border-color:var(--ac);font-weight:600;}
+.btn-g:active{background:var(--ac2);}
+.btn-g:disabled{opacity:.4;pointer-events:none;}
+.btn-r{border-color:#4a1c1c;color:var(--red);}
+
+/* Table */
+.tbl-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--bd);margin-top:8px;}
 table{width:100%;border-collapse:collapse;font-family:'IBM Plex Mono',monospace;font-size:11px;}
-th{background:var(--sf2);padding:8px 10px;color:var(--tx2);font-weight:500;border-bottom:1px solid var(--bd);white-space:nowrap;text-align:center;}
-th:first-child{text-align:left}
-td{padding:7px 10px;border-bottom:1px solid #1e2420;color:var(--tx);text-align:center;white-space:nowrap;}
-td:first-child{text-align:left;color:var(--tx2);font-size:10px}
-tr.new-row td{color:var(--ac);font-weight:600}
-tr.new-row td:first-child{color:var(--ac2)}
-tr:last-child td{border-bottom:none}
-.sum-panel{display:none;padding:18px 20px}
-.sum-panel.vis{display:block}
-.file-item{display:flex;align-items:center;gap:10px;padding:9px 13px;background:var(--sf);border:1px solid var(--bd);border-radius:8px;margin-bottom:7px}
-.fdot{width:7px;height:7px;border-radius:50%;background:var(--ac);flex-shrink:0}
-.fname{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--tx);flex:1}
-.fsz{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2)}
-.email-box{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px;margin:14px 0}
-.email-lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
-.email-addr{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ac)}
-.st-msg{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:10px 13px;border-radius:8px;text-align:center;display:none;margin-top:10px}
-.st-msg.show{display:block}
-.st-msg.ok{background:#0f2318;color:var(--ac);border:1px solid #1e4d2b}
-.st-msg.err{background:#2d1212;color:var(--red);border:1px solid #4a1c1c}
-.note{font-size:11px;color:var(--tx2);padding:10px 13px;background:var(--sf2);border-radius:8px;border-left:3px solid var(--yw);line-height:1.6;margin-top:14px}
-.chip{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:3px 9px;border-radius:20px;background:var(--sf2);color:var(--tx2);border:1px solid var(--bd);margin-bottom:14px}
-.chip span{color:var(--ac);font-weight:600}
+th{background:var(--sf2);padding:8px 8px;color:var(--tx2);font-weight:500;border-bottom:1px solid var(--bd);white-space:nowrap;text-align:center;}
+th:first-child{text-align:left;}
+td{padding:7px 8px;border-bottom:1px solid #1e2420;color:var(--tx);text-align:center;white-space:nowrap;}
+td:first-child{text-align:left;color:var(--tx2);font-size:10px;}
+tr.nr td{color:var(--ac);font-weight:600;}
+tr.nr td:first-child{color:var(--ac2);}
+tr:last-child td{border-bottom:none;}
+
+/* Summary */
+.spanel{display:none;padding:18px 20px;}
+.spanel.vis{display:block;}
+.fitem{display:flex;align-items:center;gap:10px;padding:9px 13px;background:var(--sf);border:1px solid var(--bd);border-radius:8px;margin-bottom:7px;}
+.fdot{width:7px;height:7px;border-radius:50%;background:var(--ac);flex-shrink:0;}
+.fn{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--tx);flex:1;}
+.fsz{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2);}
+.ebox{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px;margin:14px 0;}
+.elbl{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;}
+.eaddr{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ac);}
+.smsg{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:10px 13px;border-radius:8px;text-align:center;display:none;margin-top:10px;}
+.smsg.vis{display:block;}
+.smsg.ok{background:#0f2318;color:var(--ac);border:1px solid #1e4d2b;}
+.note{font-size:11px;color:var(--tx2);padding:10px 13px;background:var(--sf2);border-radius:8px;border-left:3px solid var(--yw);line-height:1.6;margin-top:14px;}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:3px 9px;border-radius:20px;background:var(--sf2);color:var(--tx2);border:1px solid var(--bd);margin-bottom:14px;}
+.chip b{color:var(--ac);}
 </style>
 </head>
 <body>
+
 <header>
   <h1>⚡ Счётчики газа</h1>
   <p id="hdate"></p>
@@ -97,295 +120,372 @@ tr:last-child td{border-bottom:none}
   <div class="ps" id="p3"></div><div class="ps" id="p4"></div>
 </div>
 
-<div class="sec" id="meters-sec">
+<!-- File input — вне любых контейнеров, глобальный -->
+<input type="file" id="fileinput" accept="image/*" capture="environment"
+  style="position:fixed;top:-9999px;left:-9999px;opacity:0;width:1px;height:1px;">
+
+<!-- METERS -->
+<div class="sec" id="msec">
   <div class="stitle">Выберите счётчик</div>
-  <div class="chip">Готово: <span id="dcnt">0</span> / 4</div>
+  <div class="chip">Готово: <b id="dcnt">0</b> / 4</div>
   <div id="mlist"></div>
 
-  <div class="cam-panel" id="campanel">
-    <div class="cam-hdr" id="camtitle">—</div>
-    <div class="cam-body">
-      <label for="file-input" class="photo-trig" id="ptrig">
-        <span class="ci">📷</span>
-        <span class="cl">Нажмите для фото</span>
-      </label>
-      <input type="file" id="file-input" accept="image/*" capture="environment">
-      <div class="ocr-box" id="ocrbox" style="display:none">
-        <div class="ocr-lbl">Показание (м³)</div>
-        <div class="ocr-row">
-          <input type="number" class="ocr-val" id="ocr-val" placeholder="—" inputmode="decimal">
-          <span class="ocr-unit">м³</span>
+  <!-- Camera panel -->
+  <div class="cpanel" id="cpanel">
+    <div class="chdr" id="chdr">—</div>
+    <div class="cbody">
+
+      <!-- Photo trigger: plain div, onclick calls openCamera() -->
+      <div class="photo-area" id="photoarea" onclick="openCamera()">
+        <div class="overlay">
+          <span>📷</span>
+          <p>Нажмите для фото</p>
         </div>
-        <div class="ocr-status" id="ocr-st"></div>
       </div>
-      <div class="cam-actions">
-        <button class="btn btn-red" onclick="cancelPhoto()">Отмена</button>
-        <button class="btn btn-ac" id="savebtn" disabled onclick="confirmPhoto()">Сохранить</button>
+
+      <!-- OCR result -->
+      <div class="obox" id="obox">
+        <div class="olbl">Показание (м³) — проверьте и исправьте</div>
+        <div class="orow">
+          <input type="number" class="oval" id="oval" placeholder="—" inputmode="numeric" pattern="[0-9]*">
+          <span class="ounit">м³</span>
+        </div>
+        <div class="ost" id="ost"></div>
+      </div>
+
+      <div class="row">
+        <button class="btn btn-r" onclick="cancelPhoto()">Отмена</button>
+        <button class="btn btn-g" id="savebtn" disabled onclick="confirmPhoto()">Сохранить ✓</button>
       </div>
     </div>
   </div>
 
-  <div style="margin-top:18px">
-    <button class="btn btn-ac" id="nextbtn" disabled onclick="showSummary()">Создать архив →</button>
+  <div style="margin-top:16px;">
+    <button class="btn btn-g" id="nextbtn" disabled onclick="showSummary()">Создать архив →</button>
   </div>
 
-  <div style="margin-top:24px">
+  <div style="margin-top:24px;">
     <div class="stitle">История показаний</div>
     <div class="tbl-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Дата</th><th>Дом 21</th><th>Дом 19</th><th>Дом 17</th><th>Дом 15</th><th>Сумма</th>
-          </tr>
-        </thead>
-        <tbody id="hist-body"></tbody>
+        <thead><tr><th>Дата</th><th>Дом21</th><th>Дом19</th><th>Дом17</th><th>Дом15</th><th>Σ</th></tr></thead>
+        <tbody id="histbody"></tbody>
       </table>
     </div>
   </div>
 </div>
 
-<div class="sum-panel" id="sum-sec">
-  <div class="stitle">Архив готов</div>
+<!-- SUMMARY -->
+<div class="spanel" id="ssec">
+  <div class="stitle">Готово к отправке</div>
   <div id="flist"></div>
-  <div class="email-box">
-    <div class="email-lbl">Получатель</div>
-    <div class="email-addr">turystyczna777@gmail.com</div>
+  <div class="ebox">
+    <div class="elbl">Получатель</div>
+    <div class="eaddr">turystyczna777@gmail.com</div>
   </div>
-  <button class="btn btn-ac" id="dlbtn" onclick="downloadAndEmail()">📦 Скачать архив + открыть письмо</button>
-  <div class="st-msg" id="stmsg"></div>
-  <div class="note">⚠️ Архив скачается на устройство. Откроется почтовый клиент — прикрепите файл вручную.</div>
-  <button class="btn" style="margin-top:14px" onclick="resetApp()">← Сначала</button>
+  <button class="btn btn-g" id="dlbtn" onclick="doDownload()">📦 Скачать архив + открыть письмо</button>
+  <div class="smsg" id="smsg"></div>
+  <div class="note">⚠️ Архив скачается на устройство. Почтовый клиент откроется — прикрепите файл вручную.</div>
+  <button class="btn" style="margin-top:14px;" onclick="resetApp()">← Сначала</button>
 </div>
 
 <script>
-const EMAIL='turystyczna777@gmail.com';
-const METERS=[
-  {id:1,house:'Дом 21',serial:'282405307798'},
-  {id:2,house:'Дом 19',serial:'282405307802'},
-  {id:3,house:'Дом 17',serial:'282405307754'},
-  {id:4,house:'Дом 15',serial:'282405307718'},
+const EMAIL = 'turystyczna777@gmail.com';
+const METERS = [
+  {id:1, house:'Дом 21', short:'dom21', serial:'282405307798'},
+  {id:2, house:'Дом 19', short:'dom19', serial:'282405307802'},
+  {id:3, house:'Дом 17', short:'dom17', serial:'282405307754'},
+  {id:4, house:'Дом 15', short:'dom15', serial:'282405307718'},
 ];
-const HISTORY=[
-  {date:'2025-10-01',v:[719,444,162,92]},
-  {date:'2025-12-31',v:[744,467,258,125]},
-  {date:'2026-01-24',v:[851,515,380,130]},
-  {date:'2026-01-30',v:[911,535,402,141]},
-  {date:'2026-03-03',v:[1080,711,445,338]},
-  {date:'2026-04-01',v:[1150,760,519,404]},
-  {date:'2026-05-04',v:[1222,810,589,459]},
+const HISTORY = [
+  {date:'2025-10-01', v:[719,444,162,92]},
+  {date:'2025-12-31', v:[744,467,258,125]},
+  {date:'2026-01-24', v:[851,515,380,130]},
+  {date:'2026-01-30', v:[911,535,402,141]},
+  {date:'2026-03-03', v:[1080,711,445,338]},
+  {date:'2026-04-01', v:[1150,760,519,404]},
+  {date:'2026-05-04', v:[1222,810,589,459]},
 ];
 
-let photos={},selMeter=null,pendingUrl=null;
+let photos = {};
+let selMeter = null;
+let pendingUrl = null;
 
-function getMonthStr(){
-  const d=new Date();
-  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
-}
-function getFileName(m){
-  return m.house.replace(' ','').toLowerCase()+'_'+getMonthStr()+'.jpg';
-}
+// ── File input handler ──────────────────────────────────────────────
+const fileInput = document.getElementById('fileinput');
 
-function renderHistory(){
-  const tb=document.getElementById('hist-body');
-  tb.innerHTML='';
-  const rows=[...HISTORY];
-  if(Object.keys(photos).length===4){
-    const today=new Date().toISOString().slice(0,10);
-    rows.push({date:today,v:METERS.map(m=>photos[m.id]?photos[m.id].val:null),isNew:true});
-  }
-  rows.forEach(r=>{
-    const sum=r.v.reduce((a,b)=>a+(b||0),0);
-    const tr=document.createElement('tr');
-    if(r.isNew)tr.className='new-row';
-    tr.innerHTML='<td>'+r.date+'</td>'+r.v.map(x=>'<td>'+(x!=null?x+' м³':'—')+'</td>').join('')+'<td>'+sum+' м³</td>';
-    tb.appendChild(tr);
-  });
+function openCamera() {
+  // Reset so 'change' fires even if same file chosen again
+  fileInput.value = '';
+  fileInput.click();
 }
 
-function renderMeters(){
-  const list=document.getElementById('mlist');
-  list.innerHTML='';
-  METERS.forEach(m=>{
-    const done=!!photos[m.id];
-    const sel=selMeter&&selMeter.id===m.id;
-    const d=document.createElement('div');
-    d.className='meter-card'+(sel?' sel':'')+(done?' done':'');
-    const val=done?photos[m.id].val:null;
-    d.innerHTML=
-      '<div class="mi">'+(done?'✅':'🔧')+'</div>'+
-      '<div class="minfo"><div class="mhouse">'+m.house+'</div><div class="mser">'+m.serial+'</div></div>'+
-      '<div class="mbadge">'+(done?val+' м³':'газ')+'</div>';
-    d.onclick=()=>selectMeter(m);
-    list.appendChild(d);
-  });
-  const cnt=Object.keys(photos).length;
-  document.getElementById('dcnt').textContent=cnt;
-  document.getElementById('nextbtn').disabled=cnt<4;
-  METERS.forEach((m,i)=>{
-    const el=document.getElementById('p'+(i+1));
-    el.className='ps'+(photos[m.id]?' done':(selMeter&&selMeter.id===m.id?' act':''));
-  });
-}
+fileInput.addEventListener('change', function() {
+  const file = this.files && this.files[0];
+  if (!file) return;
 
-function selectMeter(m){
-  selMeter=m;pendingUrl=null;
-  document.getElementById('campanel').classList.add('vis');
-  document.getElementById('camtitle').textContent='📍 '+m.house+' ('+m.serial+')';
-  const pt=document.getElementById('ptrig');
-  pt.className='photo-trig';
-  pt.innerHTML='<span class="ci">📷</span><span class="cl">Нажмите для фото</span>';
-  pt.onclick=()=>document.getElementById('file-input').click();
-  document.getElementById('file-input').value='';
-  document.getElementById('savebtn').disabled=true;
-  document.getElementById('ocrbox').style.display='none';
-  document.getElementById('ocr-st').className='ocr-status';
-  document.getElementById('ocr-val').value='';
-  renderMeters();
-  setTimeout(()=>document.getElementById('campanel').scrollIntoView({behavior:'smooth',block:'nearest'}),100);
-}
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    pendingUrl = e.target.result;
 
-document.getElementById('file-input').addEventListener('change',function(){
-  const file=this.files[0];
-  if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    pendingUrl=e.target.result;
-    const pt=document.getElementById('ptrig');
-    pt.className='photo-trig hp';
-    pt.innerHTML='<img src="'+pendingUrl+'"><span class="cl">📸 Фото готово — нажмите для переснимки</span>';
-    pt.onclick=()=>document.getElementById('file-input').click();
-    document.getElementById('ocrbox').style.display='block';
+    // Show preview
+    const pa = document.getElementById('photoarea');
+    pa.className = 'photo-area has-photo';
+    pa.innerHTML =
+      '<img src="' + pendingUrl + '">' +
+      '<div class="overlay"><p>📸 Фото готово — нажмите для переснимки</p></div>';
+
+    // Show OCR box and run OCR
+    document.getElementById('obox').className = 'obox vis';
+    document.getElementById('oval').value = '';
+    document.getElementById('savebtn').disabled = true;
     runOCR(pendingUrl);
   };
   reader.readAsDataURL(file);
 });
 
-async function runOCR(dataUrl){
-  const st=document.getElementById('ocr-st');
-  const inp=document.getElementById('ocr-val');
-  st.className='ocr-status show scanning';
-  st.textContent='⏳ Считываем показание...';
-  document.getElementById('savebtn').disabled=true;
-  inp.value='';
-  try{
-    const base64=dataUrl.split(',')[1];
-    const mtype=dataUrl.split(';')[0].split(':')[1];
-    const resp=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:100,
-        messages:[{role:'user',content:[
-          {type:'image',source:{type:'base64',media_type:mtype,data:base64}},
-          {type:'text',text:'На фото счётчик газа. Считай показание в м³. Верни ТОЛЬКО целое число без единиц измерения, без текста. Только цифры, например: 1222'}
-        ]}]
+// ── OCR ─────────────────────────────────────────────────────────────
+async function runOCR(dataUrl) {
+  const st = document.getElementById('ost');
+  const inp = document.getElementById('oval');
+  setOst('scan', '⏳ Считываем показание...');
+
+  try {
+    const base64 = dataUrl.split(',')[1];
+    const mtype  = dataUrl.split(';')[0].split(':')[1];
+
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 100,
+        messages: [{
+          role: 'user',
+          content: [
+            { type: 'image', source: { type: 'base64', media_type: mtype, data: base64 } },
+            { type: 'text', text: 'На фото счётчик газа. Найди показание (текущий объём в м³). Ответь ТОЛЬКО целым числом, без единиц, без текста. Пример: 1222' }
+          ]
+        }]
       })
     });
-    const data=await resp.json();
-    const raw=data.content&&data.content[0]&&data.content[0].text;
-    const num=parseInt(raw&&raw.replace(/[^\d]/g,''));
-    if(!isNaN(num)&&num>0){
-      inp.value=num;
-      st.className='ocr-status show ok';
-      st.textContent='✅ Считано: '+num+' м³ — проверьте и исправьте если нужно';
-      document.getElementById('savebtn').disabled=false;
-    } else {throw new Error();}
-  }catch(e){
-    st.className='ocr-status show err';
-    st.textContent='⚠️ Не удалось считать — введите вручную';
-    document.getElementById('savebtn').disabled=false;
+
+    const data = await resp.json();
+    const raw  = (data.content && data.content[0] && data.content[0].text) || '';
+    const num  = parseInt(raw.replace(/[^\d]/g, ''));
+
+    if (!isNaN(num) && num > 0) {
+      inp.value = num;
+      setOst('ok', '✅ Считано: ' + num + ' м³ — проверьте!');
+      document.getElementById('savebtn').disabled = false;
+    } else {
+      throw new Error('bad number');
+    }
+  } catch(e) {
+    setOst('err', '⚠️ Не удалось считать — введите вручную');
+    document.getElementById('savebtn').disabled = false;
   }
-  document.getElementById('ocr-val').oninput=function(){
-    document.getElementById('savebtn').disabled=!this.value;
-  };
 }
 
-function confirmPhoto(){
-  if(!selMeter||!pendingUrl)return;
-  const v=parseInt(document.getElementById('ocr-val').value);
-  if(isNaN(v)||v<=0){alert('Введите показание');return;}
-  photos[selMeter.id]={meter:selMeter,dataUrl:pendingUrl,val:v};
-  document.getElementById('campanel').classList.remove('vis');
-  selMeter=null;pendingUrl=null;
-  renderMeters();renderHistory();
+function setOst(cls, txt) {
+  const el = document.getElementById('ost');
+  el.className = 'ost vis ' + cls;
+  el.textContent = txt;
 }
 
-function cancelPhoto(){
-  document.getElementById('campanel').classList.remove('vis');
-  selMeter=null;pendingUrl=null;
+document.getElementById('oval').addEventListener('input', function() {
+  document.getElementById('savebtn').disabled = !this.value;
+});
+
+// ── Meter selection ──────────────────────────────────────────────────
+function selectMeter(m) {
+  selMeter = m;
+  pendingUrl = null;
+
+  document.getElementById('chdr').textContent = '📍 ' + m.house + '  (' + m.serial + ')';
+  document.getElementById('cpanel').className = 'cpanel vis';
+
+  // Reset photo area
+  const pa = document.getElementById('photoarea');
+  pa.className = 'photo-area';
+  pa.innerHTML = '<div class="overlay"><span>📷</span><p>Нажмите для фото</p></div>';
+
+  document.getElementById('obox').className = 'obox';
+  document.getElementById('oval').value = '';
+  document.getElementById('ost').className = 'ost';
+  document.getElementById('savebtn').disabled = true;
+
+  renderMeters();
+  setTimeout(() => document.getElementById('cpanel').scrollIntoView({behavior:'smooth', block:'nearest'}), 80);
+}
+
+function confirmPhoto() {
+  if (!selMeter || !pendingUrl) return;
+  const v = parseInt(document.getElementById('oval').value);
+  if (isNaN(v) || v <= 0) { alert('Введите показание'); return; }
+
+  photos[selMeter.id] = { meter: selMeter, dataUrl: pendingUrl, val: v };
+  document.getElementById('cpanel').className = 'cpanel';
+  selMeter = null; pendingUrl = null;
+  renderMeters();
+  renderHistory();
+}
+
+function cancelPhoto() {
+  document.getElementById('cpanel').className = 'cpanel';
+  selMeter = null; pendingUrl = null;
   renderMeters();
 }
 
-function buildCSV(){
-  const rows=[...HISTORY];
-  const today=new Date().toISOString().slice(0,10);
-  if(Object.keys(photos).length===4){
-    rows.push({date:today,v:METERS.map(m=>photos[m.id]?photos[m.id].val:'')});
+// ── Render ───────────────────────────────────────────────────────────
+function getMonth() {
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0');
+}
+function fileName(m) { return m.short + '_' + getMonth() + '.jpg'; }
+
+function renderMeters() {
+  const list = document.getElementById('mlist');
+  list.innerHTML = '';
+  METERS.forEach(function(m) {
+    const done = !!photos[m.id];
+    const sel  = selMeter && selMeter.id === m.id;
+    const d = document.createElement('div');
+    d.className = 'mcard' + (sel ? ' sel' : '') + (done ? ' done' : '');
+    d.innerHTML =
+      '<div class="mi">' + (done ? '✅' : '🔧') + '</div>' +
+      '<div class="minfo"><div class="mhouse">' + m.house + '</div><div class="mser">' + m.serial + '</div></div>' +
+      '<div class="mbadge">' + (done ? photos[m.id].val + ' м³' : 'газ') + '</div>';
+    d.onclick = function() { selectMeter(m); };
+    list.appendChild(d);
+  });
+
+  const cnt = Object.keys(photos).length;
+  document.getElementById('dcnt').textContent = cnt;
+  document.getElementById('nextbtn').disabled = cnt < 4;
+
+  METERS.forEach(function(m, i) {
+    const el = document.getElementById('p' + (i+1));
+    el.className = 'ps' + (photos[m.id] ? ' done' : (selMeter && selMeter.id === m.id ? ' act' : ''));
+  });
+}
+
+function renderHistory() {
+  const tb = document.getElementById('histbody');
+  tb.innerHTML = '';
+  const rows = HISTORY.slice();
+  const cnt = Object.keys(photos).length;
+  if (cnt === 4) {
+    rows.push({
+      date: new Date().toISOString().slice(0,10),
+      v: METERS.map(function(m) { return photos[m.id] ? photos[m.id].val : null; }),
+      isNew: true
+    });
   }
-  let csv='\uFEFF'+'Дата,Дом 21 (282405307798),Дом 19 (282405307802),Дом 17 (282405307754),Дом 15 (282405307718),Сумма\n';
-  rows.forEach(r=>{
-    const sum=r.v.reduce((a,b)=>a+(parseInt(b)||0),0);
-    csv+=r.date+','+r.v.join(',')+','+sum+'\n';
+  rows.forEach(function(r) {
+    const sum = r.v.reduce(function(a,b) { return a + (b || 0); }, 0);
+    const tr = document.createElement('tr');
+    if (r.isNew) tr.className = 'nr';
+    tr.innerHTML = '<td>' + r.date + '</td>' +
+      r.v.map(function(x) { return '<td>' + (x != null ? x : '—') + '</td>'; }).join('') +
+      '<td>' + sum + '</td>';
+    tb.appendChild(tr);
+  });
+}
+
+// ── Summary & Download ───────────────────────────────────────────────
+function showSummary() {
+  document.getElementById('msec').style.display = 'none';
+  document.getElementById('ssec').className = 'spanel vis';
+
+  const fl = document.getElementById('flist');
+  const month = getMonth();
+  fl.innerHTML = '';
+  METERS.forEach(function(m) {
+    const p = photos[m.id];
+    if (!p) return;
+    const kb = Math.round(p.dataUrl.length * 0.75 / 1024);
+    fl.innerHTML +=
+      '<div class="fitem"><div class="fdot"></div>' +
+      '<div class="fn">' + fileName(m) + '<br><span style="font-size:9px;opacity:.6">' + p.val + ' м³</span></div>' +
+      '<div class="fsz">' + kb + ' KB</div></div>';
+  });
+  fl.innerHTML +=
+    '<div class="fitem"><div class="fdot" style="background:var(--yw)"></div>' +
+    '<div class="fn">schetciki_' + month + '.csv<br><span style="font-size:9px;opacity:.6">таблица показаний</span></div>' +
+    '<div class="fsz">CSV</div></div>';
+}
+
+function buildCSV() {
+  const month = getMonth();
+  let csv = '\uFEFF' + 'Дата,Дом 21 (' + METERS[0].serial + '),Дом 19 (' + METERS[1].serial + '),Дом 17 (' + METERS[2].serial + '),Дом 15 (' + METERS[3].serial + '),Сумма\n';
+  const rows = HISTORY.slice();
+  if (Object.keys(photos).length === 4) {
+    rows.push({ date: new Date().toISOString().slice(0,10), v: METERS.map(function(m) { return photos[m.id] ? photos[m.id].val : ''; }) });
+  }
+  rows.forEach(function(r) {
+    const sum = r.v.reduce(function(a,b) { return a + (parseInt(b) || 0); }, 0);
+    csv += r.date + ',' + r.v.join(',') + ',' + sum + '\n';
   });
   return csv;
 }
 
-function showSummary(){
-  document.getElementById('meters-sec').style.display='none';
-  document.getElementById('sum-sec').classList.add('vis');
-  const fl=document.getElementById('flist');
-  fl.innerHTML='';
-  const month=getMonthStr();
-  METERS.forEach(m=>{
-    const p=photos[m.id];
-    if(!p)return;
-    const kb=Math.round(p.dataUrl.length*.75/1024);
-    fl.innerHTML+='<div class="file-item"><div class="fdot"></div><div class="fname">'+getFileName(m)+'<br><span style="font-size:9px;opacity:.6">'+p.val+' м³</span></div><div class="fsz">'+kb+' KB</div></div>';
-  });
-  fl.innerHTML+='<div class="file-item"><div class="fdot" style="background:var(--yw)"></div><div class="fname">schetciki_'+month+'.csv<br><span style="font-size:9px;opacity:.6">таблица показаний</span></div><div class="fsz">CSV</div></div>';
-}
+async function doDownload() {
+  const btn = document.getElementById('dlbtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Создаём архив...';
 
-async function downloadAndEmail(){
-  const btn=document.getElementById('dlbtn');
-  btn.disabled=true;btn.textContent='⏳ Создаём архив...';
-  const zip=new JSZip();
-  METERS.forEach(m=>{
-    const p=photos[m.id];
-    if(!p)return;
-    zip.file(getFileName(m),p.dataUrl.split(',')[1],{base64:true});
+  const zip = new JSZip();
+  METERS.forEach(function(m) {
+    const p = photos[m.id];
+    if (!p) return;
+    zip.file(fileName(m), p.dataUrl.split(',')[1], {base64: true});
   });
-  const month=getMonthStr();
-  zip.file('schetciki_'+month+'.csv',buildCSV());
-  const blob=await zip.generateAsync({type:'blob'});
-  const arcName='schetciki_gaz_'+month+'.zip';
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;a.download=arcName;a.click();
+  const month = getMonth();
+  zip.file('schetciki_' + month + '.csv', buildCSV());
+
+  const blob = await zip.generateAsync({type:'blob'});
+  const arcName = 'schetciki_gaz_' + month + '.zip';
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = arcName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  setTimeout(()=>{
-    const vals=METERS.map(m=>photos[m.id]?m.house+': '+photos[m.id].val+' м³':'').join('\n');
-    const subj=encodeURIComponent('Schetciki gazu — '+month);
-    const body=encodeURIComponent('Добрый день!\n\nПоказания счётчиков газа за '+month+':\n'+vals+'\n\nВо вложении: '+arcName);
-    window.location.href='mailto:'+EMAIL+'?subject='+subj+'&body='+body;
-  },800);
-  const el=document.getElementById('stmsg');
-  el.textContent='✅ Архив '+arcName+' скачан! Прикрепите его к открывшемуся письму.';
-  el.className='st-msg show ok';
-  btn.textContent='✅ Готово';
+
+  setTimeout(function() {
+    const vals = METERS.map(function(m) {
+      return photos[m.id] ? m.house + ': ' + photos[m.id].val + ' м³' : '';
+    }).join('\n');
+    const subj = encodeURIComponent('Schetciki gazu — ' + month);
+    const body = encodeURIComponent('Добрый день!\n\nПоказания счётчиков газа за ' + month + ':\n' + vals + '\n\nВо вложении: ' + arcName);
+    window.location.href = 'mailto:' + EMAIL + '?subject=' + subj + '&body=' + body;
+  }, 1000);
+
+  const msg = document.getElementById('smsg');
+  msg.className = 'smsg vis ok';
+  msg.textContent = '✅ ' + arcName + ' скачан! Прикрепите его к письму.';
+  btn.textContent = '✅ Готово';
 }
 
-function resetApp(){
-  photos={};selMeter=null;pendingUrl=null;
-  document.getElementById('meters-sec').style.display='block';
-  document.getElementById('sum-sec').classList.remove('vis');
-  document.getElementById('campanel').classList.remove('vis');
-  document.getElementById('stmsg').className='st-msg';
-  renderMeters();renderHistory();
+function resetApp() {
+  photos = {}; selMeter = null; pendingUrl = null;
+  document.getElementById('msec').style.display = 'block';
+  document.getElementById('ssec').className = 'spanel';
+  document.getElementById('cpanel').className = 'cpanel';
+  document.getElementById('smsg').className = 'smsg';
+  document.getElementById('dlbtn').disabled = false;
+  document.getElementById('dlbtn').textContent = '📦 Скачать архив + открыть письмо';
+  renderMeters(); renderHistory();
 }
 
-document.getElementById('hdate').textContent=new Date().toLocaleDateString('ru-RU',{day:'2-digit',month:'long',year:'numeric'});
-renderMeters();renderHistory();
+// Init
+document.getElementById('hdate').textContent =
+  new Date().toLocaleDateString('ru-RU', {day:'2-digit', month:'long', year:'numeric'});
+renderMeters();
+renderHistory();
 </script>
 </body>
 </html>
