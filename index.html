@@ -153,13 +153,13 @@ header p{font-size:10px;color:var(--tx2);margin-top:2px;font-family:'IBM Plex Mo
 <div class="spanel" id="ssec">
   <div class="stitle">Zapisz archiwum</div>
   <div id="sum-stats" style="margin-bottom:14px;font-family:IBM Plex Mono,monospace;font-size:12px;line-height:2;color:var(--tx2);"></div>
-  <button class="btn btn-g" id="save-arc-btn" onclick="saveArchive()">☁️ Wyślij archiwum do chmury</button>
+  <button class="btn btn-g" id="save-arc-btn" onclick="saveArchive()">⬇️ Pobierz archiwum ZIP</button>
   <div class="smsg" id="smsg"></div>
   <div id="link-box" style="display:none;margin-top:12px;background:var(--sf);border:1px solid var(--ac);border-radius:10px;padding:14px;">
-    <div style="font-family:IBM Plex Mono,monospace;font-size:10px;color:var(--tx2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;">🔗 Link do pobrania (ważny 24h)</div>
-    <div id="dl-link" style="font-family:IBM Plex Mono,monospace;font-size:12px;color:var(--ac);word-break:break-all;margin-bottom:10px;"></div>
-    <button class="btn btn-g" onclick="copyLink()">📋 Kopiuj link</button>
-    <div style="font-family:IBM Plex Mono,monospace;font-size:10px;color:var(--tx2);margin-top:8px;line-height:1.6;">Otwórz ten link na komputerze i pobierz plik.</div>
+    <div style="font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--ac);font-weight:600;margin-bottom:10px;">✅ Archiwum pobrane!</div>
+    <div style="font-family:IBM Plex Mono,monospace;font-size:10px;color:var(--tx2);line-height:1.8;margin-bottom:10px;" id="arc-name-display"></div>
+    <button class="btn btn-g" onclick="sendByEmail()">📧 Wyślij na e-mail</button>
+    <div style="font-family:IBM Plex Mono,monospace;font-size:10px;color:var(--tx2);margin-top:8px;line-height:1.6;">Otworzy się aplikacja pocztowa — załącz pobrany plik ZIP.</div>
   </div>
   <button class="btn" style="margin-top:10px;" onclick="backToMeters()">← Wróć</button>
 </div>
@@ -531,7 +531,8 @@ function buildCSV(){
 }
 
 // ── SAVE ARCHIVE ──────────────────────────────────────────────────────
-let lastUploadLink = '';
+let lastArcName = '';
+let lastArcBlob = null;
 
 async function saveArchive(){
   const btn=document.getElementById('save-arc-btn');
@@ -553,60 +554,49 @@ async function saveArchive(){
     zip.file('raport_'+getMonth()+'.csv',buildCSV());
     const blob=await zip.generateAsync({type:'blob'});
     const arcName='liczniki_'+getMonth()+'.zip';
+    lastArcName=arcName;
+    lastArcBlob=blob;
 
-    showMsg('⏳ Wysyłam do chmury...','info');
+    // Download ZIP
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url; a.download=arcName;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
 
-    // Upload to file.io (free, link valid 1 download or 24h)
-    const formData = new FormData();
-    formData.append('file', blob, arcName);
-    formData.append('expires', '1d');
+    // Save to IndexedDB
+    const reader=new FileReader();
+    reader.onload=async function(e){
+      try{
+        await dbSave({name:arcName,date:new Date().toISOString(),
+          sizeKb:Math.round(blob.size/1024),data:e.target.result,
+          stats:{gaz:totalFor('gaz').done,cieplo:totalFor('cieplo').done,woda:totalFor('woda').done}
+        });
+      }catch(e2){}
+    };
+    reader.readAsDataURL(blob);
 
-    const resp = await fetch('https://file.io/?expires=1d', {
-      method: 'POST',
-      body: formData
-    });
-    const result = await resp.json();
-
-    if(result.success && result.link){
-      lastUploadLink = result.link;
-      document.getElementById('dl-link').textContent = result.link;
-      document.getElementById('link-box').style.display = 'block';
-      showMsg('✅ Gotowe! Skopiuj link i otwórz na komputerze.','ok');
-      btn.textContent='✅ Wysłano!';
-
-      // Also save to IndexedDB as backup
-      const reader=new FileReader();
-      reader.onload=async function(e){
-        try{
-          await dbSave({name:arcName,date:new Date().toISOString(),
-            sizeKb:Math.round(blob.size/1024),data:e.target.result,
-            link:result.link,
-            stats:{gaz:totalFor('gaz').done,cieplo:totalFor('cieplo').done,woda:totalFor('woda').done}
-          });
-        }catch(e2){}
-      };
-      reader.readAsDataURL(blob);
-    } else {
-      throw new Error(result.message||'Upload nie powiódł się');
-    }
+    document.getElementById('arc-name-display').textContent=
+      arcName+'\nGaz: '+totalFor('gaz').done+' | Ciepło: '+totalFor('cieplo').done+' | Woda: '+totalFor('woda').done;
+    document.getElementById('link-box').style.display='block';
+    showMsg('✅ ZIP pobrany na urządzenie!','ok');
+    btn.textContent='✅ Pobrano!';
+    btn.disabled=false;
   }catch(e){
     showMsg('❌ Błąd: '+e.message,'err');
-    btn.disabled=false; btn.textContent='☁️ Wyślij archiwum do chmury';
+    btn.disabled=false; btn.textContent='⬇️ Pobierz archiwum ZIP';
   }
 }
 
-function copyLink(){
-  navigator.clipboard.writeText(lastUploadLink).then(()=>{
-    showMsg('✅ Link skopiowany! Otwórz na komputerze i pobierz plik.','ok');
-  }).catch(()=>{
-    // fallback
-    const el=document.getElementById('dl-link');
-    const range=document.createRange();
-    range.selectNode(el);
-    window.getSelection().removeAllRanges();
-    window.getSelection().addRange(range);
-    showMsg('Zaznaczono link — skopiuj ręcznie (długie naciśnięcie)','info');
-  });
+function sendByEmail(){
+  const vals=['gaz','cieplo','woda'].map(t=>{
+    const {done,total}=totalFor(t);
+    return DATA[t].label+': '+done+'/'+total;
+  }).join('\n');
+  const subj=encodeURIComponent('Liczniki — '+getMonth());
+  const body=encodeURIComponent('Dzień dobry!\n\nOdczyty liczników za '+getMonth()+':\n'+vals+'\n\nW załączniku: '+lastArcName);
+  window.location.href='mailto:turystyczna777@gmail.com?subject='+subj+'&body='+body;
 }
 
 // ── RENDER ARCHIVES ───────────────────────────────────────────────────
