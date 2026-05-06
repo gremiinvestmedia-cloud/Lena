@@ -560,8 +560,12 @@ async function saveArchive(){
           woda:totalFor('woda').done
         }
       });
-      showMsg('✅ Archiwum "'+arcName+'" zapisane!\nMożna pobrać na komputerze w zakładce 📦 Archiwa','ok');
-      btn.textContent='✅ Zapisano!';
+      // Download immediately
+      const dlA=document.createElement('a');
+      dlA.href=b64; dlA.download=arcName;
+      document.body.appendChild(dlA); dlA.click(); document.body.removeChild(dlA);
+      showMsg('✅ ZIP pobierany na urządzenie!\n\nPrześlij plik na komputer przez:\nWhatsApp / e-mail / Google Drive / USB','ok');
+      btn.textContent='✅ Pobrano!';
     };
     reader.readAsDataURL(blob);
   }catch(e){
