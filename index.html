@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Liczniki</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
 :root{--bg:#0d0f0e;--sf:#161a17;--sf2:#1e2420;--ac:#4ade80;--ac2:#22c55e;--tx:#e2e8f0;--tx2:#94a3b8;--bd:#2d3748;--red:#f87171;--yw:#fbbf24;--bl:#60a5fa;}
@@ -41,58 +40,52 @@ header p{font-size:10px;color:var(--tx2);margin-top:2px;font-family:'IBM Plex Mo
 .cpanel.vis{display:block;}
 .chdr{padding:9px 13px;border-bottom:1px solid var(--bd);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ac);}
 .cbody{padding:12px;display:flex;flex-direction:column;gap:9px;}
-.photo-area{width:100%;height:140px;background:var(--sf2);border:2px dashed var(--bd);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;position:relative;overflow:hidden;transition:border-color .2s;}
+.photo-area{width:100%;height:150px;background:var(--sf2);border:2px dashed var(--bd);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;position:relative;overflow:hidden;transition:border-color .2s;}
 .photo-area:active{border-color:var(--ac);}
 .photo-area.hp{border-style:solid;border-color:var(--ac2);}
 .photo-area img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .photo-area .ov{position:relative;z-index:2;text-align:center;}
-.photo-area .ov span{display:block;font-size:24px;line-height:1;}
-.photo-area .ov p{font-size:11px;color:var(--tx2);margin-top:5px;}
+.photo-area .ov span{display:block;font-size:28px;line-height:1;}
+.photo-area .ov p{font-size:11px;color:var(--tx2);margin-top:6px;}
 .photo-area.hp .ov p{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.9);font-weight:500;}
-.ocr-section{background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:10px;}
-.ocr-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
-.ocr-row{display:flex;align-items:center;gap:7px;}
+.val-box{background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:10px;}
+.val-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;margin-top:12px;}
+.val-lbl:first-child{margin-top:0;}
+.val-lbl.zim{color:var(--ac);}
+.val-lbl.cie{color:var(--bl);}
+.val-row{display:flex;align-items:center;gap:7px;margin-bottom:4px;}
 .oval{flex:1;padding:9px 10px;border-radius:7px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;text-align:center;width:100%;-webkit-appearance:none;}
 .oval:focus{outline:none;border-color:var(--ac);}
 .ounit{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--tx2);white-space:nowrap;}
-.ost{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:6px 9px;border-radius:6px;margin-top:7px;text-align:center;display:none;}
-.ost.vis{display:block;}
-.ost.scan{background:#3d2f0a;color:var(--yw);}
-.ost.ok{background:#0f2318;color:var(--ac);}
-.ost.err{background:#2d1212;color:var(--red);}
-.wlbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;margin-top:8px;}
-.wlbl.zim{color:#4ade80;}.wlbl.cie{color:var(--bl);}
 .row{display:flex;gap:7px;}
 .btn{flex:1;padding:11px;border-radius:8px;border:1px solid var(--bd);background:var(--sf2);color:var(--tx);font-family:'IBM Plex Mono',monospace;font-size:12px;cursor:pointer;text-align:center;transition:all .15s;-webkit-appearance:none;display:block;width:100%;}
 .btn:active{transform:scale(.97);}
 .btn-g{background:var(--ac);color:#0d1f14;border-color:var(--ac);font-weight:600;}
 .btn-g:active{background:var(--ac2);}
-.btn-g:disabled{opacity:.4;pointer-events:none;}
+.btn-g:disabled{opacity:.35;pointer-events:none;}
 .btn-r{border-color:#4a1c1c;color:var(--red);}
-.btn-bl{background:var(--bl);color:#0d1428;border-color:var(--bl);font-weight:600;}
-
-/* Saved archives */
-.arc-card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;}
-.arc-icon{font-size:22px;flex-shrink:0;}
-.arc-info{flex:1;min-width:0;}
-.arc-name{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--tx);}
-.arc-date{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2);margin-top:2px;}
-.arc-size{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2);}
-.arc-actions{display:flex;flex-direction:column;gap:5px;flex-shrink:0;}
-.arc-btn{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:5px 10px;border-radius:6px;border:1px solid var(--bd);background:var(--sf2);color:var(--tx);cursor:pointer;white-space:nowrap;}
-.arc-btn.dl{background:var(--ac);color:#0d1f14;border-color:var(--ac);font-weight:600;}
-.arc-btn.del{color:var(--red);border-color:#4a1c1c;}
-
-.empty-state{text-align:center;padding:40px 20px;color:var(--tx2);font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:2;}
-
+/* Share card */
+.share-card{background:#0a1f12;border:1px solid #1e4d2b;border-radius:10px;padding:13px;margin-top:10px;}
+.share-card-title{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ac2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;}
+.share-card-file{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--tx2);margin-bottom:10px;word-break:break-all;}
+.share-btns{display:flex;gap:7px;}
+.sbtn{flex:1;padding:11px 6px;border-radius:8px;border:none;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s;}
+.sbtn:active{transform:scale(.97);}
+.sbtn-share{background:var(--ac);color:#0d1f14;}
+.sbtn-dl{background:var(--sf2);color:var(--tx);border:1px solid var(--bd);}
+/* Summary */
 .spanel{display:none;padding:14px 16px;}
 .spanel.vis{display:block;}
-.smsg{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:10px 12px;border-radius:8px;text-align:center;display:none;margin-top:9px;line-height:1.6;white-space:pre-line;}
-.smsg.vis{display:block;}
-.smsg.ok{background:#0f2318;color:var(--ac);border:1px solid #1e4d2b;}
-.smsg.err{background:#2d1212;color:var(--red);border:1px solid #4a1c1c;}
-.smsg.info{background:#3d2f0a;color:var(--yw);border:1px solid #5a4510;}
-
+.sum-share-all{width:100%;padding:15px;border-radius:10px;border:none;background:var(--ac);color:#0d1f14;font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:14px;transition:all .15s;}
+.sum-share-all:active{background:var(--ac2);transform:scale(.98);}
+.photo-row{display:flex;align-items:center;gap:8px;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:9px 11px;margin-bottom:7px;}
+.photo-thumb{width:44px;height:44px;border-radius:6px;object-fit:cover;flex-shrink:0;background:var(--sf2);}
+.photo-thumb-ph{width:44px;height:44px;border-radius:6px;flex-shrink:0;background:var(--sf2);display:flex;align-items:center;justify-content:center;font-size:20px;}
+.photo-fname{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;word-break:break-all;line-height:1.4;}
+.photo-share-btn{flex-shrink:0;padding:8px 12px;border-radius:7px;border:none;background:var(--ac);color:#0d1f14;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;cursor:pointer;}
+.photo-share-btn:active{background:var(--ac2);}
+.empty-state{text-align:center;padding:40px 20px;color:var(--tx2);font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:2;}
+/* Bottom nav */
 .botnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:500px;background:var(--sf);border-top:1px solid var(--bd);display:flex;z-index:200;}
 .bnbtn{flex:1;padding:12px 4px 10px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx2);cursor:pointer;transition:color .15s;border:none;background:none;}
 .bnbtn .bnico{font-size:18px;display:block;margin-bottom:2px;}
@@ -101,6 +94,7 @@ header p{font-size:10px;color:var(--tx2);margin-top:2px;font-family:'IBM Plex Mo
 </style>
 </head>
 <body>
+
 <header>
   <h1>⚡ Liczniki — Blok 21/19/17/15</h1>
   <p id="hdate"></p>
@@ -115,7 +109,6 @@ header p{font-size:10px;color:var(--tx2);margin-top:2px;font-family:'IBM Plex Mo
     <div class="tab active" id="tab-gaz" onclick="switchType('gaz')">🔥 Gaz</div>
     <div class="tab" id="tab-cieplo" onclick="switchType('cieplo')">♨️ Ciepło</div>
     <div class="tab" id="tab-woda" onclick="switchType('woda')">💧 Woda</div>
-    <div class="tab" id="tab-send" onclick="showSummary()">💾 Zapisz</div>
   </div>
   <div class="house-bar" id="house-bar" style="display:none;">
     <button class="hbtn active" id="hbtn-21" onclick="switchHouse(21)">Blok 21</button>
@@ -127,59 +120,62 @@ header p{font-size:10px;color:var(--tx2);margin-top:2px;font-family:'IBM Plex Mo
     <div class="stitle" id="sec-title">Gaz</div>
     <div class="chip">Gotowe: <b id="dcnt">0</b> / <b id="dtot">4</b></div>
     <div id="mlist"></div>
+
+    <!-- Input panel -->
     <div class="cpanel" id="cpanel">
       <div class="chdr" id="chdr">—</div>
       <div class="cbody">
         <div class="photo-area" id="photoarea" onclick="openCamera()">
-          <div class="ov"><span>📷</span><p>Naciśnij aby zrobić zdjęcie</p></div>
+          <div class="ov"><span>📷</span><p>Naciśnij, aby zrobić zdjęcie</p></div>
         </div>
-        <div class="ocr-section" id="ocrbox" style="display:none;">
-          <div id="ocr-fields"></div>
-          <div class="ost" id="ost"></div>
-        </div>
+        <div class="val-box" id="valbox"></div>
         <div class="row">
           <button class="btn btn-r" onclick="cancelPhoto()">Anuluj</button>
           <button class="btn btn-g" id="savebtn" disabled onclick="confirmPhoto()">Zapisz ✓</button>
         </div>
       </div>
     </div>
+
+    <!-- Share card (shown after save) -->
+    <div id="share-card" style="display:none;" class="share-card">
+      <div class="share-card-title">✅ Zapisano</div>
+      <div class="share-card-file" id="share-card-file"></div>
+      <div class="share-btns">
+        <button class="sbtn sbtn-share" onclick="shareLastSaved()">📤 Udostępnij</button>
+        <button class="sbtn sbtn-dl" onclick="downloadLastSaved()">⬇ Pobierz</button>
+      </div>
+    </div>
+
     <div style="margin-top:14px;">
-      <button class="btn btn-g" onclick="showSummary()">💾 Zapisz archiwum →</button>
+      <button class="btn btn-g" onclick="showSummary()">📤 Wyślij wszystkie →</button>
     </div>
   </div>
 </div>
 
-<!-- SUMMARY / SAVE -->
+<!-- SUMMARY / SEND -->
 <div class="spanel" id="ssec">
-  <div class="stitle">Pobierz pliki</div>
+  <div class="stitle">Wyślij zdjęcia</div>
   <div id="sum-stats" style="margin-bottom:14px;font-family:IBM Plex Mono,monospace;font-size:12px;line-height:2;color:var(--tx2);"></div>
+  <button class="sum-share-all" onclick="shareAll()">📤 Udostępnij wszystkie zdjęcia</button>
   <div id="file-buttons"></div>
-  <div class="smsg" id="smsg"></div>
-  <button class="btn btn-g" style="margin-top:10px;" onclick="sendByEmail()">📧 Otwórz e-mail</button>
-  <button class="btn" style="margin-top:8px;" onclick="backToMeters()">← Wróć</button>
-</div>
-
-<!-- ARCHIVES VIEW -->
-<div class="spanel" id="arcsec">
-  <div class="stitle">Zapisane archiwa</div>
-  <div id="arclist"></div>
+  <button class="btn" style="margin-top:12px;" onclick="backToMeters()">← Wróć</button>
 </div>
 
 <div class="botnav">
   <button class="bnbtn active" id="bn-gaz" onclick="switchType('gaz')"><span class="bnico">🔥</span>Gaz</button>
   <button class="bnbtn" id="bn-cieplo" onclick="switchType('cieplo')"><span class="bnico">♨️</span>Ciepło</button>
   <button class="bnbtn" id="bn-woda" onclick="switchType('woda')"><span class="bnico">💧</span>Woda</button>
-  <button class="bnbtn" id="bn-arc" onclick="showArchives()"><span class="bnico">📦</span>Archiwa</button>
+  <button class="bnbtn" id="bn-send" onclick="showSummary()"><span class="bnico">📤</span>Wyślij</button>
 </div>
 
 <script>
 // ── DATA ──────────────────────────────────────────────────────────────
 const DATA = {
   gaz: { label:'Gaz', unit:'m³', houses: {
-    21:[{kw:1,serial:'282405307798',house:21}],
-    19:[{kw:1,serial:'282405307802',house:19}],
-    17:[{kw:1,serial:'282405307754',house:17}],
-    15:[{kw:1,serial:'282405307718',house:15}]
+    21:[{kw:1,serial:'282405307798'}],
+    19:[{kw:1,serial:'282405307802'}],
+    17:[{kw:1,serial:'282405307754'}],
+    15:[{kw:1,serial:'282405307718'}]
   }},
   cieplo: { label:'Ciepło', unit:'GJ', houses: {
     21:[{kw:1,serial:'5042721'},{kw:2,serial:'5043366'},{kw:3,serial:'5042733'},
@@ -229,50 +225,24 @@ const DATA = {
 
 // ── STATE ─────────────────────────────────────────────────────────────
 let curType='gaz', curHouse=21, selMeter=null, pendingUrl=null;
+let lastSaved={type:null,house:null,kw:null};
 let photos={gaz:{},cieplo:{},woda:{}};
 [21,19,17,15].forEach(h=>{photos.gaz[h]={};photos.cieplo[h]={};photos.woda[h]={};});
 
-// ── INDEXEDDB ─────────────────────────────────────────────────────────
-let db=null;
-function openDB(){
-  return new Promise((res,rej)=>{
-    const req=indexedDB.open('LiczenikiDB',1);
-    req.onupgradeneeded=e=>{e.target.result.createObjectStore('archives',{keyPath:'id',autoIncrement:true});};
-    req.onsuccess=e=>{db=e.target.result;res(db);};
-    req.onerror=e=>rej(e);
-  });
-}
-function dbSave(obj){
-  return new Promise((res,rej)=>{
-    const tx=db.transaction('archives','readwrite');
-    const req=tx.objectStore('archives').add(obj);
-    req.onsuccess=()=>res(req.result);
-    req.onerror=e=>rej(e);
-  });
-}
-function dbGetAll(){
-  return new Promise((res,rej)=>{
-    const tx=db.transaction('archives','readonly');
-    const req=tx.objectStore('archives').getAll();
-    req.onsuccess=()=>res(req.result);
-    req.onerror=e=>rej(e);
-  });
-}
-function dbDelete(id){
-  return new Promise((res,rej)=>{
-    const tx=db.transaction('archives','readwrite');
-    const req=tx.objectStore('archives').delete(id);
-    req.onsuccess=()=>res();
-    req.onerror=e=>rej(e);
-  });
-}
-
 // ── HELPERS ───────────────────────────────────────────────────────────
-function getMonth(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');}
+function getMonth(){
+  const d=new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+}
+function getFilename(type,house,kw){
+  return type+'_blok'+house+'_m'+kw+'_'+getMonth()+'.jpg';
+}
 function isDone(type,house,kw){
   const p=photos[type][house][kw];
   if(!p)return false;
-  return type==='woda'?(p.zimna!=null&&p.ciepla!=null):(p.val!=null);
+  if(p.dataUrl)return true;
+  if(type==='woda')return p.zimna!=null&&p.ciepla!=null;
+  return p.val!=null;
 }
 function totalFor(type){
   let done=0,total=0;
@@ -281,25 +251,80 @@ function totalFor(type){
   });
   return{done,total};
 }
+function dataURLtoBlob(dataUrl){
+  const arr=dataUrl.split(',');
+  const mime=arr[0].match(/:(.*?);/)[1];
+  const bstr=atob(arr[1]);
+  let n=bstr.length;
+  const u8=new Uint8Array(n);
+  while(n--)u8[n]=bstr.charCodeAt(n);
+  return new Blob([u8],{type:mime});
+}
+function downloadURL(dataUrl,filename){
+  const a=document.createElement('a');
+  a.href=dataUrl;a.download=filename;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+}
+
+// ── SHARE ─────────────────────────────────────────────────────────────
+async function shareFile(dataUrl,filename){
+  const blob=dataURLtoBlob(dataUrl);
+  const file=new File([blob],filename,{type:blob.type});
+  if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+    try{await navigator.share({files:[file],title:filename});return;}
+    catch(e){if(e.name==='AbortError')return;}
+  }
+  downloadURL(dataUrl,filename);
+}
+
+function shareLastSaved(){
+  if(!lastSaved.type)return;
+  const p=photos[lastSaved.type][lastSaved.house][lastSaved.kw];
+  if(p&&p.dataUrl)shareFile(p.dataUrl,getFilename(lastSaved.type,lastSaved.house,lastSaved.kw));
+}
+function downloadLastSaved(){
+  if(!lastSaved.type)return;
+  const p=photos[lastSaved.type][lastSaved.house][lastSaved.kw];
+  if(p&&p.dataUrl)downloadURL(p.dataUrl,getFilename(lastSaved.type,lastSaved.house,lastSaved.kw));
+}
+
+async function shareAll(){
+  const files=[],dataUrls=[],names=[];
+  ['gaz','cieplo','woda'].forEach(type=>{
+    [21,19,17,15].forEach(h=>{
+      DATA[type].houses[h].forEach(m=>{
+        const p=photos[type][h][m.kw];
+        if(!p||!p.dataUrl)return;
+        const fname=getFilename(type,h,m.kw);
+        const blob=dataURLtoBlob(p.dataUrl);
+        files.push(new File([blob],fname,{type:blob.type}));
+        dataUrls.push(p.dataUrl);
+        names.push(fname);
+      });
+    });
+  });
+  if(files.length===0){alert('Brak zdjęć do wysłania.\nNajpierw zrób odczyty.');return;}
+  if(navigator.share&&navigator.canShare&&navigator.canShare({files})){
+    try{await navigator.share({files,title:'Liczniki '+getMonth()});return;}
+    catch(e){if(e.name==='AbortError')return;}
+  }
+  // Fallback: download all one by one
+  dataUrls.forEach((u,i)=>setTimeout(()=>downloadURL(u,names[i]),i*300));
+}
 
 // ── NAVIGATION ────────────────────────────────────────────────────────
 function showView(v){
   document.getElementById('main-view').style.display=v==='main'?'block':'none';
   document.getElementById('ssec').className=v==='save'?'spanel vis':'spanel';
-  document.getElementById('arcsec').className=v==='arc'?'spanel vis':'spanel';
 }
 function switchType(t){
   curType=t;
-  document.getElementById('house-bar').style.display='none';
-  if(t!=='gaz') document.getElementById('house-bar').style.display='flex';
-  ['gaz','cieplo','woda','send'].forEach(x=>{
-    const el=document.getElementById('tab-'+x);
-    if(el)el.classList.toggle('active',x===t);
+  document.getElementById('house-bar').style.display=t==='gaz'?'none':'flex';
+  ['gaz','cieplo','woda'].forEach(x=>{
+    document.getElementById('tab-'+x).classList.toggle('active',x===t);
+    document.getElementById('bn-'+x).classList.toggle('active',x===t);
   });
-  ['gaz','cieplo','woda','arc'].forEach(x=>{
-    const el=document.getElementById('bn-'+x);
-    if(el)el.classList.toggle('active',x===t);
-  });
+  document.getElementById('bn-send').classList.remove('active');
   cancelPhoto();
   showView('main');
   renderMeters();
@@ -308,20 +333,23 @@ function switchType(t){
 function switchHouse(h){
   curHouse=h;
   [21,19,17,15].forEach(x=>document.getElementById('hbtn-'+x).classList.toggle('active',x===h));
-  cancelPhoto();renderMeters();
+  cancelPhoto();
+  renderMeters();
 }
 function showSummary(){
   showView('save');
-  ['gaz','cieplo','woda','arc'].forEach(x=>document.getElementById('bn-'+x).classList.toggle('active',x==='arc'));
+  ['gaz','cieplo','woda'].forEach(x=>{
+    document.getElementById('bn-'+x).classList.remove('active');
+  });
+  document.getElementById('bn-send').classList.add('active');
+
   const stats=document.getElementById('sum-stats');
   stats.innerHTML='';
   ['gaz','cieplo','woda'].forEach(t=>{
-    const {done,total}=totalFor(t);
-    stats.innerHTML+='<div>'+DATA[t].label+': <b style="color:var(--ac)">'+done+'</b>/'+total+' odczytów</div>';
+    const{done,total}=totalFor(t);
+    stats.innerHTML+='<div>'+DATA[t].label+': <b style="color:var(--ac)">'+done+'</b>/'+total+' zdjęć</div>';
   });
-  document.getElementById('smsg').className='smsg';
 
-  // Build download buttons for each photo
   const fb=document.getElementById('file-buttons');
   fb.innerHTML='';
   let count=0;
@@ -331,221 +359,43 @@ function showSummary(){
         const p=photos[type][h][m.kw];
         if(!p||!p.dataUrl)return;
         count++;
-        const fname=type+'_blok'+h+'_m'+m.kw+'_'+getMonth()+'.jpg';
-        const btn=document.createElement('a');
-        btn.href=p.dataUrl;
-        btn.download=fname;
-        btn.className='btn btn-g';
-        btn.style.cssText='display:block;margin-bottom:7px;text-align:center;text-decoration:none;padding:11px;';
-        btn.textContent='⬇ '+fname;
-        fb.appendChild(btn);
+        const fname=getFilename(type,h,m.kw);
+        const row=document.createElement('div');
+        row.className='photo-row';
+        const img=document.createElement('img');
+        img.className='photo-thumb';
+        img.src=p.dataUrl;
+        const fnDiv=document.createElement('div');
+        fnDiv.className='photo-fname';
+        fnDiv.textContent=fname;
+        const btn=document.createElement('button');
+        btn.className='photo-share-btn';
+        btn.textContent='📤';
+        btn.onclick=(()=>{
+          const _type=type,_h=h,_kw=m.kw,_fname=fname;
+          return ()=>shareFile(photos[_type][_h][_kw].dataUrl,_fname);
+        })();
+        row.appendChild(img);row.appendChild(fnDiv);row.appendChild(btn);
+        fb.appendChild(row);
       });
     });
   });
-
-  // CSV button
-  if(count>0){
-    const csvData='﻿'+buildCSV();
-    const csvBlob=new Blob([csvData],{type:'text/csv'});
-    const csvReader=new FileReader();
-    csvReader.onload=function(e){
-      const csvBtn=document.createElement('a');
-      csvBtn.href=e.target.result;
-      csvBtn.download='raport_'+getMonth()+'.csv';
-      csvBtn.className='btn';
-      csvBtn.style.cssText='display:block;margin-bottom:7px;text-align:center;text-decoration:none;padding:11px;border:1px solid var(--yw);color:var(--yw);';
-      csvBtn.textContent='⬇ raport_'+getMonth()+'.csv';
-      fb.appendChild(csvBtn);
-    };
-    csvReader.readAsDataURL(csvBlob);
-  }
-
   if(count===0){
-    fb.innerHTML='<div style="font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--tx2);padding:10px;">Brak zdjęć do pobrania. Najpierw zrób odczyty.</div>';
+    fb.innerHTML='<div class="empty-state">📷<br>Brak zdjęć<br>Najpierw zrób odczyty</div>';
+  } else {
+    const csvBtn=document.createElement('button');
+    csvBtn.className='btn';
+    csvBtn.style.cssText='margin-top:10px;border-color:var(--yw);color:var(--yw);';
+    csvBtn.textContent='⬇ Pobierz raport CSV';
+    csvBtn.onclick=downloadCSV;
+    fb.appendChild(csvBtn);
   }
 }
 function backToMeters(){showView('main');switchType(curType);}
-async function showArchives(){
-  showView('arc');
-  ['gaz','cieplo','woda','arc'].forEach(x=>document.getElementById('bn-'+x).classList.toggle('active',x==='arc'));
-  document.getElementById('stitle');
-  await renderArchives();
-}
 
-// ── RENDER METERS ─────────────────────────────────────────────────────
-function renderMeters(){
-  const list=document.getElementById('mlist');
-  list.innerHTML='';
-  const {done,total}=totalFor(curType);
-  document.getElementById('dcnt').textContent=done;
-  document.getElementById('dtot').textContent=total;
-  let title=DATA[curType].label;
-  if(curType!=='gaz')title+=' — Blok '+curHouse;
-  document.getElementById('sec-title').textContent=title;
-
-  // For gas show all 4 houses; for others show current house
-  const housesToShow = curType==='gaz' ? [21,19,17,15] : [curHouse];
-
-  housesToShow.forEach(houseNum => {
-  const meters = DATA[curType].houses[houseNum]||[];
-  meters.forEach(m=>{
-    const done2=isDone(curType,houseNum,m.kw);
-    const sel=selMeter&&selMeter.kw===m.kw&&selMeter._house===houseNum;
-    const p=photos[curType][houseNum][m.kw]||{};
-    const curH=houseNum;
-    const div=document.createElement('div');
-    if(curType==='woda'){
-      div.className='mcard'+(sel?' sel':'')+(done2?' done':'');
-      div.innerHTML=
-        '<div class="mi">'+(done2?'✅':'💧')+'</div>'+
-        '<div class="minfo"><div class="mkw">Mieszkanie '+m.kw+'</div>'+
-        '<div class="mser">❄'+m.sz+' 🌡'+m.sc+'</div></div>'+
-        '<div class="mbadges">'+
-        '<div class="wbadge'+(p.zimna!=null?' ok':'')+'">❄ '+(p.zimna!=null?p.zimna+' m³':'—')+'</div>'+
-        '<div class="wbadge'+(p.ciepla!=null?' ok':'')+'">🌡 '+(p.ciepla!=null?p.ciepla+' m³':'—')+'</div>'+
-        '</div>';
-    } else {
-      div.className='mcard'+(sel?' sel':'')+(done2?' done':'');
-      const lbl=curType==='gaz'?'Blok '+houseNum:'Mieszkanie '+m.kw;
-      div.innerHTML=
-        '<div class="mi">'+(done2?'✅':(curType==='gaz'?'🔥':'♨️'))+'</div>'+
-        '<div class="minfo"><div class="mkw">'+lbl+'</div><div class="mser">'+m.serial+'</div></div>'+
-        '<div class="mbadge">'+(done2?p.val+' '+DATA[curType].unit:'—')+'</div>';
-    }
-    div.onclick=()=>{ const mc=Object.assign({},m,{_house:houseNum}); selectMeter(mc,houseNum); };
-    list.appendChild(div);
-  }); // meters
-  }); // housesToShow
-}
-function updateBadges(){
-  ['gaz','cieplo','woda'].forEach(t=>{
-    const {done}=totalFor(t);
-    const btn=document.getElementById('bn-'+t);
-    const ex=btn.querySelector('.cnt');if(ex)ex.remove();
-    if(done>0){const sp=document.createElement('span');sp.className='cnt';sp.textContent=done;btn.appendChild(sp);}
-  });
-}
-
-// ── SELECT METER ──────────────────────────────────────────────────────
-function selectMeter(m, houseOverride){
-  if(houseOverride!==undefined) curHouse=houseOverride;
-  selMeter=m;pendingUrl=null;
-  const lbl=curType==='gaz'?'Blok '+(m._house||curHouse):'Mieszkanie '+m.kw;
-  document.getElementById('chdr').textContent='📍 '+lbl+(m.serial?' ('+m.serial+')':m.sz?' ('+m.sz+' / '+m.sc+')':'');
-  document.getElementById('cpanel').className='cpanel vis';
-  resetPhotoArea();
-  document.getElementById('ocrbox').style.display='none';
-  document.getElementById('ost').className='ost';
-  document.getElementById('savebtn').disabled=true;
-  const ff=document.getElementById('ocr-fields');
-  if(curType==='woda'){
-    ff.innerHTML=
-      '<div class="wlbl zim">❄ Zimna woda ('+m.sz+')</div>'+
-      '<div class="ocr-row"><input type="number" class="oval" id="oval-zim" placeholder="—" inputmode="decimal"><span class="ounit">m³</span></div>'+
-      '<div class="wlbl cie">🌡 Ciepła woda ('+m.sc+')</div>'+
-      '<div class="ocr-row"><input type="number" class="oval" id="oval-cie" placeholder="—" inputmode="decimal"><span class="ounit">m³</span></div>';
-    document.getElementById('oval-zim').addEventListener('input',checkWaterReady);
-    document.getElementById('oval-cie').addEventListener('input',checkWaterReady);
-  } else {
-    ff.innerHTML=
-      '<div class="ocr-lbl">Wskazanie ('+DATA[curType].unit+')</div>'+
-      '<div class="ocr-row"><input type="number" class="oval" id="oval-main" placeholder="—" inputmode="decimal"><span class="ounit">'+DATA[curType].unit+'</span></div>';
-    document.getElementById('oval-main').addEventListener('input',function(){
-      document.getElementById('savebtn').disabled=!this.value;
-    });
-  }
-  renderMeters();
-  setTimeout(()=>document.getElementById('cpanel').scrollIntoView({behavior:'smooth',block:'nearest'}),80);
-}
-function checkWaterReady(){
-  document.getElementById('savebtn').disabled=
-    !(document.getElementById('oval-zim').value&&document.getElementById('oval-cie').value);
-}
-function resetPhotoArea(){
-  const pa=document.getElementById('photoarea');
-  pa.className='photo-area';
-  pa.innerHTML='<div class="ov"><span>📷</span><p>Naciśnij aby zrobić zdjęcie</p></div>';
-}
-
-// ── CAMERA ────────────────────────────────────────────────────────────
-const fileInput=document.getElementById('fileinput');
-function openCamera(){fileInput.value='';fileInput.click();}
-fileInput.addEventListener('change',function(){
-  const file=this.files&&this.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=function(e){
-    pendingUrl=e.target.result;
-    const pa=document.getElementById('photoarea');
-    pa.className='photo-area hp';
-    pa.innerHTML='<img src="'+pendingUrl+'"><div class="ov"><p>📸 Gotowe</p></div>';
-    document.getElementById('ocrbox').style.display='block';
-    runOCR(pendingUrl);
-  };
-  reader.readAsDataURL(file);
-});
-
-async function runOCR(dataUrl){
-  setOst('scan','⏳ Odczytuję wskazanie...');
-  try{
-    const base64=dataUrl.split(',')[1];
-    const mtype=dataUrl.split(';')[0].split(':')[1];
-    const isWoda=curType==='woda';
-    const prompt=isWoda
-      ?'Na zdjęciu są liczniki wody. Odczytaj wskazanie zimnej wody i ciepłej wody. Odpowiedz TYLKO: ZIMNA=liczba CIEPLA=liczba'
-      :'Na zdjęciu jest licznik. Odczytaj wskazanie. Odpowiedz TYLKO liczbą (np: 19.412). Bez tekstu.';
-    const resp=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:100,
-        messages:[{role:'user',content:[
-          {type:'image',source:{type:'base64',media_type:mtype,data:base64}},
-          {type:'text',text:prompt}
-        ]}]})
-    });
-    const data=await resp.json();
-    const raw=(data.content&&data.content[0]&&data.content[0].text)||'';
-    if(isWoda){
-      const mz=raw.match(/ZIMNA=([0-9.]+)/i),mc=raw.match(/CIEPLA=([0-9.]+)/i);
-      if(mz)document.getElementById('oval-zim').value=parseFloat(mz[1]);
-      if(mc)document.getElementById('oval-cie').value=parseFloat(mc[1]);
-      if(mz&&mc){setOst('ok','✅ ❄ '+mz[1]+' | 🌡 '+mc[1]+' — sprawdź!');checkWaterReady();}
-      else throw new Error();
-    } else {
-      const num=parseFloat(raw.replace(/[^\d.]/g,''));
-      if(!isNaN(num)&&num>=0){
-        document.getElementById('oval-main').value=num;
-        setOst('ok','✅ '+num+' '+DATA[curType].unit+' — sprawdź!');
-        document.getElementById('savebtn').disabled=false;
-      } else throw new Error();
-    }
-  }catch(e){setOst('err','⚠️ Nie udało się — wpisz ręcznie');document.getElementById('savebtn').disabled=false;}
-}
-function setOst(cls,txt){const el=document.getElementById('ost');el.className='ost vis '+cls;el.textContent=txt;}
-
-function confirmPhoto(){
-  if(!selMeter||!pendingUrl)return;
-  const saveHouse = selMeter._house||curHouse;
-  if(curType==='woda'){
-    const z=parseFloat(document.getElementById('oval-zim').value);
-    const c=parseFloat(document.getElementById('oval-cie').value);
-    if(isNaN(z)||isNaN(c)){alert('Wpisz oba wskazania');return;}
-    photos.woda[saveHouse][selMeter.kw]={dataUrl:pendingUrl,zimna:z,ciepla:c};
-  } else {
-    const v=parseFloat(document.getElementById('oval-main').value);
-    if(isNaN(v)){alert('Wpisz wskazanie');return;}
-    photos[curType][saveHouse][selMeter.kw]={dataUrl:pendingUrl,val:v};
-  }
-  document.getElementById('cpanel').className='cpanel';
-  selMeter=null;pendingUrl=null;
-  renderMeters();updateBadges();
-}
-function cancelPhoto(){
-  document.getElementById('cpanel').className='cpanel';
-  selMeter=null;pendingUrl=null;renderMeters();
-}
-
-// ── BUILD CSV ─────────────────────────────────────────────────────────
+// ── CSV ───────────────────────────────────────────────────────────────
 function buildCSV(){
-  let csv='\uFEFF'+'Typ;Blok;Mieszkanie;Nr licznika;Wskazanie;Jednostka;Data\n';
+  let csv='﻿Typ;Blok;Mieszkanie;Nr licznika;Wskazanie;Jednostka;Data\n';
   const date=new Date().toISOString().slice(0,10);
   [21,19,17,15].forEach(h=>{
     const gm=DATA.gaz.houses[h][0],gp=photos.gaz[h][gm.kw];
@@ -564,125 +414,226 @@ function buildCSV(){
   });
   return csv;
 }
-
-// ── SAVE ARCHIVE ──────────────────────────────────────────────────────
-let lastArcName = '';
-let lastArcBlob = null;
-
-async function saveArchive(){
-  const btn=document.getElementById('save-arc-btn');
-  btn.disabled=true; btn.textContent='⏳ Pakuję...';
-  showMsg('⏳ Tworzę archiwum ZIP...','info');
-  document.getElementById('link-box').style.display='none';
-  try{
-    const zip=new JSZip();
-    ['gaz','cieplo','woda'].forEach(type=>{
-      [21,19,17,15].forEach(h=>{
-        DATA[type].houses[h].forEach(m=>{
-          const p=photos[type][h][m.kw];
-          if(!p||!p.dataUrl)return;
-          const fname=type+'_blok'+h+'_m'+m.kw+'_'+getMonth()+'.jpg';
-          zip.file(fname,p.dataUrl.split(',')[1],{base64:true});
-        });
-      });
-    });
-    zip.file('raport_'+getMonth()+'.csv',buildCSV());
-    const blob=await zip.generateAsync({type:'blob'});
-    const arcName='liczniki_'+getMonth()+'.zip';
-    lastArcName=arcName;
-    lastArcBlob=blob;
-
-    // Save to IndexedDB
-    const reader=new FileReader();
-    reader.onload=async function(e){
-      try{
-        await dbSave({name:arcName,date:new Date().toISOString(),
-          sizeKb:Math.round(blob.size/1024),data:e.target.result,
-          stats:{gaz:totalFor('gaz').done,cieplo:totalFor('cieplo').done,woda:totalFor('woda').done}
-        });
-      }catch(e2){}
-    };
-    reader.readAsDataURL(blob);
-
-    document.getElementById('arc-name-display').textContent=
-      arcName+'\nGaz: '+totalFor('gaz').done+' | Ciepło: '+totalFor('cieplo').done+' | Woda: '+totalFor('woda').done;
-    document.getElementById('link-box').style.display='block';
-    showMsg('✅ ZIP pobrany na urządzenie!','ok');
-    btn.textContent='✅ Pobrano!';
-    btn.disabled=false;
-  }catch(e){
-    showMsg('❌ Błąd: '+e.message,'err');
-    btn.disabled=false; btn.textContent='⬇️ Pobierz archiwum ZIP';
-  }
+function downloadCSV(){
+  const blob=new Blob([buildCSV()],{type:'text/csv;charset=utf-8'});
+  downloadURL(URL.createObjectURL(blob),'raport_'+getMonth()+'.csv');
 }
 
-function sendByEmail(){
-  const vals=['gaz','cieplo','woda'].map(t=>{
-    const {done,total}=totalFor(t);
-    return DATA[t].label+': '+done+'/'+total;
-  }).join('\n');
-  const subj=encodeURIComponent('Liczniki — '+getMonth());
-  const body=encodeURIComponent('Dzień dobry!\n\nOdczyty liczników za '+getMonth()+':\n'+vals+'\n\nW załączniku: '+lastArcName);
-  window.location.href='mailto:turystyczna777@gmail.com?subject='+subj+'&body='+body;
-}
+// ── RENDER METERS ─────────────────────────────────────────────────────
+function renderMeters(){
+  const list=document.getElementById('mlist');
+  list.innerHTML='';
+  const{done,total}=totalFor(curType);
+  document.getElementById('dcnt').textContent=done;
+  document.getElementById('dtot').textContent=total;
+  let title=DATA[curType].label;
+  if(curType!=='gaz')title+=' — Blok '+curHouse;
+  document.getElementById('sec-title').textContent=title;
 
-// ── RENDER ARCHIVES ───────────────────────────────────────────────────
-async function renderArchives(){
-  const list=document.getElementById('arclist');
-  list.innerHTML='<div style="color:var(--tx2);font-family:IBM Plex Mono,monospace;font-size:11px;padding:10px 0;">⏳ Ładowanie...</div>';
-  try{
-    const archives=await dbGetAll();
-    if(archives.length===0){
-      list.innerHTML='<div class="empty-state">📦<br>Brak zapisanych archiwów<br><br>Zrób odczyty i zapisz archiwum</div>';
-      return;
-    }
-    list.innerHTML='';
-    archives.slice().reverse().forEach(arc=>{
-      const d=new Date(arc.date);
-      const dateStr=d.toLocaleDateString('pl-PL',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  const housesToShow=curType==='gaz'?[21,19,17,15]:[curHouse];
+  housesToShow.forEach(houseNum=>{
+    DATA[curType].houses[houseNum].forEach(m=>{
+      const done2=isDone(curType,houseNum,m.kw);
+      const sel=selMeter&&selMeter.kw===m.kw&&selMeter._house===houseNum;
+      const p=photos[curType][houseNum][m.kw]||{};
       const div=document.createElement('div');
-      div.className='arc-card';
-      div.innerHTML=
-        '<div class="arc-icon">📦</div>'+
-        '<div class="arc-info">'+
-          '<div class="arc-name">'+arc.name+'</div>'+
-          '<div class="arc-date">'+dateStr+'</div>'+
-          '<div class="arc-size">'+arc.sizeKb+' KB'+
-          (arc.stats?' · Gaz:'+arc.stats.gaz+' Ciepło:'+arc.stats.cieplo+' Woda:'+arc.stats.woda:'')+'</div>'+
-        '</div>'+
-        '<div class="arc-actions">'+
-          '<button class="arc-btn dl" onclick="downloadArc('+arc.id+')">⬇ Pobierz</button>'+
-          '<button class="arc-btn del" onclick="deleteArc('+arc.id+')">🗑 Usuń</button>'+
-        '</div>';
+      div.className='mcard'+(sel?' sel':'')+(done2?' done':'');
+
+      if(curType==='woda'){
+        div.innerHTML=
+          '<div class="mi">'+(done2?'✅':'💧')+'</div>'+
+          '<div class="minfo">'+
+            '<div class="mkw">Mieszkanie '+m.kw+'</div>'+
+            '<div class="mser">❄ '+m.sz+' · 🌡 '+m.sc+'</div>'+
+          '</div>'+
+          '<div class="mbadges">'+
+            '<div class="wbadge'+(p.zimna!=null?' ok':'')+'">❄ '+(p.zimna!=null?p.zimna+' m³':'—')+'</div>'+
+            '<div class="wbadge'+(p.ciepla!=null?' ok':'')+'">🌡 '+(p.ciepla!=null?p.ciepla+' m³':'—')+'</div>'+
+          '</div>';
+      } else {
+        const lbl=curType==='gaz'?'Blok '+houseNum:'Mieszkanie '+m.kw;
+        const icon=done2?'✅':(curType==='gaz'?'🔥':'♨️');
+        const badge=done2?(p.val!=null?p.val+' '+DATA[curType].unit:'📷'):'—';
+        div.innerHTML=
+          '<div class="mi">'+icon+'</div>'+
+          '<div class="minfo">'+
+            '<div class="mkw">'+lbl+'</div>'+
+            '<div class="mser">'+m.serial+'</div>'+
+          '</div>'+
+          '<div class="mbadge">'+badge+'</div>';
+      }
+      div.onclick=()=>selectMeter(Object.assign({},m,{_house:houseNum}),houseNum);
       list.appendChild(div);
     });
-  }catch(e){list.innerHTML='<div class="empty-state">❌ Błąd: '+e.message+'</div>';}
+  });
+}
+function updateBadges(){
+  ['gaz','cieplo','woda'].forEach(t=>{
+    const{done}=totalFor(t);
+    const btn=document.getElementById('bn-'+t);
+    const ex=btn.querySelector('.cnt');if(ex)ex.remove();
+    if(done>0){const sp=document.createElement('span');sp.className='cnt';sp.textContent=done;btn.appendChild(sp);}
+  });
 }
 
-async function downloadArc(id){
-  const tx=db.transaction('archives','readonly');
-  const req=tx.objectStore('archives').get(id);
-  req.onsuccess=function(){
-    const arc=req.result;
-    const a=document.createElement('a');
-    a.href=arc.data;
-    a.download=arc.name;
-    document.body.appendChild(a);a.click();document.body.removeChild(a);
+// ── SELECT METER ──────────────────────────────────────────────────────
+function selectMeter(m,houseOverride){
+  if(houseOverride!==undefined)curHouse=houseOverride;
+  selMeter=m;
+  pendingUrl=null;
+  document.getElementById('share-card').style.display='none';
+
+  const lbl=curType==='gaz'?'Blok '+(m._house||curHouse):'Mieszkanie '+m.kw;
+  const serial=m.serial?' ('+m.serial+')':m.sz?' ('+m.sz+' / '+m.sc+')':'';
+  document.getElementById('chdr').textContent='📍 '+lbl+serial;
+  document.getElementById('cpanel').className='cpanel vis';
+  document.getElementById('savebtn').disabled=true;
+
+  resetPhotoArea();
+  buildValFields(m);
+  renderMeters();
+  setTimeout(()=>document.getElementById('cpanel').scrollIntoView({behavior:'smooth',block:'nearest'}),80);
+}
+
+function buildValFields(m){
+  const vb=document.getElementById('valbox');
+  const h=m._house||curHouse;
+  const existing=photos[curType][h][m.kw]||{};
+  if(curType==='woda'){
+    vb.innerHTML=
+      '<div class="val-lbl zim">❄ Zimna woda ('+m.sz+')</div>'+
+      '<div class="val-row"><input type="number" class="oval" id="oval-zim" placeholder="0.000" inputmode="decimal" step="0.001"><span class="ounit">m³</span></div>'+
+      '<div class="val-lbl cie">🌡 Ciepła woda ('+m.sc+')</div>'+
+      '<div class="val-row"><input type="number" class="oval" id="oval-cie" placeholder="0.000" inputmode="decimal" step="0.001"><span class="ounit">m³</span></div>';
+    const zim=document.getElementById('oval-zim');
+    const cie=document.getElementById('oval-cie');
+    if(existing.zimna!=null)zim.value=existing.zimna;
+    if(existing.ciepla!=null)cie.value=existing.ciepla;
+    if(existing.dataUrl){
+      const pa=document.getElementById('photoarea');
+      pa.className='photo-area hp';
+      pa.innerHTML='<img src="'+existing.dataUrl+'"><div class="ov"><p>📸 Zmień zdjęcie</p></div>';
+      pendingUrl=existing.dataUrl;
+    }
+    zim.addEventListener('input',updateSaveBtn);
+    cie.addEventListener('input',updateSaveBtn);
+  } else {
+    vb.innerHTML=
+      '<div class="val-lbl">Wskazanie ('+DATA[curType].unit+')</div>'+
+      '<div class="val-row"><input type="number" class="oval" id="oval-main" placeholder="0.000" inputmode="decimal" step="0.001"><span class="ounit">'+DATA[curType].unit+'</span></div>';
+    const main=document.getElementById('oval-main');
+    if(existing.val!=null)main.value=existing.val;
+    if(existing.dataUrl){
+      const pa=document.getElementById('photoarea');
+      pa.className='photo-area hp';
+      pa.innerHTML='<img src="'+existing.dataUrl+'"><div class="ov"><p>📸 Zmień zdjęcie</p></div>';
+      pendingUrl=existing.dataUrl;
+    }
+    main.addEventListener('input',updateSaveBtn);
+  }
+  updateSaveBtn();
+}
+
+function updateSaveBtn(){
+  // Enable save if photo taken OR at least one value entered
+  const hasPhoto=!!pendingUrl;
+  let hasValue=false;
+  if(curType==='woda'){
+    const z=document.getElementById('oval-zim');
+    const c=document.getElementById('oval-cie');
+    hasValue=!!(z&&z.value||c&&c.value);
+  } else {
+    const v=document.getElementById('oval-main');
+    hasValue=!!(v&&v.value);
+  }
+  document.getElementById('savebtn').disabled=!hasPhoto&&!hasValue;
+}
+
+function resetPhotoArea(){
+  const pa=document.getElementById('photoarea');
+  pa.className='photo-area';
+  pa.innerHTML='<div class="ov"><span>📷</span><p>Naciśnij, aby zrobić zdjęcie</p></div>';
+}
+
+// ── CAMERA ────────────────────────────────────────────────────────────
+const fileInput=document.getElementById('fileinput');
+function openCamera(){fileInput.value='';fileInput.click();}
+fileInput.addEventListener('change',function(){
+  const file=this.files&&this.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const img=new Image();
+    img.onload=function(){
+      const MAX=1600;
+      let w=img.width,h=img.height;
+      if(w>MAX||h>MAX){
+        if(w>h){h=Math.round(h*MAX/w);w=MAX;}
+        else{w=Math.round(w*MAX/h);h=MAX;}
+      }
+      const canvas=document.createElement('canvas');
+      canvas.width=w;canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      pendingUrl=canvas.toDataURL('image/jpeg',0.82);
+      const pa=document.getElementById('photoarea');
+      pa.className='photo-area hp';
+      pa.innerHTML='<img src="'+pendingUrl+'"><div class="ov"><p>📸 Gotowe — zmień zdjęcie</p></div>';
+      updateSaveBtn();
+    };
+    img.src=e.target.result;
   };
+  reader.readAsDataURL(file);
+});
+
+// ── SAVE ──────────────────────────────────────────────────────────────
+function confirmPhoto(){
+  if(!selMeter)return;
+  const saveHouse=selMeter._house||curHouse;
+
+  if(curType==='woda'){
+    const z=parseFloat(document.getElementById('oval-zim').value);
+    const c=parseFloat(document.getElementById('oval-cie').value);
+    photos.woda[saveHouse][selMeter.kw]={
+      dataUrl:pendingUrl||null,
+      zimna:isNaN(z)?null:z,
+      ciepla:isNaN(c)?null:c
+    };
+  } else {
+    const v=parseFloat(document.getElementById('oval-main').value);
+    photos[curType][saveHouse][selMeter.kw]={
+      dataUrl:pendingUrl||null,
+      val:isNaN(v)?null:v
+    };
+  }
+
+  lastSaved={type:curType,house:saveHouse,kw:selMeter.kw};
+  const savedData=photos[lastSaved.type][lastSaved.house][lastSaved.kw];
+
+  document.getElementById('cpanel').className='cpanel';
+  selMeter=null;pendingUrl=null;
+
+  // Show share card only if photo was taken
+  if(savedData.dataUrl){
+    const fname=getFilename(lastSaved.type,lastSaved.house,lastSaved.kw);
+    document.getElementById('share-card-file').textContent=fname;
+    document.getElementById('share-card').style.display='block';
+    setTimeout(()=>document.getElementById('share-card').scrollIntoView({behavior:'smooth',block:'nearest'}),80);
+  }
+
+  renderMeters();
+  updateBadges();
 }
 
-async function deleteArc(id){
-  if(!confirm('Usunąć to archiwum?'))return;
-  await dbDelete(id);
-  await renderArchives();
+function cancelPhoto(){
+  document.getElementById('cpanel').className='cpanel';
+  document.getElementById('share-card').style.display='none';
+  selMeter=null;pendingUrl=null;
 }
-
-function showMsg(t,tp){const el=document.getElementById('smsg');el.textContent=t;el.className='smsg vis '+tp;}
 
 // ── INIT ──────────────────────────────────────────────────────────────
 document.getElementById('hdate').textContent=
   new Date().toLocaleDateString('pl-PL',{day:'2-digit',month:'long',year:'numeric'});
-openDB().then(()=>{switchType('gaz');}).catch(e=>console.error('DB error:',e));
+switchType('gaz');
 </script>
 </body>
 </html>
