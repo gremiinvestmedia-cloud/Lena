@@ -326,7 +326,7 @@ function showSummary(){
     if(done>0)anyDone=true;
     stats.innerHTML+='<div>'+DATA[t].label+': <b style="color:var(--ac)">'+done+'</b>/'+total+' odczytów</div>';
   });
-  document.getElementById('save-arc-btn').disabled=!anyDone;
+  document.getElementById('save-arc-btn').disabled=false;
   document.getElementById('smsg').className='smsg';
 }
 function backToMeters(){showView('main');switchType(curType);}
