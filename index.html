@@ -3,484 +3,619 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Счётчики газа</title>
+<title>Liczniki</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
-:root{--bg:#0d0f0e;--sf:#161a17;--sf2:#1e2420;--ac:#4ade80;--ac2:#22c55e;--tx:#e2e8f0;--tx2:#94a3b8;--bd:#2d3748;--red:#f87171;--yw:#fbbf24;}
+:root{--bg:#0d0f0e;--sf:#161a17;--sf2:#1e2420;--ac:#4ade80;--ac2:#22c55e;--tx:#e2e8f0;--tx2:#94a3b8;--bd:#2d3748;--red:#f87171;--yw:#fbbf24;--bl:#60a5fa;}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;max-width:500px;margin:0 auto;padding-bottom:60px;}
-header{padding:16px 20px 12px;border-bottom:1px solid var(--bd);background:var(--sf);}
-header h1{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--ac);letter-spacing:.15em;text-transform:uppercase;}
-header p{font-size:11px;color:var(--tx2);margin-top:3px;font-family:'IBM Plex Mono',monospace;}
-.prog{display:flex;gap:4px;padding:10px 20px;background:var(--sf);border-bottom:1px solid var(--bd);}
-.ps{flex:1;height:3px;background:var(--bd);border-radius:2px;transition:background .3s;}
-.ps.done{background:var(--ac2)}.ps.act{background:var(--ac)}
-.sec{padding:18px 20px;}
-.stitle{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--tx2);text-transform:uppercase;margin-bottom:12px;}
-.mcard{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;transition:border-color .15s,background .15s;}
-.mcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#4a5568;transition:background .2s;}
-.mcard.sel{border-color:var(--ac);background:#0f2318}.mcard.sel::before{background:var(--ac)}
-.mcard.done{border-color:#1e4d2b}.mcard.done::before{background:var(--ac2)}
-.mi{width:38px;height:38px;background:var(--sf2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;}
-.mcard.done .mi{background:#0f2318}
-.minfo{flex:1;min-width:0}
-.mhouse{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;}
-.mser{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2);margin-top:2px}
-.mbadge{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:3px 8px;border-radius:6px;background:var(--sf2);color:var(--tx2);flex-shrink:0;}
-.mcard.done .mbadge{background:#0f2318;color:var(--ac)}
-.cpanel{display:none;background:var(--sf);border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin-top:12px;}
-.cpanel.vis{display:block}
-.chdr{padding:10px 14px;border-bottom:1px solid var(--bd);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ac);}
-.cbody{padding:14px;display:flex;flex-direction:column;gap:10px;}
-.photo-area{width:100%;height:160px;background:var(--sf2);border:2px dashed var(--bd);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;position:relative;overflow:hidden;transition:border-color .2s;}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;max-width:500px;margin:0 auto;padding-bottom:80px;}
+header{padding:14px 20px 10px;border-bottom:1px solid var(--bd);background:var(--sf);position:sticky;top:0;z-index:100;}
+header h1{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--ac);letter-spacing:.15em;text-transform:uppercase;}
+header p{font-size:10px;color:var(--tx2);margin-top:2px;font-family:'IBM Plex Mono',monospace;}
+.tabs{display:flex;background:var(--sf);border-bottom:1px solid var(--bd);}
+.tab{flex:1;padding:10px 4px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--tx2);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;}
+.tab.active{color:var(--ac);border-bottom-color:var(--ac);}
+.house-bar{display:flex;gap:6px;padding:10px 14px;background:var(--sf2);border-bottom:1px solid var(--bd);overflow-x:auto;}
+.hbtn{flex-shrink:0;padding:5px 13px;border-radius:20px;border:1px solid var(--bd);background:var(--sf);color:var(--tx2);font-family:'IBM Plex Mono',monospace;font-size:11px;cursor:pointer;white-space:nowrap;transition:all .15s;}
+.hbtn.active{background:var(--ac);color:#0d1f14;border-color:var(--ac);font-weight:600;}
+.sec{padding:14px 16px;}
+.stitle{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--tx2);text-transform:uppercase;margin-bottom:10px;}
+.chip{display:inline-flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:10px;padding:2px 8px;border-radius:20px;background:var(--sf2);color:var(--tx2);border:1px solid var(--bd);margin-bottom:12px;}
+.chip b{color:var(--ac);}
+.mcard{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;margin-bottom:7px;cursor:pointer;display:flex;align-items:center;gap:10px;position:relative;overflow:hidden;transition:border-color .15s,background .15s;}
+.mcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#4a5568;}
+.mcard.sel{border-color:var(--ac);background:#0f2318;}.mcard.sel::before{background:var(--ac);}
+.mcard.done{border-color:#1e4d2b;}.mcard.done::before{background:var(--ac2);}
+.mi{width:34px;height:34px;background:var(--sf2);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;}
+.mcard.done .mi{background:#0f2318;}
+.minfo{flex:1;min-width:0;}
+.mkw{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;}
+.mser{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx2);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.mbadge{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:2px 7px;border-radius:6px;background:var(--sf2);color:var(--tx2);flex-shrink:0;text-align:right;}
+.mcard.done .mbadge{background:#0f2318;color:var(--ac);}
+.mbadges{display:flex;flex-direction:column;gap:3px;flex-shrink:0;}
+.wbadge{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:2px 6px;border-radius:5px;background:var(--sf2);color:var(--tx2);white-space:nowrap;}
+.wbadge.ok{background:#0f2318;color:var(--ac);}
+.cpanel{display:none;background:var(--sf);border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin-top:10px;}
+.cpanel.vis{display:block;}
+.chdr{padding:9px 13px;border-bottom:1px solid var(--bd);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ac);}
+.cbody{padding:12px;display:flex;flex-direction:column;gap:9px;}
+.photo-area{width:100%;height:140px;background:var(--sf2);border:2px dashed var(--bd);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;position:relative;overflow:hidden;transition:border-color .2s;}
 .photo-area:active{border-color:var(--ac);}
-.photo-area.has-photo{border-style:solid;border-color:var(--ac2);}
+.photo-area.hp{border-style:solid;border-color:var(--ac2);}
 .photo-area img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-.photo-area .ov{position:relative;z-index:2;text-align:center;padding:8px;}
-.photo-area .ov span{display:block;font-size:28px;line-height:1;}
-.photo-area .ov p{font-size:12px;color:var(--tx2);margin-top:6px;}
-.photo-area.has-photo .ov p{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.9);font-weight:500;}
-.obox{background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:12px;display:none;}
-.obox.vis{display:block}
-.olbl{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
-.orow{display:flex;align-items:center;gap:8px;}
-.oval{flex:1;padding:10px;border-radius:8px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;text-align:center;width:100%;}
+.photo-area .ov{position:relative;z-index:2;text-align:center;}
+.photo-area .ov span{display:block;font-size:24px;line-height:1;}
+.photo-area .ov p{font-size:11px;color:var(--tx2);margin-top:5px;}
+.photo-area.hp .ov p{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.9);font-weight:500;}
+.ocr-section{background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:10px;}
+.ocr-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+.ocr-row{display:flex;align-items:center;gap:7px;}
+.oval{flex:1;padding:9px 10px;border-radius:7px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;text-align:center;width:100%;-webkit-appearance:none;}
 .oval:focus{outline:none;border-color:var(--ac);}
-.ounit{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--tx2);}
-.ost{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:7px 10px;border-radius:6px;margin-top:8px;text-align:center;display:none;}
-.ost.vis{display:block}
+.ounit{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--tx2);white-space:nowrap;}
+.ost{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:6px 9px;border-radius:6px;margin-top:7px;text-align:center;display:none;}
+.ost.vis{display:block;}
 .ost.scan{background:#3d2f0a;color:var(--yw);}
 .ost.ok{background:#0f2318;color:var(--ac);}
 .ost.err{background:#2d1212;color:var(--red);}
-.row{display:flex;gap:8px;}
-.btn{flex:1;padding:13px;border-radius:8px;border:1px solid var(--bd);background:var(--sf2);color:var(--tx);font-family:'IBM Plex Mono',monospace;font-size:13px;cursor:pointer;text-align:center;transition:all .15s;-webkit-appearance:none;display:block;width:100%;}
+.wlbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;margin-top:8px;}
+.wlbl.zim{color:#4ade80;}.wlbl.cie{color:var(--bl);}
+.row{display:flex;gap:7px;}
+.btn{flex:1;padding:11px;border-radius:8px;border:1px solid var(--bd);background:var(--sf2);color:var(--tx);font-family:'IBM Plex Mono',monospace;font-size:12px;cursor:pointer;text-align:center;transition:all .15s;-webkit-appearance:none;display:block;width:100%;}
 .btn:active{transform:scale(.97);}
 .btn-g{background:var(--ac);color:#0d1f14;border-color:var(--ac);font-weight:600;}
 .btn-g:active{background:var(--ac2);}
 .btn-g:disabled{opacity:.4;pointer-events:none;}
 .btn-r{border-color:#4a1c1c;color:var(--red);}
-.tbl-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--bd);margin-top:8px;}
-table{width:100%;border-collapse:collapse;font-family:'IBM Plex Mono',monospace;font-size:11px;}
-th{background:var(--sf2);padding:8px;color:var(--tx2);font-weight:500;border-bottom:1px solid var(--bd);white-space:nowrap;text-align:center;}
-th:first-child{text-align:left;}
-td{padding:7px 8px;border-bottom:1px solid #1e2420;color:var(--tx);text-align:center;white-space:nowrap;}
-td:first-child{text-align:left;color:var(--tx2);font-size:10px;}
-tr.nr td{color:var(--ac);font-weight:600;}
-tr.nr td:first-child{color:var(--ac2);}
-tr:last-child td{border-bottom:none;}
-.spanel{display:none;padding:18px 20px;}
+.btn-bl{background:var(--bl);color:#0d1428;border-color:var(--bl);font-weight:600;}
+
+/* Saved archives */
+.arc-card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;}
+.arc-icon{font-size:22px;flex-shrink:0;}
+.arc-info{flex:1;min-width:0;}
+.arc-name{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--tx);}
+.arc-date{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2);margin-top:2px;}
+.arc-size{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2);}
+.arc-actions{display:flex;flex-direction:column;gap:5px;flex-shrink:0;}
+.arc-btn{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:5px 10px;border-radius:6px;border:1px solid var(--bd);background:var(--sf2);color:var(--tx);cursor:pointer;white-space:nowrap;}
+.arc-btn.dl{background:var(--ac);color:#0d1f14;border-color:var(--ac);font-weight:600;}
+.arc-btn.del{color:var(--red);border-color:#4a1c1c;}
+
+.empty-state{text-align:center;padding:40px 20px;color:var(--tx2);font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:2;}
+
+.spanel{display:none;padding:14px 16px;}
 .spanel.vis{display:block;}
-.fitem{display:flex;align-items:center;gap:10px;padding:9px 13px;background:var(--sf);border:1px solid var(--bd);border-radius:8px;margin-bottom:7px;}
-.fdot{width:7px;height:7px;border-radius:50%;background:var(--ac);flex-shrink:0;}
-.fn{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--tx);flex:1;}
-.fsz{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2);}
-.smsg{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:10px 13px;border-radius:8px;text-align:center;display:none;margin-top:10px;line-height:1.6;}
+.smsg{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:10px 12px;border-radius:8px;text-align:center;display:none;margin-top:9px;line-height:1.6;white-space:pre-line;}
 .smsg.vis{display:block;}
 .smsg.ok{background:#0f2318;color:var(--ac);border:1px solid #1e4d2b;}
 .smsg.err{background:#2d1212;color:var(--red);border:1px solid #4a1c1c;}
 .smsg.info{background:#3d2f0a;color:var(--yw);border:1px solid #5a4510;}
-.chip{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:3px 9px;border-radius:20px;background:var(--sf2);color:var(--tx2);border:1px solid var(--bd);margin-bottom:14px;}
-.chip b{color:var(--ac);}
-.gdrive-box{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px;margin:14px 0;}
-.gdrive-lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;}
-.gdrive-status{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--tx2);margin-bottom:10px;}
-.gdrive-status.connected{color:var(--ac);}
+
+.botnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:500px;background:var(--sf);border-top:1px solid var(--bd);display:flex;z-index:200;}
+.bnbtn{flex:1;padding:12px 4px 10px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx2);cursor:pointer;transition:color .15s;border:none;background:none;}
+.bnbtn .bnico{font-size:18px;display:block;margin-bottom:2px;}
+.bnbtn.active{color:var(--ac);}
+.bnbtn .cnt{display:inline-block;background:var(--ac2);color:#0d1f14;font-size:8px;font-weight:600;padding:1px 4px;border-radius:10px;margin-left:2px;}
 </style>
 </head>
 <body>
-
 <header>
-  <h1>⚡ Счётчики газа</h1>
+  <h1>⚡ Liczniki — Blok 21/19/17/15</h1>
   <p id="hdate"></p>
 </header>
-<div class="prog">
-  <div class="ps" id="p1"></div><div class="ps" id="p2"></div>
-  <div class="ps" id="p3"></div><div class="ps" id="p4"></div>
-</div>
 
 <input type="file" id="fileinput" accept="image/*" capture="environment"
   style="position:fixed;top:-9999px;left:-9999px;opacity:0;width:1px;height:1px;">
 
-<!-- METERS -->
-<div class="sec" id="msec">
-  <div class="stitle">Выберите счётчик</div>
-  <div class="chip">Готово: <b id="dcnt">0</b> / 4</div>
-  <div id="mlist"></div>
-
-  <div class="cpanel" id="cpanel">
-    <div class="chdr" id="chdr">—</div>
-    <div class="cbody">
-      <div class="photo-area" id="photoarea" onclick="openCamera()">
-        <div class="ov"><span>📷</span><p>Нажмите для фото</p></div>
-      </div>
-      <div class="obox" id="obox">
-        <div class="olbl">Показание (м³) — проверьте и исправьте</div>
-        <div class="orow">
-          <input type="number" class="oval" id="oval" placeholder="—" inputmode="numeric" pattern="[0-9]*">
-          <span class="ounit">м³</span>
+<!-- METERS VIEW -->
+<div id="main-view">
+  <div class="tabs">
+    <div class="tab active" id="tab-gaz" onclick="switchType('gaz')">🔥 Gaz</div>
+    <div class="tab" id="tab-cieplo" onclick="switchType('cieplo')">♨️ Ciepło</div>
+    <div class="tab" id="tab-woda" onclick="switchType('woda')">💧 Woda</div>
+    <div class="tab" id="tab-send" onclick="showSummary()">💾 Zapisz</div>
+  </div>
+  <div class="house-bar" id="house-bar" style="display:none;">
+    <button class="hbtn active" id="hbtn-21" onclick="switchHouse(21)">Blok 21</button>
+    <button class="hbtn" id="hbtn-19" onclick="switchHouse(19)">Blok 19</button>
+    <button class="hbtn" id="hbtn-17" onclick="switchHouse(17)">Blok 17</button>
+    <button class="hbtn" id="hbtn-15" onclick="switchHouse(15)">Blok 15</button>
+  </div>
+  <div class="sec">
+    <div class="stitle" id="sec-title">Gaz</div>
+    <div class="chip">Gotowe: <b id="dcnt">0</b> / <b id="dtot">4</b></div>
+    <div id="mlist"></div>
+    <div class="cpanel" id="cpanel">
+      <div class="chdr" id="chdr">—</div>
+      <div class="cbody">
+        <div class="photo-area" id="photoarea" onclick="openCamera()">
+          <div class="ov"><span>📷</span><p>Naciśnij aby zrobić zdjęcie</p></div>
         </div>
-        <div class="ost" id="ost"></div>
-      </div>
-      <div class="row">
-        <button class="btn btn-r" onclick="cancelPhoto()">Отмена</button>
-        <button class="btn btn-g" id="savebtn" disabled onclick="confirmPhoto()">Сохранить ✓</button>
+        <div class="ocr-section" id="ocrbox" style="display:none;">
+          <div id="ocr-fields"></div>
+          <div class="ost" id="ost"></div>
+        </div>
+        <div class="row">
+          <button class="btn btn-r" onclick="cancelPhoto()">Anuluj</button>
+          <button class="btn btn-g" id="savebtn" disabled onclick="confirmPhoto()">Zapisz ✓</button>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div style="margin-top:16px;">
-    <button class="btn btn-g" id="nextbtn" disabled onclick="showSummary()">Создать архив →</button>
-  </div>
-
-  <div style="margin-top:24px;">
-    <div class="stitle">История показаний</div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>Дата</th><th>Дом21</th><th>Дом19</th><th>Дом17</th><th>Дом15</th><th>Σ</th></tr></thead>
-        <tbody id="histbody"></tbody>
-      </table>
+    <div style="margin-top:14px;">
+      <button class="btn btn-g" onclick="showSummary()">💾 Zapisz archiwum →</button>
     </div>
   </div>
 </div>
 
-<!-- SUMMARY -->
+<!-- SUMMARY / SAVE -->
 <div class="spanel" id="ssec">
-  <div class="stitle">Готово к отправке</div>
-  <div id="flist"></div>
-
-  <div class="gdrive-box">
-    <div class="gdrive-lbl">Google Drive → turystyczna777@gmail.com</div>
-    <div class="gdrive-status" id="gdrive-status">⬤ Не подключено</div>
-    <button class="btn btn-g" id="gauth-btn" onclick="signInGoogle()" style="margin-bottom:8px;">🔑 Войти через Google</button>
-    <button class="btn btn-g" id="upload-btn" disabled onclick="uploadToDrive()">📤 Загрузить в Drive + отправить письмо</button>
-  </div>
-
+  <div class="stitle">Zapisz archiwum</div>
+  <div id="sum-stats" style="margin-bottom:14px;font-family:IBM Plex Mono,monospace;font-size:12px;line-height:2;color:var(--tx2);"></div>
+  <button class="btn btn-g" id="save-arc-btn" onclick="saveArchive()">💾 Zapisz archiwum na stronie</button>
   <div class="smsg" id="smsg"></div>
-  <button class="btn" style="margin-top:14px;" onclick="resetApp()">← Сначала</button>
+  <button class="btn" style="margin-top:10px;" onclick="backToMeters()">← Wróć</button>
+</div>
+
+<!-- ARCHIVES VIEW -->
+<div class="spanel" id="arcsec">
+  <div class="stitle">Zapisane archiwa</div>
+  <div id="arclist"></div>
+</div>
+
+<div class="botnav">
+  <button class="bnbtn active" id="bn-gaz" onclick="switchType('gaz')"><span class="bnico">🔥</span>Gaz</button>
+  <button class="bnbtn" id="bn-cieplo" onclick="switchType('cieplo')"><span class="bnico">♨️</span>Ciepło</button>
+  <button class="bnbtn" id="bn-woda" onclick="switchType('woda')"><span class="bnico">💧</span>Woda</button>
+  <button class="bnbtn" id="bn-arc" onclick="showArchives()"><span class="bnico">📦</span>Archiwa</button>
 </div>
 
 <script>
-const CLIENT_ID = '705377688798-5dqufekeb8050gmqtl6fph5ierfp3ftb.apps.googleusercontent.com';
-const SCOPES = 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/gmail.send';
-const EMAIL = 'turystyczna777@gmail.com';
+// ── DATA ──────────────────────────────────────────────────────────────
+const DATA = {
+  gaz: { label:'Gaz', unit:'m³', houses: {
+    21:[{kw:21,serial:'282405307798'}], 19:[{kw:19,serial:'282405307802'}],
+    17:[{kw:17,serial:'282405307754'}], 15:[{kw:15,serial:'282405307718'}]
+  }},
+  cieplo: { label:'Ciepło', unit:'GJ', houses: {
+    21:[{kw:1,serial:'5042721'},{kw:2,serial:'5043366'},{kw:3,serial:'5042733'},
+        {kw:4,serial:'5043361'},{kw:5,serial:'5042727'},{kw:6,serial:'5042698'},
+        {kw:7,serial:'5042700'},{kw:8,serial:'5042724'},{kw:9,serial:'5043037'},
+        {kw:10,serial:'5042726'},{kw:11,serial:'5042728'},{kw:12,serial:'5043379'}],
+    19:[{kw:1,serial:'5042994'},{kw:2,serial:'5069824'},{kw:3,serial:'5066429'},
+        {kw:4,serial:'5066433'},{kw:5,serial:'5066431'},{kw:6,serial:'5068432'},
+        {kw:7,serial:'5069880'},{kw:8,serial:'5186665'},{kw:9,serial:'5069863'},
+        {kw:10,serial:'5069825'},{kw:11,serial:'5059456'},{kw:12,serial:'5038000'}],
+    17:[{kw:1,serial:'5078944'},{kw:2,serial:'5079647'},{kw:3,serial:'5079393'},
+        {kw:4,serial:'5079640'},{kw:5,serial:'5079651'},{kw:6,serial:'5078948'},
+        {kw:7,serial:'5079638'},{kw:8,serial:'5078951'},{kw:9,serial:'5078942'},
+        {kw:10,serial:'5079120'},{kw:11,serial:'5078958'},{kw:12,serial:'5079122'}],
+    15:[{kw:1,serial:'5078971'},{kw:2,serial:'5072842'},{kw:3,serial:'5077334'},
+        {kw:4,serial:'5079634'},{kw:5,serial:'5078963'},{kw:6,serial:'5078959'},
+        {kw:7,serial:'5068418'},{kw:8,serial:'5077065'},{kw:9,serial:'5069829'},
+        {kw:10,serial:'5077519'},{kw:11,serial:'5068500'},{kw:12,serial:'5069881'}]
+  }},
+  woda: { label:'Woda', unit:'m³', houses: {
+    21:[{kw:1,sz:'230565273A',sc:'221368706A'},{kw:2,sz:'230565268A',sc:'221368766A'},
+        {kw:3,sz:'230095926A',sc:'221368685A'},{kw:4,sz:'230095938A',sc:'221368785A'},
+        {kw:5,sz:'230095934A',sc:'221368747A'},{kw:6,sz:'230095907A',sc:'221368748A'},
+        {kw:7,sz:'230565269A',sc:'221368715A'},{kw:8,sz:'230095927A',sc:'221368786A'},
+        {kw:9,sz:'230565250A',sc:'221368769A'},{kw:10,sz:'230565246A',sc:'221368771A'},
+        {kw:11,sz:'230095670A',sc:'221368736A'},{kw:12,sz:'230565266A',sc:'221368714A'}],
+    19:[{kw:1,sz:'230847103A',sc:'230073575A'},{kw:2,sz:'230847015A',sc:'230073561A'},
+        {kw:3,sz:'230847001A',sc:'230073576A'},{kw:4,sz:'230847081A',sc:'230073550A'},
+        {kw:5,sz:'230847050A',sc:'230073549A'},{kw:6,sz:'230847000A',sc:'230073551A'},
+        {kw:7,sz:'230847104A',sc:'230073571A'},{kw:8,sz:'230847079A',sc:'230073513A'},
+        {kw:9,sz:'230847092A',sc:'230073573A'},{kw:10,sz:'230847060A',sc:'230013560A'},
+        {kw:11,sz:'230847039A',sc:'230073558A'},{kw:12,sz:'320847113A',sc:'230073577A'}],
+    17:[{kw:1,sz:'230846995A',sc:'230073557A'},{kw:2,sz:'230846979A',sc:'221368717A'},
+        {kw:3,sz:'230847029A',sc:'221368738A'},{kw:4,sz:'230847017A',sc:'221368778A'},
+        {kw:5,sz:'230847016A',sc:'221368692A'},{kw:6,sz:'230846981A',sc:'230346378A'},
+        {kw:7,sz:'230847020A',sc:'230073566A'},{kw:8,sz:'230846980A',sc:'230039689A'},
+        {kw:9,sz:'230846999A',sc:'230073542A'},{kw:10,sz:'230847049A',sc:'230073556A'},
+        {kw:11,sz:'230847040A',sc:'230073554A'},{kw:12,sz:'230847003A',sc:'230073544A'}],
+    15:[{kw:1,sz:'230847030A',sc:'230073516A'},{kw:2,sz:'230847105A',sc:'230039695A'},
+        {kw:3,sz:'230847002A',sc:'230073562A'},{kw:4,sz:'230847095A',sc:'230073503A'},
+        {kw:5,sz:'230847071A',sc:'230073548A'},{kw:6,sz:'230847093A',sc:'230073501A'},
+        {kw:7,sz:'230847008A',sc:'221368770A'},{kw:8,sz:'230847091A',sc:'230073563A'},
+        {kw:9,sz:'230847019A',sc:'230073559A'},{kw:10,sz:'230846982A',sc:'230039698A'},
+        {kw:11,sz:'230847014A',sc:'230073526A'},{kw:12,sz:'230847031A',sc:'221368732A'}]
+  }}
+};
 
-const METERS = [
-  {id:1, house:'Дом 21', short:'dom21', serial:'282405307798'},
-  {id:2, house:'Дом 19', short:'dom19', serial:'282405307802'},
-  {id:3, house:'Дом 17', short:'dom17', serial:'282405307754'},
-  {id:4, house:'Дом 15', short:'dom15', serial:'282405307718'},
-];
-const HISTORY = [
-  {date:'2025-10-01', v:[719,444,162,92]},
-  {date:'2025-12-31', v:[744,467,258,125]},
-  {date:'2026-01-24', v:[851,515,380,130]},
-  {date:'2026-01-30', v:[911,535,402,141]},
-  {date:'2026-03-03', v:[1080,711,445,338]},
-  {date:'2026-04-01', v:[1150,760,519,404]},
-  {date:'2026-05-04', v:[1222,810,589,459]},
-];
+// ── STATE ─────────────────────────────────────────────────────────────
+let curType='gaz', curHouse=21, selMeter=null, pendingUrl=null;
+let photos={gaz:{},cieplo:{},woda:{}};
+[21,19,17,15].forEach(h=>{photos.gaz[h]={};photos.cieplo[h]={};photos.woda[h]={};});
 
-let photos = {}, selMeter = null, pendingUrl = null;
-let accessToken = null;
-
-// ── Google Auth ──────────────────────────────────────────────────────
-function signInGoogle() {
-  const client = google.accounts.oauth2.initTokenClient({
-    client_id: CLIENT_ID,
-    scope: SCOPES,
-    callback: (resp) => {
-      if (resp.error) { showMsg('Ошибка входа: ' + resp.error, 'err'); return; }
-      accessToken = resp.access_token;
-      document.getElementById('gdrive-status').textContent = '✅ Подключено';
-      document.getElementById('gdrive-status').className = 'gdrive-status connected';
-      document.getElementById('gauth-btn').textContent = '✅ Google подключён';
-      document.getElementById('gauth-btn').disabled = true;
-      document.getElementById('upload-btn').disabled = false;
-    }
+// ── INDEXEDDB ─────────────────────────────────────────────────────────
+let db=null;
+function openDB(){
+  return new Promise((res,rej)=>{
+    const req=indexedDB.open('LiczenikiDB',1);
+    req.onupgradeneeded=e=>{e.target.result.createObjectStore('archives',{keyPath:'id',autoIncrement:true});};
+    req.onsuccess=e=>{db=e.target.result;res(db);};
+    req.onerror=e=>rej(e);
   });
-  client.requestAccessToken();
+}
+function dbSave(obj){
+  return new Promise((res,rej)=>{
+    const tx=db.transaction('archives','readwrite');
+    const req=tx.objectStore('archives').add(obj);
+    req.onsuccess=()=>res(req.result);
+    req.onerror=e=>rej(e);
+  });
+}
+function dbGetAll(){
+  return new Promise((res,rej)=>{
+    const tx=db.transaction('archives','readonly');
+    const req=tx.objectStore('archives').getAll();
+    req.onsuccess=()=>res(req.result);
+    req.onerror=e=>rej(e);
+  });
+}
+function dbDelete(id){
+  return new Promise((res,rej)=>{
+    const tx=db.transaction('archives','readwrite');
+    const req=tx.objectStore('archives').delete(id);
+    req.onsuccess=()=>res();
+    req.onerror=e=>rej(e);
+  });
 }
 
-// ── Upload to Drive + send Gmail ─────────────────────────────────────
-async function uploadToDrive() {
-  const btn = document.getElementById('upload-btn');
-  btn.disabled = true;
-  btn.textContent = '⏳ Создаём архив...';
-  showMsg('⏳ Создаём ZIP архив...', 'info');
+// ── HELPERS ───────────────────────────────────────────────────────────
+function getMonth(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');}
+function isDone(type,house,kw){
+  const p=photos[type][house][kw];
+  if(!p)return false;
+  return type==='woda'?(p.zimna!=null&&p.ciepla!=null):(p.val!=null);
+}
+function totalFor(type){
+  let done=0,total=0;
+  [21,19,17,15].forEach(h=>{
+    DATA[type].houses[h].forEach(m=>{total++;if(isDone(type,h,m.kw))done++;});
+  });
+  return{done,total};
+}
 
-  try {
-    // Build ZIP
-    const zip = new JSZip();
-    METERS.forEach(m => {
-      const p = photos[m.id];
-      if (!p) return;
-      zip.file(fileName(m), p.dataUrl.split(',')[1], {base64: true});
-    });
-    const month = getMonth();
-    zip.file('schetciki_' + month + '.csv', buildCSV());
-    const zipBlob = await zip.generateAsync({type: 'blob'});
-    const arcName = 'schetciki_gaz_' + month + '.zip';
+// ── NAVIGATION ────────────────────────────────────────────────────────
+function showView(v){
+  document.getElementById('main-view').style.display=v==='main'?'block':'none';
+  document.getElementById('ssec').className=v==='save'?'spanel vis':'spanel';
+  document.getElementById('arcsec').className=v==='arc'?'spanel vis':'spanel';
+}
+function switchType(t){
+  curType=t;
+  if(t==='gaz'){curHouse=21;document.getElementById('house-bar').style.display='none';}
+  else document.getElementById('house-bar').style.display='flex';
+  ['gaz','cieplo','woda','send'].forEach(x=>{
+    const el=document.getElementById('tab-'+x);
+    if(el)el.classList.toggle('active',x===t);
+  });
+  ['gaz','cieplo','woda','arc'].forEach(x=>{
+    const el=document.getElementById('bn-'+x);
+    if(el)el.classList.toggle('active',x===t);
+  });
+  cancelPhoto();
+  showView('main');
+  renderMeters();
+  updateBadges();
+}
+function switchHouse(h){
+  curHouse=h;
+  [21,19,17,15].forEach(x=>document.getElementById('hbtn-'+x).classList.toggle('active',x===h));
+  cancelPhoto();renderMeters();
+}
+function showSummary(){
+  showView('save');
+  ['gaz','cieplo','woda','arc'].forEach(x=>document.getElementById('bn-'+x).classList.toggle('active',x==='arc'));
+  const stats=document.getElementById('sum-stats');
+  stats.innerHTML='';
+  let anyDone=false;
+  ['gaz','cieplo','woda'].forEach(t=>{
+    const {done,total}=totalFor(t);
+    if(done>0)anyDone=true;
+    stats.innerHTML+='<div>'+DATA[t].label+': <b style="color:var(--ac)">'+done+'</b>/'+total+' odczytów</div>';
+  });
+  document.getElementById('save-arc-btn').disabled=!anyDone;
+  document.getElementById('smsg').className='smsg';
+}
+function backToMeters(){showView('main');switchType(curType);}
+async function showArchives(){
+  showView('arc');
+  ['gaz','cieplo','woda','arc'].forEach(x=>document.getElementById('bn-'+x).classList.toggle('active',x==='arc'));
+  document.getElementById('stitle');
+  await renderArchives();
+}
 
-    showMsg('⏳ Загружаем в Google Drive...', 'info');
-
-    // Upload to Drive
-    const metadata = { name: arcName, mimeType: 'application/zip' };
-    const form = new FormData();
-    form.append('metadata', new Blob([JSON.stringify(metadata)], {type: 'application/json'}));
-    form.append('file', zipBlob);
-
-    const uploadResp = await fetch(
-      'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,webViewLink',
-      { method: 'POST', headers: { Authorization: 'Bearer ' + accessToken }, body: form }
-    );
-    const uploadData = await uploadResp.json();
-    if (!uploadData.id) throw new Error('Upload failed: ' + JSON.stringify(uploadData));
-
-    const fileId = uploadData.id;
-
-    // Share file with email
-    await fetch('https://www.googleapis.com/drive/v3/files/' + fileId + '/permissions', {
-      method: 'POST',
-      headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ role: 'reader', type: 'user', emailAddress: EMAIL })
-    });
-
-    // Get shareable link
-    const linkResp = await fetch('https://www.googleapis.com/drive/v3/files/' + fileId + '?fields=webViewLink', {
-      headers: { Authorization: 'Bearer ' + accessToken }
-    });
-    const linkData = await linkResp.json();
-    const fileLink = linkData.webViewLink || 'https://drive.google.com/file/d/' + fileId;
-
-    showMsg('⏳ Отправляем письмо...', 'info');
-
-    // Send Gmail
-    const vals = METERS.map(m => photos[m.id] ? m.house + ': ' + photos[m.id].val + ' м³' : '').join('\n');
-    const emailBody =
-      'Добрый день!\n\n' +
-      'Показания счётчиков газа за ' + month + ':\n' + vals +
-      '\n\nАрхив в Google Drive:\n' + fileLink +
-      '\n\nФайл: ' + arcName;
-
-    const emailLines = [
-      'To: ' + EMAIL,
-      'Subject: =?UTF-8?B?' + btoa(unescape(encodeURIComponent('Счётчики газа — ' + month))) + '?=',
-      'MIME-Version: 1.0',
-      'Content-Type: text/plain; charset=utf-8',
-      'Content-Transfer-Encoding: base64',
-      '',
-      btoa(unescape(encodeURIComponent(emailBody)))
-    ].join('\n');
-
-    const encoded = btoa(emailLines).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-
-    const gmailResp = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
-      method: 'POST',
-      headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ raw: encoded })
-    });
-
-    if (gmailResp.ok) {
-      showMsg('✅ Архив загружен в Drive!\n✅ Письмо отправлено на ' + EMAIL + '\n\n📎 ' + arcName, 'ok');
-      btn.textContent = '✅ Отправлено!';
+// ── RENDER METERS ─────────────────────────────────────────────────────
+function renderMeters(){
+  const list=document.getElementById('mlist');
+  list.innerHTML='';
+  const meters=DATA[curType].houses[curHouse]||[];
+  const {done,total}=totalFor(curType);
+  document.getElementById('dcnt').textContent=done;
+  document.getElementById('dtot').textContent=total;
+  let title=DATA[curType].label;
+  if(curType!=='gaz')title+=' — Blok '+curHouse;
+  document.getElementById('sec-title').textContent=title;
+  meters.forEach(m=>{
+    const done2=isDone(curType,curHouse,m.kw);
+    const sel=selMeter&&selMeter.kw===m.kw;
+    const p=photos[curType][curHouse][m.kw]||{};
+    const div=document.createElement('div');
+    if(curType==='woda'){
+      div.className='mcard'+(sel?' sel':'')+(done2?' done':'');
+      div.innerHTML=
+        '<div class="mi">'+(done2?'✅':'💧')+'</div>'+
+        '<div class="minfo"><div class="mkw">Mieszkanie '+m.kw+'</div>'+
+        '<div class="mser">❄'+m.sz+' 🌡'+m.sc+'</div></div>'+
+        '<div class="mbadges">'+
+        '<div class="wbadge'+(p.zimna!=null?' ok':'')+'">❄ '+(p.zimna!=null?p.zimna+' m³':'—')+'</div>'+
+        '<div class="wbadge'+(p.ciepla!=null?' ok':'')+'">🌡 '+(p.ciepla!=null?p.ciepla+' m³':'—')+'</div>'+
+        '</div>';
     } else {
-      const errData = await gmailResp.json();
-      // Gmail failed but Drive worked — still success
-      showMsg('✅ Архив в Drive: ' + fileLink + '\n\n⚠️ Письмо не отправлено — недостаточно прав Gmail. Отправьте ссылку вручную.', 'ok');
-      btn.textContent = '✅ Drive готов';
+      div.className='mcard'+(sel?' sel':'')+(done2?' done':'');
+      const lbl=curType==='gaz'?'Blok '+m.kw:'Mieszkanie '+m.kw;
+      div.innerHTML=
+        '<div class="mi">'+(done2?'✅':(curType==='gaz'?'🔥':'♨️'))+'</div>'+
+        '<div class="minfo"><div class="mkw">'+lbl+'</div><div class="mser">'+m.serial+'</div></div>'+
+        '<div class="mbadge">'+(done2?p.val+' '+DATA[curType].unit:'—')+'</div>';
     }
-
-  } catch(e) {
-    showMsg('❌ Ошибка: ' + e.message, 'err');
-    btn.disabled = false;
-    btn.textContent = '📤 Попробовать снова';
-  }
+    div.onclick=()=>selectMeter(m);
+    list.appendChild(div);
+  });
+}
+function updateBadges(){
+  ['gaz','cieplo','woda'].forEach(t=>{
+    const {done}=totalFor(t);
+    const btn=document.getElementById('bn-'+t);
+    const ex=btn.querySelector('.cnt');if(ex)ex.remove();
+    if(done>0){const sp=document.createElement('span');sp.className='cnt';sp.textContent=done;btn.appendChild(sp);}
+  });
 }
 
-// ── Camera ───────────────────────────────────────────────────────────
-const fileInput = document.getElementById('fileinput');
-function openCamera() { fileInput.value = ''; fileInput.click(); }
+// ── SELECT METER ──────────────────────────────────────────────────────
+function selectMeter(m){
+  selMeter=m;pendingUrl=null;
+  const lbl=curType==='gaz'?'Blok '+m.kw:'Mieszkanie '+m.kw;
+  document.getElementById('chdr').textContent='📍 '+lbl+(m.serial?' ('+m.serial+')':m.sz?' ('+m.sz+' / '+m.sc+')':'');
+  document.getElementById('cpanel').className='cpanel vis';
+  resetPhotoArea();
+  document.getElementById('ocrbox').style.display='none';
+  document.getElementById('ost').className='ost';
+  document.getElementById('savebtn').disabled=true;
+  const ff=document.getElementById('ocr-fields');
+  if(curType==='woda'){
+    ff.innerHTML=
+      '<div class="wlbl zim">❄ Zimna woda ('+m.sz+')</div>'+
+      '<div class="ocr-row"><input type="number" class="oval" id="oval-zim" placeholder="—" inputmode="decimal"><span class="ounit">m³</span></div>'+
+      '<div class="wlbl cie">🌡 Ciepła woda ('+m.sc+')</div>'+
+      '<div class="ocr-row"><input type="number" class="oval" id="oval-cie" placeholder="—" inputmode="decimal"><span class="ounit">m³</span></div>';
+    document.getElementById('oval-zim').addEventListener('input',checkWaterReady);
+    document.getElementById('oval-cie').addEventListener('input',checkWaterReady);
+  } else {
+    ff.innerHTML=
+      '<div class="ocr-lbl">Wskazanie ('+DATA[curType].unit+')</div>'+
+      '<div class="ocr-row"><input type="number" class="oval" id="oval-main" placeholder="—" inputmode="decimal"><span class="ounit">'+DATA[curType].unit+'</span></div>';
+    document.getElementById('oval-main').addEventListener('input',function(){
+      document.getElementById('savebtn').disabled=!this.value;
+    });
+  }
+  renderMeters();
+  setTimeout(()=>document.getElementById('cpanel').scrollIntoView({behavior:'smooth',block:'nearest'}),80);
+}
+function checkWaterReady(){
+  document.getElementById('savebtn').disabled=
+    !(document.getElementById('oval-zim').value&&document.getElementById('oval-cie').value);
+}
+function resetPhotoArea(){
+  const pa=document.getElementById('photoarea');
+  pa.className='photo-area';
+  pa.innerHTML='<div class="ov"><span>📷</span><p>Naciśnij aby zrobić zdjęcie</p></div>';
+}
 
-fileInput.addEventListener('change', function() {
-  const file = this.files && this.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    pendingUrl = e.target.result;
-    const pa = document.getElementById('photoarea');
-    pa.className = 'photo-area has-photo';
-    pa.innerHTML = '<img src="' + pendingUrl + '"><div class="ov"><p>📸 Готово — нажмите для переснимки</p></div>';
-    document.getElementById('obox').className = 'obox vis';
-    document.getElementById('oval').value = '';
-    document.getElementById('savebtn').disabled = true;
+// ── CAMERA ────────────────────────────────────────────────────────────
+const fileInput=document.getElementById('fileinput');
+function openCamera(){fileInput.value='';fileInput.click();}
+fileInput.addEventListener('change',function(){
+  const file=this.files&&this.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    pendingUrl=e.target.result;
+    const pa=document.getElementById('photoarea');
+    pa.className='photo-area hp';
+    pa.innerHTML='<img src="'+pendingUrl+'"><div class="ov"><p>📸 Gotowe</p></div>';
+    document.getElementById('ocrbox').style.display='block';
     runOCR(pendingUrl);
   };
   reader.readAsDataURL(file);
 });
 
-async function runOCR(dataUrl) {
-  setOst('scan', '⏳ Считываем показание...');
-  try {
-    const base64 = dataUrl.split(',')[1];
-    const mtype = dataUrl.split(';')[0].split(':')[1];
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514', max_tokens: 100,
-        messages: [{role:'user', content:[
-          {type:'image', source:{type:'base64', media_type:mtype, data:base64}},
-          {type:'text', text:'На фото счётчик газа. Найди показание в м³. Ответь ТОЛЬКО целым числом без единиц. Пример: 1222'}
-        ]}]
-      })
+async function runOCR(dataUrl){
+  setOst('scan','⏳ Odczytuję wskazanie...');
+  try{
+    const base64=dataUrl.split(',')[1];
+    const mtype=dataUrl.split(';')[0].split(':')[1];
+    const isWoda=curType==='woda';
+    const prompt=isWoda
+      ?'Na zdjęciu są liczniki wody. Odczytaj wskazanie zimnej wody i ciepłej wody. Odpowiedz TYLKO: ZIMNA=liczba CIEPLA=liczba'
+      :'Na zdjęciu jest licznik. Odczytaj wskazanie. Odpowiedz TYLKO liczbą (np: 19.412). Bez tekstu.';
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:100,
+        messages:[{role:'user',content:[
+          {type:'image',source:{type:'base64',media_type:mtype,data:base64}},
+          {type:'text',text:prompt}
+        ]}]})
     });
-    const data = await resp.json();
-    const raw = (data.content && data.content[0] && data.content[0].text) || '';
-    const num = parseInt(raw.replace(/[^\d]/g, ''));
-    if (!isNaN(num) && num > 0) {
-      document.getElementById('oval').value = num;
-      setOst('ok', '✅ Считано: ' + num + ' м³ — проверьте!');
-      document.getElementById('savebtn').disabled = false;
-    } else throw new Error();
-  } catch(e) {
-    setOst('err', '⚠️ Не удалось считать — введите вручную');
-    document.getElementById('savebtn').disabled = false;
+    const data=await resp.json();
+    const raw=(data.content&&data.content[0]&&data.content[0].text)||'';
+    if(isWoda){
+      const mz=raw.match(/ZIMNA=([0-9.]+)/i),mc=raw.match(/CIEPLA=([0-9.]+)/i);
+      if(mz)document.getElementById('oval-zim').value=parseFloat(mz[1]);
+      if(mc)document.getElementById('oval-cie').value=parseFloat(mc[1]);
+      if(mz&&mc){setOst('ok','✅ ❄ '+mz[1]+' | 🌡 '+mc[1]+' — sprawdź!');checkWaterReady();}
+      else throw new Error();
+    } else {
+      const num=parseFloat(raw.replace(/[^\d.]/g,''));
+      if(!isNaN(num)&&num>=0){
+        document.getElementById('oval-main').value=num;
+        setOst('ok','✅ '+num+' '+DATA[curType].unit+' — sprawdź!');
+        document.getElementById('savebtn').disabled=false;
+      } else throw new Error();
+    }
+  }catch(e){setOst('err','⚠️ Nie udało się — wpisz ręcznie');document.getElementById('savebtn').disabled=false;}
+}
+function setOst(cls,txt){const el=document.getElementById('ost');el.className='ost vis '+cls;el.textContent=txt;}
+
+function confirmPhoto(){
+  if(!selMeter||!pendingUrl)return;
+  if(curType==='woda'){
+    const z=parseFloat(document.getElementById('oval-zim').value);
+    const c=parseFloat(document.getElementById('oval-cie').value);
+    if(isNaN(z)||isNaN(c)){alert('Wpisz oba wskazania');return;}
+    photos.woda[curHouse][selMeter.kw]={dataUrl:pendingUrl,zimna:z,ciepla:c};
+  } else {
+    const v=parseFloat(document.getElementById('oval-main').value);
+    if(isNaN(v)){alert('Wpisz wskazanie');return;}
+    photos[curType][curHouse][selMeter.kw]={dataUrl:pendingUrl,val:v};
   }
+  document.getElementById('cpanel').className='cpanel';
+  selMeter=null;pendingUrl=null;
+  renderMeters();updateBadges();
+}
+function cancelPhoto(){
+  document.getElementById('cpanel').className='cpanel';
+  selMeter=null;pendingUrl=null;renderMeters();
 }
 
-function setOst(cls, txt) {
-  const el = document.getElementById('ost');
-  el.className = 'ost vis ' + cls;
-  el.textContent = txt;
-}
-
-document.getElementById('oval').addEventListener('input', function() {
-  document.getElementById('savebtn').disabled = !this.value;
-});
-
-// ── Meter logic ──────────────────────────────────────────────────────
-function selectMeter(m) {
-  selMeter = m; pendingUrl = null;
-  document.getElementById('chdr').textContent = '📍 ' + m.house + ' (' + m.serial + ')';
-  document.getElementById('cpanel').className = 'cpanel vis';
-  const pa = document.getElementById('photoarea');
-  pa.className = 'photo-area';
-  pa.innerHTML = '<div class="ov"><span>📷</span><p>Нажмите для фото</p></div>';
-  document.getElementById('obox').className = 'obox';
-  document.getElementById('oval').value = '';
-  document.getElementById('ost').className = 'ost';
-  document.getElementById('savebtn').disabled = true;
-  renderMeters();
-  setTimeout(() => document.getElementById('cpanel').scrollIntoView({behavior:'smooth', block:'nearest'}), 80);
-}
-
-function confirmPhoto() {
-  if (!selMeter || !pendingUrl) return;
-  const v = parseInt(document.getElementById('oval').value);
-  if (isNaN(v) || v <= 0) { alert('Введите показание'); return; }
-  photos[selMeter.id] = {meter: selMeter, dataUrl: pendingUrl, val: v};
-  document.getElementById('cpanel').className = 'cpanel';
-  selMeter = null; pendingUrl = null;
-  renderMeters(); renderHistory();
-}
-
-function cancelPhoto() {
-  document.getElementById('cpanel').className = 'cpanel';
-  selMeter = null; pendingUrl = null;
-  renderMeters();
-}
-
-// ── Render ───────────────────────────────────────────────────────────
-function getMonth() {
-  const d = new Date();
-  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0');
-}
-function fileName(m) { return m.short + '_' + getMonth() + '.jpg'; }
-
-function renderMeters() {
-  const list = document.getElementById('mlist');
-  list.innerHTML = '';
-  METERS.forEach(m => {
-    const done = !!photos[m.id], sel = selMeter && selMeter.id === m.id;
-    const d = document.createElement('div');
-    d.className = 'mcard' + (sel ? ' sel' : '') + (done ? ' done' : '');
-    d.innerHTML =
-      '<div class="mi">' + (done ? '✅' : '🔧') + '</div>' +
-      '<div class="minfo"><div class="mhouse">' + m.house + '</div><div class="mser">' + m.serial + '</div></div>' +
-      '<div class="mbadge">' + (done ? photos[m.id].val + ' м³' : 'газ') + '</div>';
-    d.onclick = () => selectMeter(m);
-    list.appendChild(d);
-  });
-  const cnt = Object.keys(photos).length;
-  document.getElementById('dcnt').textContent = cnt;
-  document.getElementById('nextbtn').disabled = cnt < 4;
-  METERS.forEach((m, i) => {
-    const el = document.getElementById('p' + (i+1));
-    el.className = 'ps' + (photos[m.id] ? ' done' : (selMeter && selMeter.id === m.id ? ' act' : ''));
-  });
-}
-
-function renderHistory() {
-  const tb = document.getElementById('histbody');
-  tb.innerHTML = '';
-  const rows = [...HISTORY];
-  if (Object.keys(photos).length === 4) {
-    rows.push({date: new Date().toISOString().slice(0,10), v: METERS.map(m => photos[m.id] ? photos[m.id].val : null), isNew: true});
-  }
-  rows.forEach(r => {
-    const sum = r.v.reduce((a,b) => a + (b||0), 0);
-    const tr = document.createElement('tr');
-    if (r.isNew) tr.className = 'nr';
-    tr.innerHTML = '<td>' + r.date + '</td>' + r.v.map(x => '<td>' + (x != null ? x : '—') + '</td>').join('') + '<td>' + sum + '</td>';
-    tb.appendChild(tr);
-  });
-}
-
-function buildCSV() {
-  let csv = '\uFEFF' + 'Дата,Дом 21,Дом 19,Дом 17,Дом 15,Сумма\n';
-  const rows = [...HISTORY];
-  if (Object.keys(photos).length === 4) rows.push({date: new Date().toISOString().slice(0,10), v: METERS.map(m => photos[m.id] ? photos[m.id].val : '')});
-  rows.forEach(r => {
-    const sum = r.v.reduce((a,b) => a + (parseInt(b)||0), 0);
-    csv += r.date + ',' + r.v.join(',') + ',' + sum + '\n';
+// ── BUILD CSV ─────────────────────────────────────────────────────────
+function buildCSV(){
+  let csv='\uFEFF'+'Typ;Blok;Mieszkanie;Nr licznika;Wskazanie;Jednostka;Data\n';
+  const date=new Date().toISOString().slice(0,10);
+  [21,19,17,15].forEach(h=>{
+    const gm=DATA.gaz.houses[h][0],gp=photos.gaz[h][gm.kw];
+    if(gp&&gp.val!=null)csv+='Gaz;'+h+';'+gm.kw+';'+gm.serial+';'+gp.val+';m³;'+date+'\n';
+    DATA.cieplo.houses[h].forEach(m=>{
+      const p=photos.cieplo[h][m.kw];
+      if(p&&p.val!=null)csv+='Ciepło;'+h+';'+m.kw+';'+m.serial+';'+p.val+';GJ;'+date+'\n';
+    });
+    DATA.woda.houses[h].forEach(m=>{
+      const p=photos.woda[h][m.kw];
+      if(p){
+        if(p.zimna!=null)csv+='Woda zimna;'+h+';'+m.kw+';'+m.sz+';'+p.zimna+';m³;'+date+'\n';
+        if(p.ciepla!=null)csv+='Woda ciepła;'+h+';'+m.kw+';'+m.sc+';'+p.ciepla+';m³;'+date+'\n';
+      }
+    });
   });
   return csv;
 }
 
-function showSummary() {
-  document.getElementById('msec').style.display = 'none';
-  document.getElementById('ssec').className = 'spanel vis';
-  const fl = document.getElementById('flist');
-  fl.innerHTML = '';
-  METERS.forEach(m => {
-    const p = photos[m.id]; if (!p) return;
-    const kb = Math.round(p.dataUrl.length * .75 / 1024);
-    fl.innerHTML += '<div class="fitem"><div class="fdot"></div><div class="fn">' + fileName(m) + '<br><span style="font-size:9px;opacity:.6">' + p.val + ' м³</span></div><div class="fsz">' + kb + ' KB</div></div>';
-  });
-  fl.innerHTML += '<div class="fitem"><div class="fdot" style="background:var(--yw)"></div><div class="fn">schetciki_' + getMonth() + '.csv</div><div class="fsz">CSV</div></div>';
+// ── SAVE ARCHIVE ──────────────────────────────────────────────────────
+async function saveArchive(){
+  const btn=document.getElementById('save-arc-btn');
+  btn.disabled=true;btn.textContent='⏳ Pakuję...';
+  showMsg('⏳ Tworzę archiwum ZIP...','info');
+  try{
+    const zip=new JSZip();
+    ['gaz','cieplo','woda'].forEach(type=>{
+      [21,19,17,15].forEach(h=>{
+        DATA[type].houses[h].forEach(m=>{
+          const p=photos[type][h][m.kw];
+          if(!p||!p.dataUrl)return;
+          const fname=type+'_blok'+h+'_m'+m.kw+'_'+getMonth()+'.jpg';
+          zip.file(fname,p.dataUrl.split(',')[1],{base64:true});
+        });
+      });
+    });
+    zip.file('raport_'+getMonth()+'.csv',buildCSV());
+    const blob=await zip.generateAsync({type:'blob'});
+    const arcName='liczniki_'+getMonth()+'.zip';
+    // Convert to base64 for storage
+    const reader=new FileReader();
+    reader.onload=async function(e){
+      const b64=e.target.result;
+      const sizeKb=Math.round(blob.size/1024);
+      await dbSave({
+        name:arcName,
+        date:new Date().toISOString(),
+        sizeKb,
+        data:b64,
+        stats:{
+          gaz:totalFor('gaz').done,
+          cieplo:totalFor('cieplo').done,
+          woda:totalFor('woda').done
+        }
+      });
+      showMsg('✅ Archiwum "'+arcName+'" zapisane!\nMożna pobrać na komputerze w zakładce 📦 Archiwa','ok');
+      btn.textContent='✅ Zapisano!';
+    };
+    reader.readAsDataURL(blob);
+  }catch(e){
+    showMsg('❌ Błąd: '+e.message,'err');
+    btn.disabled=false;btn.textContent='💾 Zapisz archiwum na stronie';
+  }
 }
 
-function showMsg(t, tp) {
-  const el = document.getElementById('smsg');
-  el.textContent = t; el.className = 'smsg vis ' + tp;
-  el.style.whiteSpace = 'pre-line';
+// ── RENDER ARCHIVES ───────────────────────────────────────────────────
+async function renderArchives(){
+  const list=document.getElementById('arclist');
+  list.innerHTML='<div style="color:var(--tx2);font-family:IBM Plex Mono,monospace;font-size:11px;padding:10px 0;">⏳ Ładowanie...</div>';
+  try{
+    const archives=await dbGetAll();
+    if(archives.length===0){
+      list.innerHTML='<div class="empty-state">📦<br>Brak zapisanych archiwów<br><br>Zrób odczyty i zapisz archiwum</div>';
+      return;
+    }
+    list.innerHTML='';
+    archives.slice().reverse().forEach(arc=>{
+      const d=new Date(arc.date);
+      const dateStr=d.toLocaleDateString('pl-PL',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+      const div=document.createElement('div');
+      div.className='arc-card';
+      div.innerHTML=
+        '<div class="arc-icon">📦</div>'+
+        '<div class="arc-info">'+
+          '<div class="arc-name">'+arc.name+'</div>'+
+          '<div class="arc-date">'+dateStr+'</div>'+
+          '<div class="arc-size">'+arc.sizeKb+' KB'+
+          (arc.stats?' · Gaz:'+arc.stats.gaz+' Ciepło:'+arc.stats.cieplo+' Woda:'+arc.stats.woda:'')+'</div>'+
+        '</div>'+
+        '<div class="arc-actions">'+
+          '<button class="arc-btn dl" onclick="downloadArc('+arc.id+')">⬇ Pobierz</button>'+
+          '<button class="arc-btn del" onclick="deleteArc('+arc.id+')">🗑 Usuń</button>'+
+        '</div>';
+      list.appendChild(div);
+    });
+  }catch(e){list.innerHTML='<div class="empty-state">❌ Błąd: '+e.message+'</div>';}
 }
 
-function resetApp() {
-  photos = {}; selMeter = null; pendingUrl = null;
-  document.getElementById('msec').style.display = 'block';
-  document.getElementById('ssec').className = 'spanel';
-  document.getElementById('cpanel').className = 'cpanel';
-  document.getElementById('smsg').className = 'smsg';
-  document.getElementById('upload-btn').disabled = !accessToken;
-  document.getElementById('upload-btn').textContent = '📤 Загрузить в Drive + отправить письмо';
-  renderMeters(); renderHistory();
+async function downloadArc(id){
+  const tx=db.transaction('archives','readonly');
+  const req=tx.objectStore('archives').get(id);
+  req.onsuccess=function(){
+    const arc=req.result;
+    const a=document.createElement('a');
+    a.href=arc.data;
+    a.download=arc.name;
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+  };
 }
 
-document.getElementById('hdate').textContent = new Date().toLocaleDateString('ru-RU', {day:'2-digit', month:'long', year:'numeric'});
-renderMeters(); renderHistory();
+async function deleteArc(id){
+  if(!confirm('Usunąć to archiwum?'))return;
+  await dbDelete(id);
+  await renderArchives();
+}
+
+function showMsg(t,tp){const el=document.getElementById('smsg');el.textContent=t;el.className='smsg vis '+tp;}
+
+// ── INIT ──────────────────────────────────────────────────────────────
+document.getElementById('hdate').textContent=
+  new Date().toLocaleDateString('pl-PL',{day:'2-digit',month:'long',year:'numeric'});
+openDB().then(()=>{switchType('gaz');}).catch(e=>console.error('DB error:',e));
 </script>
 </body>
 </html>
