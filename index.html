@@ -175,8 +175,10 @@ header p{font-size:10px;color:var(--tx2);margin-top:2px;font-family:'IBM Plex Mo
 // ── DATA ──────────────────────────────────────────────────────────────
 const DATA = {
   gaz: { label:'Gaz', unit:'m³', houses: {
-    21:[{kw:21,serial:'282405307798'}], 19:[{kw:19,serial:'282405307802'}],
-    17:[{kw:17,serial:'282405307754'}], 15:[{kw:15,serial:'282405307718'}]
+    21:[{kw:1,serial:'282405307798',house:21}],
+    19:[{kw:1,serial:'282405307802',house:19}],
+    17:[{kw:1,serial:'282405307754',house:17}],
+    15:[{kw:1,serial:'282405307718',house:15}]
   }},
   cieplo: { label:'Ciepło', unit:'GJ', houses: {
     21:[{kw:1,serial:'5042721'},{kw:2,serial:'5043366'},{kw:3,serial:'5042733'},
@@ -287,8 +289,8 @@ function showView(v){
 }
 function switchType(t){
   curType=t;
-  if(t==='gaz'){curHouse=21;document.getElementById('house-bar').style.display='none';}
-  else document.getElementById('house-bar').style.display='flex';
+  document.getElementById('house-bar').style.display='none';
+  if(t!=='gaz') document.getElementById('house-bar').style.display='flex';
   ['gaz','cieplo','woda','send'].forEach(x=>{
     const el=document.getElementById('tab-'+x);
     if(el)el.classList.toggle('active',x===t);
@@ -333,17 +335,23 @@ async function showArchives(){
 function renderMeters(){
   const list=document.getElementById('mlist');
   list.innerHTML='';
-  const meters=DATA[curType].houses[curHouse]||[];
   const {done,total}=totalFor(curType);
   document.getElementById('dcnt').textContent=done;
   document.getElementById('dtot').textContent=total;
   let title=DATA[curType].label;
   if(curType!=='gaz')title+=' — Blok '+curHouse;
   document.getElementById('sec-title').textContent=title;
+
+  // For gas show all 4 houses; for others show current house
+  const housesToShow = curType==='gaz' ? [21,19,17,15] : [curHouse];
+
+  housesToShow.forEach(houseNum => {
+  const meters = DATA[curType].houses[houseNum]||[];
   meters.forEach(m=>{
-    const done2=isDone(curType,curHouse,m.kw);
-    const sel=selMeter&&selMeter.kw===m.kw;
-    const p=photos[curType][curHouse][m.kw]||{};
+    const done2=isDone(curType,houseNum,m.kw);
+    const sel=selMeter&&selMeter.kw===m.kw&&selMeter._house===houseNum;
+    const p=photos[curType][houseNum][m.kw]||{};
+    const curH=houseNum;
     const div=document.createElement('div');
     if(curType==='woda'){
       div.className='mcard'+(sel?' sel':'')+(done2?' done':'');
@@ -357,15 +365,16 @@ function renderMeters(){
         '</div>';
     } else {
       div.className='mcard'+(sel?' sel':'')+(done2?' done':'');
-      const lbl=curType==='gaz'?'Blok '+m.kw:'Mieszkanie '+m.kw;
+      const lbl=curType==='gaz'?'Blok '+houseNum:'Mieszkanie '+m.kw;
       div.innerHTML=
         '<div class="mi">'+(done2?'✅':(curType==='gaz'?'🔥':'♨️'))+'</div>'+
         '<div class="minfo"><div class="mkw">'+lbl+'</div><div class="mser">'+m.serial+'</div></div>'+
         '<div class="mbadge">'+(done2?p.val+' '+DATA[curType].unit:'—')+'</div>';
     }
-    div.onclick=()=>selectMeter(m);
+    div.onclick=()=>{ const mc=Object.assign({},m,{_house:houseNum}); selectMeter(mc,houseNum); };
     list.appendChild(div);
-  });
+  }); // meters
+  }); // housesToShow
 }
 function updateBadges(){
   ['gaz','cieplo','woda'].forEach(t=>{
@@ -377,9 +386,10 @@ function updateBadges(){
 }
 
 // ── SELECT METER ──────────────────────────────────────────────────────
-function selectMeter(m){
+function selectMeter(m, houseOverride){
+  if(houseOverride!==undefined) curHouse=houseOverride;
   selMeter=m;pendingUrl=null;
-  const lbl=curType==='gaz'?'Blok '+m.kw:'Mieszkanie '+m.kw;
+  const lbl=curType==='gaz'?'Blok '+(m._house||curHouse):'Mieszkanie '+m.kw;
   document.getElementById('chdr').textContent='📍 '+lbl+(m.serial?' ('+m.serial+')':m.sz?' ('+m.sz+' / '+m.sc+')':'');
   document.getElementById('cpanel').className='cpanel vis';
   resetPhotoArea();
@@ -472,15 +482,16 @@ function setOst(cls,txt){const el=document.getElementById('ost');el.className='o
 
 function confirmPhoto(){
   if(!selMeter||!pendingUrl)return;
+  const saveHouse = selMeter._house||curHouse;
   if(curType==='woda'){
     const z=parseFloat(document.getElementById('oval-zim').value);
     const c=parseFloat(document.getElementById('oval-cie').value);
     if(isNaN(z)||isNaN(c)){alert('Wpisz oba wskazania');return;}
-    photos.woda[curHouse][selMeter.kw]={dataUrl:pendingUrl,zimna:z,ciepla:c};
+    photos.woda[saveHouse][selMeter.kw]={dataUrl:pendingUrl,zimna:z,ciepla:c};
   } else {
     const v=parseFloat(document.getElementById('oval-main').value);
     if(isNaN(v)){alert('Wpisz wskazanie');return;}
-    photos[curType][curHouse][selMeter.kw]={dataUrl:pendingUrl,val:v};
+    photos[curType][saveHouse][selMeter.kw]={dataUrl:pendingUrl,val:v};
   }
   document.getElementById('cpanel').className='cpanel';
   selMeter=null;pendingUrl=null;
