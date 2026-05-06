@@ -592,19 +592,6 @@ async function saveArchive(){
     lastArcName=arcName;
     lastArcBlob=blob;
 
-    // Download ZIP - iOS compatible
-    const reader2=new FileReader();
-    reader2.onload=function(ev){
-      const a=document.createElement('a');
-      a.href=ev.target.result;
-      a.download=arcName;
-      a.style.display='none';
-      document.body.appendChild(a);
-      a.click();
-      setTimeout(()=>document.body.removeChild(a),500);
-    };
-    reader2.readAsDataURL(blob);
-
     // Save to IndexedDB
     const reader=new FileReader();
     reader.onload=async function(e){
