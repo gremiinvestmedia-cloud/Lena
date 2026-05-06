@@ -151,17 +151,12 @@ header p{font-size:10px;color:var(--tx2);margin-top:2px;font-family:'IBM Plex Mo
 
 <!-- SUMMARY / SAVE -->
 <div class="spanel" id="ssec">
-  <div class="stitle">Zapisz archiwum</div>
+  <div class="stitle">Pobierz pliki</div>
   <div id="sum-stats" style="margin-bottom:14px;font-family:IBM Plex Mono,monospace;font-size:12px;line-height:2;color:var(--tx2);"></div>
-  <button class="btn btn-g" id="save-arc-btn" onclick="saveArchive()">⬇️ Pobierz archiwum ZIP</button>
+  <div id="file-buttons"></div>
   <div class="smsg" id="smsg"></div>
-  <div id="link-box" style="display:none;margin-top:12px;background:var(--sf);border:1px solid var(--ac);border-radius:10px;padding:14px;">
-    <div style="font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--ac);font-weight:600;margin-bottom:10px;">✅ Archiwum pobrane!</div>
-    <div style="font-family:IBM Plex Mono,monospace;font-size:10px;color:var(--tx2);line-height:1.8;margin-bottom:10px;" id="arc-name-display"></div>
-    <button class="btn btn-g" onclick="sendByEmail()">📧 Wyślij na e-mail</button>
-    <div style="font-family:IBM Plex Mono,monospace;font-size:10px;color:var(--tx2);margin-top:8px;line-height:1.6;">Otworzy się aplikacja pocztowa — załącz pobrany plik ZIP.</div>
-  </div>
-  <button class="btn" style="margin-top:10px;" onclick="backToMeters()">← Wróć</button>
+  <button class="btn btn-g" style="margin-top:10px;" onclick="sendByEmail()">📧 Otwórz e-mail</button>
+  <button class="btn" style="margin-top:8px;" onclick="backToMeters()">← Wróć</button>
 </div>
 
 <!-- ARCHIVES VIEW -->
@@ -320,14 +315,54 @@ function showSummary(){
   ['gaz','cieplo','woda','arc'].forEach(x=>document.getElementById('bn-'+x).classList.toggle('active',x==='arc'));
   const stats=document.getElementById('sum-stats');
   stats.innerHTML='';
-  let anyDone=false;
   ['gaz','cieplo','woda'].forEach(t=>{
     const {done,total}=totalFor(t);
-    if(done>0)anyDone=true;
     stats.innerHTML+='<div>'+DATA[t].label+': <b style="color:var(--ac)">'+done+'</b>/'+total+' odczytów</div>';
   });
-  document.getElementById('save-arc-btn').disabled=false;
   document.getElementById('smsg').className='smsg';
+
+  // Build download buttons for each photo
+  const fb=document.getElementById('file-buttons');
+  fb.innerHTML='';
+  let count=0;
+  ['gaz','cieplo','woda'].forEach(type=>{
+    [21,19,17,15].forEach(h=>{
+      DATA[type].houses[h].forEach(m=>{
+        const p=photos[type][h][m.kw];
+        if(!p||!p.dataUrl)return;
+        count++;
+        const fname=type+'_blok'+h+'_m'+m.kw+'_'+getMonth()+'.jpg';
+        const btn=document.createElement('a');
+        btn.href=p.dataUrl;
+        btn.download=fname;
+        btn.className='btn btn-g';
+        btn.style.cssText='display:block;margin-bottom:7px;text-align:center;text-decoration:none;padding:11px;';
+        btn.textContent='⬇ '+fname;
+        fb.appendChild(btn);
+      });
+    });
+  });
+
+  // CSV button
+  if(count>0){
+    const csvData='﻿'+buildCSV();
+    const csvBlob=new Blob([csvData],{type:'text/csv'});
+    const csvReader=new FileReader();
+    csvReader.onload=function(e){
+      const csvBtn=document.createElement('a');
+      csvBtn.href=e.target.result;
+      csvBtn.download='raport_'+getMonth()+'.csv';
+      csvBtn.className='btn';
+      csvBtn.style.cssText='display:block;margin-bottom:7px;text-align:center;text-decoration:none;padding:11px;border:1px solid var(--yw);color:var(--yw);';
+      csvBtn.textContent='⬇ raport_'+getMonth()+'.csv';
+      fb.appendChild(csvBtn);
+    };
+    csvReader.readAsDataURL(csvBlob);
+  }
+
+  if(count===0){
+    fb.innerHTML='<div style="font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--tx2);padding:10px;">Brak zdjęć do pobrania. Najpierw zrób odczyty.</div>';
+  }
 }
 function backToMeters(){showView('main');switchType(curType);}
 async function showArchives(){
@@ -557,13 +592,18 @@ async function saveArchive(){
     lastArcName=arcName;
     lastArcBlob=blob;
 
-    // Download ZIP
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    a.href=url; a.download=arcName;
-    document.body.appendChild(a); a.click();
-    document.body.removeChild(a);
-    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    // Download ZIP - iOS compatible
+    const reader2=new FileReader();
+    reader2.onload=function(ev){
+      const a=document.createElement('a');
+      a.href=ev.target.result;
+      a.download=arcName;
+      a.style.display='none';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(()=>document.body.removeChild(a),500);
+    };
+    reader2.readAsDataURL(blob);
 
     // Save to IndexedDB
     const reader=new FileReader();
