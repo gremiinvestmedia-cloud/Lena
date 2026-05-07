@@ -85,6 +85,15 @@ header p{font-size:10px;color:var(--tx2);margin-top:2px;font-family:'IBM Plex Mo
 .photo-share-btn{flex-shrink:0;padding:8px 12px;border-radius:7px;border:none;background:var(--ac);color:#0d1f14;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;cursor:pointer;}
 .photo-share-btn:active{background:var(--ac2);}
 .empty-state{text-align:center;padding:40px 20px;color:var(--tx2);font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:2;}
+/* Readings table */
+.rtable{width:100%;border-collapse:collapse;margin-bottom:14px;}
+.rtable th{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx2);padding:5px 8px;text-align:left;border-bottom:1px solid var(--bd);}
+.rtable td{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--tx);padding:6px 8px;border-bottom:1px solid #1e2a20;}
+.rtable tr:last-child td{border-bottom:none;}
+.rtable td.val{color:var(--ac);font-weight:600;}
+.rtable td.miss{color:var(--tx2);}
+.rtable-sec{background:var(--sf);border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+.rtable-hdr{padding:8px 12px;background:var(--sf2);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ac);border-bottom:1px solid var(--bd);}
 /* Bottom nav */
 .botnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:500px;background:var(--sf);border-top:1px solid var(--bd);display:flex;z-index:200;}
 .bnbtn{flex:1;padding:12px 4px 10px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx2);cursor:pointer;transition:color .15s;border:none;background:none;}
@@ -156,6 +165,7 @@ header p{font-size:10px;color:var(--tx2);margin-top:2px;font-family:'IBM Plex Mo
 <div class="spanel" id="ssec">
   <div class="stitle">Wyślij zdjęcia</div>
   <div id="sum-stats" style="margin-bottom:14px;font-family:IBM Plex Mono,monospace;font-size:12px;line-height:2;color:var(--tx2);"></div>
+  <div id="readings-table"></div>
   <button class="sum-share-all" onclick="shareAll()">📤 Udostępnij wszystkie zdjęcia</button>
   <div id="file-buttons"></div>
   <button class="btn" style="margin-top:12px;" onclick="backToMeters()">← Wróć</button>
@@ -261,9 +271,12 @@ function dataURLtoBlob(dataUrl){
   return new Blob([u8],{type:mime});
 }
 function downloadURL(dataUrl,filename){
+  const blob=dataURLtoBlob(dataUrl);
+  const url=URL.createObjectURL(blob);
   const a=document.createElement('a');
-  a.href=dataUrl;a.download=filename;
+  a.href=url;a.download=filename;
   document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url),2000);
 }
 
 // ── SHARE ─────────────────────────────────────────────────────────────
@@ -271,21 +284,10 @@ async function shareFile(dataUrl,filename){
   const blob=dataURLtoBlob(dataUrl);
   const file=new File([blob],filename,{type:blob.type});
   if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
-    try{await navigator.share({files:[file],title:filename});return;}
+    try{await navigator.share({files:[file],title:filename,text:'📎 '+filename});return;}
     catch(e){if(e.name==='AbortError')return;}
   }
   downloadURL(dataUrl,filename);
-}
-
-function shareLastSaved(){
-  if(!lastSaved.type)return;
-  const p=photos[lastSaved.type][lastSaved.house][lastSaved.kw];
-  if(p&&p.dataUrl)shareFile(p.dataUrl,getFilename(lastSaved.type,lastSaved.house,lastSaved.kw));
-}
-function downloadLastSaved(){
-  if(!lastSaved.type)return;
-  const p=photos[lastSaved.type][lastSaved.house][lastSaved.kw];
-  if(p&&p.dataUrl)downloadURL(p.dataUrl,getFilename(lastSaved.type,lastSaved.house,lastSaved.kw));
 }
 
 async function shareAll(){
@@ -304,12 +306,23 @@ async function shareAll(){
     });
   });
   if(files.length===0){alert('Brak zdjęć do wysłania.\nNajpierw zrób odczyty.');return;}
+  const shareText=names.map(n=>'📎 '+n).join('\n');
   if(navigator.share&&navigator.canShare&&navigator.canShare({files})){
-    try{await navigator.share({files,title:'Liczniki '+getMonth()});return;}
+    try{await navigator.share({files,title:'Liczniki '+getMonth(),text:shareText});return;}
     catch(e){if(e.name==='AbortError')return;}
   }
-  // Fallback: download all one by one
   dataUrls.forEach((u,i)=>setTimeout(()=>downloadURL(u,names[i]),i*300));
+}
+
+function shareLastSaved(){
+  if(!lastSaved.type)return;
+  const p=photos[lastSaved.type][lastSaved.house][lastSaved.kw];
+  if(p&&p.dataUrl)shareFile(p.dataUrl,getFilename(lastSaved.type,lastSaved.house,lastSaved.kw));
+}
+function downloadLastSaved(){
+  if(!lastSaved.type)return;
+  const p=photos[lastSaved.type][lastSaved.house][lastSaved.kw];
+  if(p&&p.dataUrl)downloadURL(p.dataUrl,getFilename(lastSaved.type,lastSaved.house,lastSaved.kw));
 }
 
 // ── NAVIGATION ────────────────────────────────────────────────────────
@@ -350,6 +363,7 @@ function showSummary(){
     stats.innerHTML+='<div>'+DATA[t].label+': <b style="color:var(--ac)">'+done+'</b>/'+total+' zdjęć</div>';
   });
 
+  buildReadingsTable();
   const fb=document.getElementById('file-buttons');
   fb.innerHTML='';
   let count=0;
@@ -392,6 +406,87 @@ function showSummary(){
   }
 }
 function backToMeters(){showView('main');switchType(curType);}
+
+// ── READINGS TABLE ────────────────────────────────────────────────────
+function buildReadingsTable(){
+  const el=document.getElementById('readings-table');
+  el.innerHTML='';
+
+  // GAZ
+  let gazRows='';
+  [21,19,17,15].forEach(h=>{
+    const m=DATA.gaz.houses[h][0];
+    const p=photos.gaz[h][m.kw]||{};
+    const val=p.val!=null?p.val+' m³':null;
+    const photo=p.dataUrl?'📷':'';
+    gazRows+=
+      '<tr>'+
+        '<td>Blok '+h+'</td>'+
+        '<td>'+m.serial+'</td>'+
+        '<td class="'+(val?'val':'miss')+'">'+( val||'—')+'</td>'+
+        '<td>'+photo+'</td>'+
+      '</tr>';
+  });
+  el.innerHTML+=
+    '<div class="rtable-sec">'+
+      '<div class="rtable-hdr">🔥 Gaz</div>'+
+      '<table class="rtable">'+
+        '<tr><th>Blok</th><th>Nr licznika</th><th>Wskazanie</th><th></th></tr>'+
+        gazRows+
+      '</table>'+
+    '</div>';
+
+  // CIEPŁO — per house
+  [21,19,17,15].forEach(h=>{
+    let rows='';
+    DATA.cieplo.houses[h].forEach(m=>{
+      const p=photos.cieplo[h][m.kw]||{};
+      const val=p.val!=null?p.val+' GJ':null;
+      const photo=p.dataUrl?'📷':'';
+      rows+=
+        '<tr>'+
+          '<td>m.'+m.kw+'</td>'+
+          '<td>'+m.serial+'</td>'+
+          '<td class="'+(val?'val':'miss')+'">'+( val||'—')+'</td>'+
+          '<td>'+photo+'</td>'+
+        '</tr>';
+    });
+    el.innerHTML+=
+      '<div class="rtable-sec">'+
+        '<div class="rtable-hdr">♨️ Ciepło — Blok '+h+'</div>'+
+        '<table class="rtable">'+
+          '<tr><th>Mieszk.</th><th>Nr licznika</th><th>Wskazanie</th><th></th></tr>'+
+          rows+
+        '</table>'+
+      '</div>';
+  });
+
+  // WODA — per house
+  [21,19,17,15].forEach(h=>{
+    let rows='';
+    DATA.woda.houses[h].forEach(m=>{
+      const p=photos.woda[h][m.kw]||{};
+      const zim=p.zimna!=null?p.zimna+' m³':null;
+      const cie=p.ciepla!=null?p.ciepla+' m³':null;
+      const photo=p.dataUrl?'📷':'';
+      rows+=
+        '<tr>'+
+          '<td>m.'+m.kw+'</td>'+
+          '<td class="'+(zim?'val':'miss')+'">❄ '+(zim||'—')+'</td>'+
+          '<td class="'+(cie?'val':'miss')+'">🌡 '+(cie||'—')+'</td>'+
+          '<td>'+photo+'</td>'+
+        '</tr>';
+    });
+    el.innerHTML+=
+      '<div class="rtable-sec">'+
+        '<div class="rtable-hdr">💧 Woda — Blok '+h+'</div>'+
+        '<table class="rtable">'+
+          '<tr><th>Mieszk.</th><th>Zimna</th><th>Ciepła</th><th></th></tr>'+
+          rows+
+        '</table>'+
+      '</div>';
+  });
+}
 
 // ── CSV ───────────────────────────────────────────────────────────────
 function buildCSV(){
